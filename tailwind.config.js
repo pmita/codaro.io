@@ -6,6 +6,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      'midnight': 'red',
+      'main-white': '#FFFFFF',
+      'main-black': '#1E1E1E',
+      'secondary-black': '#2B2B2B',
+      'highlight-green': '#337A5B',
+      'error-red': '#CE4C4C',
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-roboto)"],
