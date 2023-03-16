@@ -1,16 +1,5 @@
-import { Roboto, Poppins } from 'next/font/google'
+import { roboto, poppins } from './utils/fonts'
 import styles from './page.module.css'
-
-const roboto = Roboto({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
-  style: ['normal', 'italic']
-})
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic']
-})
 
 export default function Home() {
   return (
