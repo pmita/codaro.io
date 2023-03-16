@@ -19,7 +19,18 @@ body {
   overflow-x: hidden;
 }
 
+html{
+  font-size: 62.5%;
+  line-height: 1.3;
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 52.25%;
+  }
 }
