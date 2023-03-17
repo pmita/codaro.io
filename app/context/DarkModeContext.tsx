@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 // TYPES
 import { DarkModeProviderType, DarkModeContextType } from "../types/context/DarkModeContext"
 
@@ -11,7 +11,29 @@ export const DarkModeProvider = ({ children }: DarkModeProviderType) => {
   const [darkMode, setDarkMode] = useState(false);
 
   //EVENTS
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  // const toggleDarkMode = () => setDarkMode(!darkMode);
+
+  const toggleDarkMode = () => {
+    if(localStorage.getItem('darkMode')) {
+      if(localStorage.getItem('darkMode') === 'light'){
+        setDarkMode(true)
+        localStorage.setItem('darkMode', 'dark')
+      } else {
+        setDarkMode(false)
+        localStorage.setItem('darkMode', 'light')
+      }
+  }
+}
+
+  useEffect(() => {
+    if(!localStorage.getItem('darkMode')){
+      localStorage.setItem('darkMode', 'light')
+    } else {
+      if(localStorage.getItem('darkMode') === 'dark'){
+        setDarkMode(true)
+      }
+    }
+  }, []);
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
@@ -29,4 +51,3 @@ export const useDarkMode = () => {
 
   return darkModeContext;
 }
-
