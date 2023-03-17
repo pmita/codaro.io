@@ -1,3 +1,5 @@
+import Navbar from './Navbar/Navbar'
+import { roboto, poppins } from './utils/fonts'
 import './globals.css'
 
 export const metadata = {
@@ -11,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${roboto.className} ${poppins.className}`}>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   )
 }
