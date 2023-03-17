@@ -9,7 +9,7 @@ const Navbar = () => {
       <h1 className={`text-2xl p-4 ${poppins.className} text-main-purple font-bold`}>
         Codaro.io
       </h1>
-      <ul className="flex justify-end items-center gap-x-8">
+      <ul className="flex justify-end items-center gap-x-4 md:gap-x-8">
         <h4 className={`hover:scale-105 hover:text-main-purple transition-transform font-semibold`}>
           <Link href={'/pro'}>
             PRO
