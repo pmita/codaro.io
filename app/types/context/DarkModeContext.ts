@@ -4,6 +4,5 @@ export type DarkModeProviderType = {
 
 export type DarkModeContextType = {
   darkMode: boolean
-  setDarkMode: (darkMode: boolean) => void
-  color: string
+  toggleDarkMode: () => void
 }

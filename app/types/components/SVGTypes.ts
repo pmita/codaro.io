@@ -1,5 +1,8 @@
+import { MouseEventHandler } from "react";
+
 export type SVGPropType = {
-  width: string;
-  height: string;
-  fill: string;
+  width?: string;
+  height?: string;
+  fill?: string;
+  onClick?: () => void;
 }
