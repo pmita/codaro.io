@@ -1,7 +1,7 @@
 'use client'
 
-import { roboto, poppins } from '../utils/fonts'
 import Link from 'next/link'
+import { roboto, poppins } from '../utils/fonts'
 
 const Navbar = () => {
   return (
