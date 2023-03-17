@@ -20,7 +20,7 @@ const Navbar = () => {
             courses
           </Link>
         </h4>
-        <button className={`primary-btn ${roboto.className}`}>
+        <button className={`primary-btn ${roboto.className} drop-shadow-[3px_3px_0_black] hover:drop-shadow-[0_0_7px_rgba(39,31,224,0.5)] transition-all duration-300`}>
           <Link href={'/login'}>
             LOGIN
           </Link>
