@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .primary-btn{
+    padding: 1rem 2rem;
+    background: theme('colors.main-purple');
+    color: theme('colors.main-white');
+    border: 3px solid theme('colors.main-purple');
+    transition: all 0.3s ease-in-out;
+  }
+  .primary-btn:hover{
+    background: theme('colors.main-white');
+    color: theme('colors.main-purple');
+    cursor: pointer;
+  }
+
+  .secondary-btn{
+    padding: 1rem 2rem;
+    background: theme('colors.main-white');
+    color: theme('colors.main-purple');
+    border: 3px solid theme('colors.main-purple');
+    transition: all 0.3s ease-in-out;
+  }
+  .secondary-btn:hover{
+    background: theme('colors.main-purple');
+    color: theme('colors.main-white');
+    cursor: pointer;
+  }
+
+  .container{
+    max-width: 1536px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@layer base{
+  h1{
+    @apply text-2xl;
+  }
+  h2{
+    @apply text-xl;
+  }
+  h3{
+    @apply text-lg;
+  }
+  h4, p, a, span, li, td{
+    @apply text-base;
+  }
+  h5{
+    @apply text-sm;
+  }
+  h6{
+    @apply text-xs;
+  }
+}
+
 :root{
   --poppins-default: 'Poppins', sans-serif;
   --roboto-default: 'Roboto', sans-serif;

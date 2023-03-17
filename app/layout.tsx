@@ -1,17 +1,6 @@
 import Navbar from './Navbar/Navbar'
-import { Roboto, Poppins } from 'next/font/google'
+import { roboto, poppins } from './utils/fonts'
 import './globals.css'
-
-const roboto = Roboto({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
-  style: ['normal', 'italic']
-})
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic']
-})
 
 export const metadata = {
   title: 'Create Next App',
@@ -24,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${roboto.className} ${poppins.className}`}>
       <body>
         <Navbar />
         {children}

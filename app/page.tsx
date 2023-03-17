@@ -1,4 +1,3 @@
-import { roboto, poppins } from './utils/fonts'
 import styles from './page.module.css'
 
 export default function Home() {
