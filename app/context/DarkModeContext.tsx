@@ -11,27 +11,7 @@ export const DarkModeProvider = ({ children }: DarkModeProviderType) => {
   const [darkMode, setDarkMode] = useState(false);
 
   //EVENTS
-  const toggleDarkMode = () => {
-    if(localStorage.getItem('darkMode')) {
-      if(localStorage.getItem('darkMode') === 'light'){
-        setDarkMode(true)
-        localStorage.setItem('darkMode', 'dark')
-      } else {
-        setDarkMode(false)
-        localStorage.setItem('darkMode', 'light')
-      }
-  }
-}
-
-  useEffect(() => {
-    if(!localStorage.getItem('darkMode')){
-      localStorage.setItem('darkMode', 'light')
-    } else {
-      if(localStorage.getItem('darkMode') === 'dark'){
-        setDarkMode(true)
-      }
-    }
-  }, []);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
