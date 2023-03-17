@@ -10,8 +10,6 @@ export const DarkModeProvider = ({ children }: DarkModeProviderType) => {
   // STATE
   const [darkMode, setDarkMode] = useState(false);
 
-  console.log(darkMode);
-
   //EVENTS
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
