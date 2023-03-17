@@ -20,10 +20,10 @@ const Navbar = () => {
       <ul className="flex justify-end items-center gap-x-4 md:gap-x-8">
         {darkMode 
           ? <button onClick={toggleDarkMode} type="button">
-              <LightModeSVG width="35" height="35" fill="#FFFFFF" onClick={toggleDarkMode} />
+              <LightModeSVG width="25" height="25" fill="#FFFFFF" onClick={toggleDarkMode} />
             </button>
           : <button onClick={toggleDarkMode} type="button">
-              <DarkModeSVG width="35" height="35" fill="#1E1E1E" /> 
+              <DarkModeSVG width="25" height="25" fill="#1E1E1E" /> 
             </button>
         }
         <h4 className={`hover:scale-105 hover:text-main-purple transition-transform font-semibold`}>
