@@ -11,8 +11,6 @@ export const DarkModeProvider = ({ children }: DarkModeProviderType) => {
   const [darkMode, setDarkMode] = useState(false);
 
   //EVENTS
-  // const toggleDarkMode = () => setDarkMode(!darkMode);
-
   const toggleDarkMode = () => {
     if(localStorage.getItem('darkMode')) {
       if(localStorage.getItem('darkMode') === 'light'){
