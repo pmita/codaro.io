@@ -36,6 +36,16 @@
     }
   }
 
+  .dark{
+    background: theme('colors.main-black');
+    color: theme('colors.main-white');
+  }
+
+  .light{
+    background: theme('colors.main-white');
+    color: theme('colors.main-black');
+  }
+
   .container{
     max-width: 1536px;
     margin-left: auto;
@@ -67,6 +77,8 @@
 :root{
   --poppins-default: 'Poppins', sans-serif;
   --roboto-default: 'Roboto', sans-serif;
+
+
 }
 
 * {

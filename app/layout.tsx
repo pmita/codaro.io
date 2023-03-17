@@ -1,4 +1,5 @@
-import Navbar from './Navbar/Navbar'
+import Navbar from './components/Navbar'
+import { DarkModeProvider } from './context/DarkModeContext'
 import { roboto, poppins } from './utils/fonts'
 import './globals.css'
 
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${roboto.className} ${poppins.className}`}>
       <body>
-        <Navbar />
+        <DarkModeProvider>
+          <Navbar />
+        </DarkModeProvider>
         {children}
       </body>
     </html>
