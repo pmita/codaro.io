@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
 import { useDarkMode } from '../context/DarkModeContext';
+import BackgroundCylinderSVG from './SVGs/BackgroundCylinderSVG';
+import BackgroundRoundCudeSVG from './SVGs/BackgroundRoundCubeSVG';
 
 export const LandingBanner = () => {
   const { darkMode } = useDarkMode();
@@ -20,6 +22,10 @@ export const LandingBanner = () => {
             </defs>
           </svg>
         </div> */}
+        <div className="absolute -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40 -left-50 ">
+          {/* <BackgroundCylinderSVG  width="288" height='428' fill="none"/> */}
+          <BackgroundRoundCudeSVG width="424" height='360' fill="none"/>
+        </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className={`text-4xl font-bold ${poppins.className} tracking-tight ${darkMode ? "text-main-white" : "text-main-purple"} sm:text-6xl`}>
