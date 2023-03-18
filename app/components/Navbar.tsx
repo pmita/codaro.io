@@ -13,7 +13,7 @@ const Navbar = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <nav className={`p-6 md:p-8 container flex justify-between items-center ${darkMode ? "dark" : ""}`}>
+    <nav className={`p-6 md:p-8 min-h-[10vh] container flex justify-between items-center ${darkMode ? "dark" : ""}`}>
       <h1 className={`text-2xl p-4 ${poppins.className} ${darkMode ? "text-main-white" : "text-main-purple"} font-bold`}>
         Codaro.io
       </h1>
