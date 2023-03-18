@@ -18,8 +18,8 @@ export default function RootLayout({
       <body>
         <DarkModeProvider>
           <Navbar />
+          {children}
         </DarkModeProvider>
-        {children}
       </body>
     </html>
   )
