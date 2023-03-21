@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
 import { useDarkMode } from '../context/DarkModeContext';
 import BackgroundCylinderSVG from './SVGs/BackgroundCylinderSVG';
-import BackgroundRoundCudeSVG from './SVGs/BackgroundRoundCubeSVG';
 
 export const LandingBanner = () => {
   const { darkMode } = useDarkMode();
@@ -22,9 +21,8 @@ export const LandingBanner = () => {
             </defs>
           </svg>
         </div> */}
-        <div className="absolute -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40 -left-50 ">
-          {/* <BackgroundCylinderSVG  width="288" height='428' fill="none"/> */}
-          <BackgroundRoundCudeSVG width="424" height='360' fill="none"/>
+        <div className="absolute -rotate-45 bottom-10 -z-10 blur-3xl transform-gpu overflow-hidden sm:bottom-10 -left-70 ">
+          <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
@@ -47,6 +45,12 @@ export const LandingBanner = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="absolute -top-10 -z-10 blur-3xl transform-gpu overflow-hidden sm:-top-10 -right-20 ">
+        <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
+        </div>
+        <div className="absolute rotate-30 -top-10 -z-10 blur-3xl transform-gpu overflow-hidden sm:-top-10 left-20 ">
+        <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
         </div>
         {/* <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
           <svg className="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678">
