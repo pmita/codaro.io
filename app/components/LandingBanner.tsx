@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
 import { useDarkMode } from '../context/DarkModeContext';
 import BackgroundCylinder from './SVGs/BackgroundCylinder';
+import DarkModeCylinderSVG from './SVGs/DarkModeCylinderSVG';
 
 
 export const LandingBanner = () => {
@@ -12,13 +13,22 @@ export const LandingBanner = () => {
     <div className={`${darkMode ? "dark" : ""} min-h-[90vh] flex justify-center items-center`}>
       <div className="relative isolate px-4 pt-14 lg:px-6">
         <div className="absolute -rotate-45 bottom-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:bottom-10 -left-70 origin-bottom-left animate-rotateRight">
-          <BackgroundCylinder  width="300" height='428' fill="none"/>
+          {darkMode 
+            ?<DarkModeCylinderSVG  width="288" height='428' fill="none"/>
+            :<BackgroundCylinder  width="288" height='428' fill="none"/>
+          }
         </div>
         <div className="absolute -rotate-20 -top-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 left-20 origin-bottom-right animate-rotateLeft">
-          <BackgroundCylinder  width="300" height='428' fill="none"/>
+          {darkMode 
+            ?<DarkModeCylinderSVG  width="288" height='428' fill="none"/>
+            :<BackgroundCylinder  width="288" height='428' fill="none"/>
+          }
         </div>
         <div className="absolute -top-10 rotate-20 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 -right-20 origin-top-right animate-rotateLeft">
-          <BackgroundCylinder  width="300" height='428' fill="none"/>
+          {darkMode 
+            ?<DarkModeCylinderSVG  width="288" height='428' fill="none"/>
+            :<BackgroundCylinder  width="288" height='428' fill="none"/>
+          }
         </div>
 
         {/*Actual content goes here*/}
