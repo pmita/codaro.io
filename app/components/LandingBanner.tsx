@@ -11,13 +11,13 @@ export const LandingBanner = () => {
   return(
     <div className={`${darkMode ? "dark" : ""} min-h-[90vh] flex justify-center items-center`}>
       <div className="relative isolate px-4 pt-14 lg:px-6">
-        <div className="absolute -rotate-45 bottom-10 -z-10 transform-gpu overflow-hidden sm:bottom-10 -left-70 origin-bottom-left animate-rotateRight">
+        <div className="absolute -rotate-45 bottom-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:bottom-10 -left-70 origin-bottom-left animate-rotateRight">
           <BackgroundCylinder  width="300" height='428' fill="none"/>
         </div>
-        <div className="absolute -rotate-20 -top-10 -z-10 transform-gpu overflow-hidden sm:-top-10 left-20 origin-bottom-right animate-rotateLeft">
+        <div className="absolute -rotate-20 -top-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 left-20 origin-bottom-right animate-rotateLeft">
           <BackgroundCylinder  width="300" height='428' fill="none"/>
         </div>
-        <div className="absolute -top-10 rotate-20 -z-10 transform-gpu overflow-hidden sm:-top-10 -right-20 origin-top-right animate-rotateLeft">
+        <div className="absolute -top-10 rotate-20 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 -right-20 origin-top-right animate-rotateLeft">
           <BackgroundCylinder  width="300" height='428' fill="none"/>
         </div>
 
