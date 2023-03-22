@@ -3,16 +3,25 @@
 import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
 import { useDarkMode } from '../context/DarkModeContext';
-import BackgroundCylinderSVG from './SVGs/BackgroundCylinderSVG';
+import BackgroundCylinder from './SVGs/BackgroundCylinder';
+
 
 export const LandingBanner = () => {
   const { darkMode } = useDarkMode();
   return(
     <div className={`${darkMode ? "dark" : ""} min-h-[90vh] flex justify-center items-center`}>
       <div className="relative isolate px-4 pt-14 lg:px-6">
-        <div className="absolute -rotate-45 bottom-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:bottom-10 -left-70 animate-rotateRight origin-bottom-left">
-          <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
+        <div className="absolute -rotate-45 bottom-10 -z-10 transform-gpu overflow-hidden sm:bottom-10 -left-70 origin-bottom-left">
+          <BackgroundCylinder  width="300" height='428' fill="none"/>
         </div>
+        <div className="absolute -rotate-20 -top-10 -z-10 transform-gpu overflow-hidden sm:-top-10 left-20 ">
+          <BackgroundCylinder  width="300" height='428' fill="none"/>
+        </div>
+        <div className="absolute -top-10 rotate-20 -z-10 transform-gpu overflow-hidden sm:-top-10 -right-20">
+          <BackgroundCylinder  width="300" height='428' fill="none"/>
+        </div>
+
+        {/*Actual content goes here*/}
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className={`text-4xl font-bold ${poppins.className} tracking-tight ${darkMode ? "text-main-white" : "text-main-purple"} sm:text-6xl`}>
@@ -34,12 +43,6 @@ export const LandingBanner = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="absolute -top-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 -right-20 animate-floatUp">
-        <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
-        </div>
-        <div className="absolute rotate-30 -top-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:-top-10 left-20 animate-floatDown">
-        <BackgroundCylinderSVG  width="300" height='428' fill="none"/>
         </div>
       </div>
     </div>

@@ -26,6 +26,11 @@ module.exports = {
         poppins: ["var(--font-poppins)"],
       },
     },
+    rotate: {
+      '15': '15deg',
+      '20': '20deg',
+      '45': '45deg',
+    },
     keyframes: {
       down: {
         '0%, 100%': { transform: 'translateY(-10%)' },
