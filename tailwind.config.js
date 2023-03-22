@@ -32,13 +32,9 @@ module.exports = {
       '45': '45deg',
     },
     keyframes: {
-      down: {
-        '0%, 100%': { transform: 'translateY(-10%)' },
-        '50%': { transform: 'translateY(10%)' },
-      },
-      up: {
-        '0%, 100%': { transform: 'translateY(10%)' },
-        '50%': { transform: 'translateY(-10%)' },
+      left: {
+        '0%, 100%': { transform: 'rotateZ(10deg)' },
+        '50%': { transform: 'rotateZ(-15deg)' },
       },
       right: {
         '0%, 100%': { transform: 'rotateZ(-10deg)' },
@@ -46,8 +42,7 @@ module.exports = {
       },
     },
     animation: {
-      floatDown: 'down 7s ease-in-out infinite',
-      floatUp: 'up 5s ease-in-out infinite',
+      rotateLeft: 'left 9s ease-in-out infinite',
       rotateRight: 'right 9s ease-in-out infinite',
     },
   },
