@@ -1,5 +1,5 @@
 import Navbar from './components/Navbar'
-import { DarkModeProvider } from './context/DarkModeContext'
+import { DarkModeProvider, useDarkMode } from './context/DarkModeContext'
 import { roboto, poppins } from './utils/fonts'
 import './globals.css'
 

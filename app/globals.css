@@ -46,6 +46,11 @@
     color: theme('colors.main-black');
   }
 
+  body.dark {
+    background: theme('colors.main-black');
+    color: theme('colors.main-white');
+  }
+
   .container{
     max-width: 1536px;
     margin-left: auto;
