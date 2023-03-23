@@ -12,6 +12,8 @@ export const LandingBanner = () => {
   return(
     <div className={`${darkMode ? "dark" : ""} min-h-[90vh] flex justify-center items-center`}>
       <div className="relative isolate px-4 pt-14 lg:px-6">
+
+        {/* ----- Background SVGs ----- */}
         <div className="absolute -rotate-45 bottom-10 -z-10 blur-2xl transform-gpu overflow-hidden sm:bottom-10 -left-70 origin-bottom-left animate-rotateRight">
           {darkMode 
             ?<DarkModeCylinderSVG  width="288" height='428' fill="none"/>
@@ -31,7 +33,7 @@ export const LandingBanner = () => {
           }
         </div>
 
-        {/*Actual content goes here*/}
+        {/* ----- CTA Banner ----- */}
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className={`text-4xl font-bold ${poppins.className} tracking-tight ${darkMode ? "text-main-white" : "text-main-purple"} sm:text-6xl`}>
