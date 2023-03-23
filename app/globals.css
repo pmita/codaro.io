@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer components {
+  .cta-btn{
+    padding: 1rem 2rem;
+    background: theme('colors.main-purple');
+    color: theme('colors.main-white');
+    border: 3px solid theme('colors.main-purple');
+    transition: all 0.3s ease-in-out;
+  }
+  .cta-btn:hover{
+    background: theme('colors.main-white');
+    color: theme('colors.main-purple');
+    cursor: pointer;
+  }
+
   .primary-btn{
     padding: 1rem 2rem;
     background: theme('colors.main-purple');
@@ -16,6 +29,16 @@
     cursor: pointer;
   }
 
+  .primary-btn.dark{
+    background: theme('colors.main-white');
+    color: theme('colors.main-black');
+    border: 3px solid theme('colors.main-white');
+  }
+  .primary-btn.dark:hover{
+    background: theme('colors.main-black');
+    color: theme('colors.main-white');
+  }
+
   .secondary-btn{
     padding: 1rem 2rem;
     background: theme('colors.main-white');
@@ -27,6 +50,16 @@
     background: theme('colors.main-purple');
     color: theme('colors.main-white');
     cursor: pointer;
+  }
+
+  .secondary-btn.dark{
+    background: theme('colors.main-black');
+    color: theme('colors.main-white');
+    border: 3px solid theme('colors.main-white');
+  }
+  .secondary-btn.dark:hover{
+    background: theme('colors.main-white');
+    color: theme('colors.main-black');
   }
 
   @media only screen and (max-width: 768px){

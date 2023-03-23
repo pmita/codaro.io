@@ -2,7 +2,9 @@
 
 import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
+// CONTEXT
 import { useDarkMode } from '../context/DarkModeContext';
+// SVGs
 import BackgroundCylinder from './SVGs/BackgroundCylinder';
 import DarkModeCylinderSVG from './SVGs/DarkModeCylinderSVG';
 
@@ -43,14 +45,14 @@ export const LandingBanner = () => {
               Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <button className="primary-btn">
+              <button className={`primary-btn ${darkMode ? "dark" : ""}`}>
                 <Link href={'/pro'}>
                   Get Started
                 </Link>
               </button>
-              <button className="secondary-btn">
+              <button className={`secondary-btn ${darkMode ? "dark" : ""}`}>
                 <Link href={'/courses'}>
-                  Learn More →
+                  Learn More
                 </Link>
               </button>
             </div>
