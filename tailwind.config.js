@@ -26,6 +26,25 @@ module.exports = {
         poppins: ["var(--font-poppins)"],
       },
     },
+    rotate: {
+      '15': '15deg',
+      '20': '20deg',
+      '45': '45deg',
+    },
+    keyframes: {
+      left: {
+        '0%, 100%': { transform: 'rotateZ(10deg)' },
+        '50%': { transform: 'rotateZ(-15deg)' },
+      },
+      right: {
+        '0%, 100%': { transform: 'rotateZ(-10deg)' },
+        '50%': { transform: 'rotateZ(15deg)' },
+      },
+    },
+    animation: {
+      rotateLeft: 'left 9s ease-in-out infinite',
+      rotateRight: 'right 9s ease-in-out infinite',
+    },
   },
   plugins: [],
   darkMode: "class",
