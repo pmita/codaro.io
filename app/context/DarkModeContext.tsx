@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect } from "react"
-import { DarkModeProviderType, DarkModeContextType } from "../types/context/DarkModeContext"
+import { DarkModeProviderType, DarkModeContextType } from "../types/context/DarkModeContextTypes"
 
 export const DarkModeContext = createContext<DarkModeContextType | null>(null);
 

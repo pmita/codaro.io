@@ -1,23 +1,8 @@
 "use client"
 
 import { createContext, useContext, useReducer } from "react"
-
-export type AuthStateContextType = {
-  state: AuthStateType,
-  dispatch: React.Dispatch<any>
-}
-
-export type AuthStateProviderType = {
-  children: React.ReactNode
-}
-
-export type AuthStateType = {
-  color: string,
-  authStateHasChanged: boolean,
-  user: any,
-  isLoading: boolean,
-  error: Error | string | null,
-}
+// TYPES
+import { AuthStateType, AuthStateContextType, AuthStateProviderType } from "../types/context/AuthStateContextTypes";
 
 const initialState: AuthStateType = {
   color: 'red',
