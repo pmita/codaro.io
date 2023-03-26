@@ -46,7 +46,7 @@ export const useDarkMode = () => {
   const darkModeContext = useContext(DarkModeContext);
 
   if(!darkModeContext) {
-    throw new Error('useDarkMode must be used within a DarkModeProvider. Check the your component is included in this context');
+    throw new Error('useDarkMode must be used within a DarkModeProvider. Check your component is included in this context');
   }
 
   return darkModeContext;
