@@ -1,28 +1,31 @@
+import firebase from "firebase"
+
 export type AuthStateType = {
   authStateHasChanged: boolean,
-  user: any,
-  isLoading: boolean,
-  error: Error | string | null,
+  user: firebase.User | null,
 }
 
 // -----Action Reducer Types-----
 export enum AuthActionType {
   SIGN_IN_LOADING="SIGN_IN_LOADING",
   SIGN_IN_SUCCESS="SIGN_IN_SUCCESS",
-  SIGN_IN_ERROR="SIGN_IN_ERROR"
+  SIGN_IN_ERROR="SIGN_IN_ERROR",
+  SIGN_UP="SIGN_UP",
+  SIGN_IN="SIGN_IN",
+  AUTH_IS_READY="AUTH_IS_READY",
 }
 
-export type SignInSuccessActionType = {
-  type: AuthActionType.SIGN_IN_SUCCESS,
-  payload: any
+export type SignUpActionType = {
+  type: AuthActionType.SIGN_UP,
+  payload: firebase.User | null
 }
-export type SignInLoadingActionType = {
-  type: AuthActionType.SIGN_IN_LOADING,
+export type SignInActionType = {
+  type: AuthActionType.SIGN_IN,
+  payload: firebase.User | null
 }
-
-export type SignInErrorActionType = {
-  type: AuthActionType.SIGN_IN_ERROR,
-  payload: Error | string | null
+export type AuthIsReadyActionType = {
+  type: AuthActionType.AUTH_IS_READY,
+  payload: firebase.User | null
 }
 
 // -----Context Types-----

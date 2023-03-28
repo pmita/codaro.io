@@ -7,31 +7,23 @@ import {
   AuthStateContextType, 
   AuthStateProviderType, 
   AuthActionType, 
-  SignInSuccessActionType, 
-  SignInLoadingActionType, 
-  SignInErrorActionType 
+  SignUpActionType,
 } from "../types/context/AuthStateContextTypes";
 
 const initialState: AuthStateType = {
   authStateHasChanged: false,
   user: null,
-  isLoading: false,
-  error: null,
 }
 
 export const AuthStateContext = createContext<AuthStateContextType | null>(null);
 
 export const AuthStateReducer = (
   state: AuthStateType, 
-  action: SignInSuccessActionType | SignInLoadingActionType | SignInErrorActionType
+  action: SignUpActionType
 ) => {
   switch(action.type) {
-    case AuthActionType.SIGN_IN_LOADING:
-      return { ...state, isLoading: true, user: null, error: null };
-    case AuthActionType.SIGN_IN_ERROR:
-      return { ...state, isLoading: false, user: null, error: action.payload };
-    case AuthActionType.SIGN_IN_SUCCESS:
-      return { ...state, isLoading: false, user: action.payload, error: null };
+    case AuthActionType.SIGN_UP:
+      return { ...state, user: action.payload };
     default:
       return { ...state };
   }
