@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthState } from '../context/AuthenticationContext';
 import { auth, firestore } from '../firebase/config';
 
@@ -8,6 +8,7 @@ export const useSignUp = () => {
   const { dispatch } = useAuthState();
   const [error, setError] = useState<Error | string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCancelled, setIsCancelled] = useState<boolean>(false);
 
   const signUp: signUp = async (email, password, username) => {
     setIsLoading(true);
@@ -32,11 +33,22 @@ export const useSignUp = () => {
       })
 
       dispatch({ type: 'SIGN_UP', payload: response.user });
+
+      if(!isCancelled){
+        setIsLoading(false);
+        setError(null);
+      }
     }catch(error){
-      setIsLoading(false);
-      setError((error as Error).message);
+      if(!isCancelled){
+        setIsLoading(false);
+        setError((error as Error).message);
+      }
     }
   }
+
+  useEffect(() => {
+    return () => setIsCancelled(true);
+  }, []);
 
   return { signUp, error, isLoading };
 }
