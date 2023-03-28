@@ -1,41 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useAuthState } from '../context/AuthenticationContext';
 // FIREBASE
-import { auth, firestore } from '../firebase/config';
+import { auth } from '../firebase/config';
 // TYPES
 import { AuthActionType } from '../types/context/AuthStateContextTypes';
 
-type signUp = (email: string, password: string, username: string) => void;
+type signIn = (email: string, password: string) => void;
 
-export const useSignUp = () => {
+export const useSignIn = () => {
   const { dispatch } = useAuthState();
   const [error, setError] = useState<Error | string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
 
-  const signUp: signUp = async (email, password, username) => {
+  const signIn: signIn = async (email, password) => {
     setIsLoading(true);
 
     try{
       setIsLoading(true);
       setError(null);
-      const response = await auth.createUserWithEmailAndPassword(email, password);
+      const response = await auth.signInWithEmailAndPassword(email, password);
 
       if(!response.user){
-        throw new Error('Sign up process failed. User could not be created.');
+        throw new Error('Something went wrong. User could not be signed in.');
       }
 
-      await response.user.updateProfile({
-        displayName: username
-      })
-
-      await firestore.collection('users').doc(response.user.uid).set({
-        displayName: username,
-        email,
-        uid: response.user.uid,
-      })
-
-      dispatch({ type: AuthActionType.SIGN_UP, payload: response.user });
+      dispatch({ type: AuthActionType.SIGN_IN, payload: response.user });
 
       if(!isCancelled){
         setIsLoading(false);
@@ -53,5 +43,5 @@ export const useSignUp = () => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { signUp, error, isLoading };
+  return { signIn, error, isLoading };
 }

@@ -8,7 +8,8 @@ import {
   AuthStateProviderType, 
   AuthActionType, 
   SignUpActionType,
-  SignOutActionType
+  SignOutActionType,
+  SignInActionType
 } from "../types/context/AuthStateContextTypes";
 
 const initialState: AuthStateType = {
@@ -20,10 +21,11 @@ export const AuthStateContext = createContext<AuthStateContextType | null>(null)
 
 export const AuthStateReducer = (
   state: AuthStateType, 
-  action: SignUpActionType | SignOutActionType
+  action: SignUpActionType | SignOutActionType | SignInActionType
 ) => {
   switch(action.type) {
     case AuthActionType.SIGN_UP:
+    case AuthActionType.SIGN_IN:
       return { ...state, user: action.payload };
     case AuthActionType.SIGN_OUT:
       return { ...state, user: null };

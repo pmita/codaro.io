@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAuthState } from '../context/AuthenticationContext';
+// FIREBASE
 import { auth } from '../firebase/config';
+// TYPES
+import { AuthActionType } from '../types/context/AuthStateContextTypes';
 
 type signOut = (email: string, password: string, username: string) => void;
 
@@ -18,7 +21,7 @@ export const useSignOut = () => {
       setError(null);
       await auth.signOut();
 
-      dispatch({ type: 'SIGN_OUT' });
+      dispatch({ type: AuthActionType.SIGN_OUT });
 
       if(!isCancelled){
         setIsLoading(false);
