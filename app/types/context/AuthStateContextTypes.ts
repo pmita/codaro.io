@@ -7,12 +7,10 @@ export type AuthStateType = {
 
 // -----Action Reducer Types-----
 export enum AuthActionType {
-  SIGN_IN_LOADING="SIGN_IN_LOADING",
-  SIGN_IN_SUCCESS="SIGN_IN_SUCCESS",
-  SIGN_IN_ERROR="SIGN_IN_ERROR",
   SIGN_UP="SIGN_UP",
   SIGN_IN="SIGN_IN",
   AUTH_IS_READY="AUTH_IS_READY",
+  SIGN_OUT="SIGN_OUT",
 }
 
 export type SignUpActionType = {
@@ -26,6 +24,9 @@ export type SignInActionType = {
 export type AuthIsReadyActionType = {
   type: AuthActionType.AUTH_IS_READY,
   payload: firebase.User | null
+}
+export type SignOutActionType = {
+  type: AuthActionType.SIGN_OUT,
 }
 
 // -----Context Types-----
