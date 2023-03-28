@@ -22,19 +22,17 @@ const Login = () => {
 
   return (
     <div className={`${darkMode ? "dark" : ""} flex min-h-[90vh] items-center justify-center py-12 px-4 sm:px-6 lg:px-8`}>
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <h2 className={`mt-6 tex t-center text-3xl font-bold tracking-tight ${darkMode ? "text-main-white" : "text-main-purple"}`}>
-            Sign in to your account
-          </h2>
-        </div>
+      <div className="w-full max-w-md space-y-8 flex flex-col items-stretch justify-center">
+        <h2 className={`mt-6 text-center text-3xl font-bold tracking-tight ${darkMode ? "text-main-white" : "text-main-purple"}`}>
+          Sign in to your account
+        </h2>
 
 
         <form className="mt-8 max-w-xs md:max-w-md flex flex-col justify-center items-stretch gap-6" onSubmit={handleSubmit(onSubmit)}>
           <input 
             type="email"
             placeholder="Email"
-            className={`max-width-[100%] border-solid border-2 border-main-purple p-2`}
+            className={`max-width-[100%] border-solid border-4 border-main-black p-2 ${darkMode ? "dark" : ""}`}
             {...register("email",{
               required: "Email is required",
               pattern: {
@@ -48,7 +46,7 @@ const Login = () => {
           <input 
             type="password"
             placeholder="Password"
-            className={`full-width border-solid border-2 border-main-purple p-2`}
+            className={`full-width border-solid border-4 border-main-black p-2 ${darkMode ? "dark" : ""}`}
             {...register("password",{
               required: "Password is required",
               minLength: {
