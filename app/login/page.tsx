@@ -1,12 +1,19 @@
 "use client"
 
 import { useDarkMode } from '../context/DarkModeContext';
+import { useSignIn } from '../hooks/useSignIn';
 // LIBRARIES
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+type LoginFormValues = {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
   const { darkMode } = useDarkMode();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { signIn } = useSignIn();
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -16,8 +23,8 @@ const Login = () => {
   });
 
   // EVENTS
-  const onSubmit = async (data:any) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginFormValues>= async ({ email, password }) => {
+    signIn(email, password);
   }
 
   return (

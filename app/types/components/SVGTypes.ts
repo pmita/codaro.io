@@ -1,5 +1,3 @@
-import { MouseEventHandler } from "react";
-
 export type SVGPropType = {
   width?: string;
   height?: string;
