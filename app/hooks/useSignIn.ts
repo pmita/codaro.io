@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuthState } from '../context/AuthenticationContext';
 // FIREBASE
@@ -9,6 +10,7 @@ type signIn = (email: string, password: string) => void;
 
 export const useSignIn = () => {
   const { dispatch } = useAuthState();
+  const router = useRouter();
   const [error, setError] = useState<Error | string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
@@ -30,6 +32,7 @@ export const useSignIn = () => {
       if(!isCancelled){
         setIsLoading(false);
         setError(null);
+        router.push('/');
       }
     }catch(error){
       if(!isCancelled){

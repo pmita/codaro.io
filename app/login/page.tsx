@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from 'next/navigation';
 import { useDarkMode } from '../context/DarkModeContext';
 import { useSignIn } from '../hooks/useSignIn';
 // LIBRARIES
@@ -13,7 +12,6 @@ type LoginFormValues = {
 
 const Login = () => {
   const { darkMode } = useDarkMode();
-  const router = useRouter();
   const { signIn } = useSignIn();
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
     mode: "onBlur",
@@ -27,7 +25,6 @@ const Login = () => {
   // EVENTS
   const onSubmit: SubmitHandler<LoginFormValues>= async ({ email, password }) => {
     signIn(email, password);
-    // router.push("/");
   }
 
   return (
