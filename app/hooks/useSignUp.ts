@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuthState } from '../context/AuthenticationContext';
 // FIREBASE
@@ -9,6 +10,7 @@ type signUp = (email: string, password: string, username: string) => void;
 
 export const useSignUp = () => {
   const { dispatch } = useAuthState();
+  const router = useRouter();
   const [error, setError] = useState<Error | string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
@@ -32,7 +34,6 @@ export const useSignUp = () => {
       await firestore.collection('users').doc(response.user.uid).set({
         displayName: username,
         email,
-        uid: response.user.uid,
       })
 
       dispatch({ type: AuthActionType.SIGN_UP, payload: response.user });
@@ -40,6 +41,7 @@ export const useSignUp = () => {
       if(!isCancelled){
         setIsLoading(false);
         setError(null);
+        router.push('/');
       }
     }catch(error){
       if(!isCancelled){
