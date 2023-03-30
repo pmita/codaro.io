@@ -31,7 +31,8 @@ export type SignOutActionType = {
 
 // -----Context Types-----
 export type AuthStateContextType = {
-  state: AuthStateType,
+  user: firebase.User | null,
+  authStateHasChanged: boolean,
   dispatch: React.Dispatch<any>
 }
 

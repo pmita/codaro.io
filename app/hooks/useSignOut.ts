@@ -5,7 +5,7 @@ import { auth } from '../firebase/config';
 // TYPES
 import { AuthActionType } from '../types/context/AuthStateContextTypes';
 
-type signOut = (email: string, password: string, username: string) => void;
+type signOut = () => void;
 
 export const useSignOut = () => {
   const { dispatch } = useAuthState();
