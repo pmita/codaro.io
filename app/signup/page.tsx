@@ -5,12 +5,9 @@ import { useDarkMode } from '../context/DarkModeContext';
 import { useSignUp } from '../hooks/useSignUp';
 // LIBRARIES
 import { useForm, SubmitHandler } from 'react-hook-form';
+// TYPES
+import { SignUpFormValues } from '../types/pages/SignUpPageTypes';
 
-type SignUpFormValues = {
-  email: string;
-  password: string;
-  username: string;
-}
 
 const SignUp = () => {
   const { darkMode } = useDarkMode();

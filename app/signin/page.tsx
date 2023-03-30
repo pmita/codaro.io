@@ -4,16 +4,13 @@ import { useDarkMode } from '../context/DarkModeContext';
 import { useSignIn } from '../hooks/useSignIn';
 // LIBRARIES
 import { useForm, SubmitHandler } from 'react-hook-form';
+// TYPES
+import { SignInFormValues } from '../types/pages/SignInPageTypes';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-}
-
-const Login = () => {
+const SignIn = () => {
   const { darkMode } = useDarkMode();
   const { signIn } = useSignIn();
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
+  const { register, handleSubmit, formState: { errors } } = useForm<SignInFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -23,7 +20,7 @@ const Login = () => {
   });
 
   // EVENTS
-  const onSubmit: SubmitHandler<LoginFormValues>= async ({ email, password }) => {
+  const onSubmit: SubmitHandler<SignInFormValues>= async ({ email, password }) => {
     signIn(email, password);
   }
 
@@ -79,4 +76,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default SignIn;
