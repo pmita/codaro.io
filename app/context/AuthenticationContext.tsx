@@ -1,6 +1,8 @@
 "use client"
 
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useReducer, useEffect } from "react"
+// FIREBASE
+import { auth } from "../firebase/config";
 // TYPES
 import { 
   AuthStateType, 
@@ -9,7 +11,8 @@ import {
   AuthActionType, 
   SignUpActionType,
   SignOutActionType,
-  SignInActionType
+  SignInActionType,
+  AuthIsReadyActionType
 } from "../types/context/AuthStateContextTypes";
 
 const initialState: AuthStateType = {
@@ -21,11 +24,12 @@ export const AuthStateContext = createContext<AuthStateContextType | null>(null)
 
 export const AuthStateReducer = (
   state: AuthStateType, 
-  action: SignUpActionType | SignOutActionType | SignInActionType
+  action: SignUpActionType | SignOutActionType | SignInActionType | AuthIsReadyActionType
 ) => {
   switch(action.type) {
     case AuthActionType.SIGN_UP:
     case AuthActionType.SIGN_IN:
+    case AuthActionType.AUTH_IS_READY:
       return { ...state, user: action.payload };
     case AuthActionType.SIGN_OUT:
       return { ...state, user: null };
@@ -37,6 +41,17 @@ export const AuthStateReducer = (
 export const AuthStateProvider = ({ children }: AuthStateProviderType) => {
   // STATE
   const [state, dispatch] = useReducer(AuthStateReducer, initialState);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if(user) {
+        dispatch({ type: AuthActionType.AUTH_IS_READY, payload: user });
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <AuthStateContext.Provider value={{ ...state, dispatch }}>
       {children}
