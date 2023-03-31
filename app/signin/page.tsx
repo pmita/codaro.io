@@ -1,7 +1,9 @@
 "use client"
 
+// HOOKS
 import { useDarkMode } from '../context/DarkModeContext';
 import { useSignIn } from '../hooks/useSignIn';
+import { useGoogleAuth } from '../hooks/useGoogleAuth';
 // LIBRARIES
 import { useForm, SubmitHandler } from 'react-hook-form';
 // TYPES
@@ -10,6 +12,7 @@ import { SignInFormValues } from '../types/pages/SignInPageTypes';
 const SignIn = () => {
   const { darkMode } = useDarkMode();
   const { signIn } = useSignIn();
+  const { signInWithGoogle } = useGoogleAuth();
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -71,6 +74,16 @@ const SignIn = () => {
             </button>
           </div>
         </form>
+
+        <div className='text-center'>
+          <button 
+            type="button" 
+            className={`primary-btn ${darkMode ? "dark" : ""}`}
+            onClick={signInWithGoogle}
+          >
+            Sign in with Google
+          </button>
+        </div>
       </div>
     </div>
   );
