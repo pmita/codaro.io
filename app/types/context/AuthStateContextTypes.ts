@@ -8,8 +8,8 @@ export type AuthStateType = {
 // -----Action Reducer Types-----
 export enum AuthActionType {
   SIGN_UP="SIGN_UP",
-  SIGN_UP_WITH_GOOGLE="SIGN_UP_WITH_GOOGLE",
-  SIGN_UP_WITH_GITHUB="SIGN_UP_WITH_GITHUB",
+  SIGN_IN_WITH_GOOGLE="SIGN_IN_WITH_GOOGLE",
+  SIGN_IN_WITH_GITHUB="SIGN_IN_WITH_GITHUB",
   SIGN_IN="SIGN_IN",
   AUTH_IS_READY="AUTH_IS_READY",
   SIGN_OUT="SIGN_OUT",
@@ -19,12 +19,12 @@ export type SignUpActionType = {
   type: AuthActionType.SIGN_UP,
   payload: firebase.User | null
 }
-export type SignUpWithGoogleActionType = {
-  type: AuthActionType.SIGN_UP_WITH_GOOGLE,
+export type SignInWithGoogleActionType = {
+  type: AuthActionType.SIGN_IN_WITH_GOOGLE,
   payload: firebase.User | null
 }
-export type SignUpWithGithubActionType = {
-  type: AuthActionType.SIGN_UP_WITH_GITHUB,
+export type SignInWithGithubActionType = {
+  type: AuthActionType.SIGN_IN_WITH_GITHUB,
   payload: firebase.User | null
 }
 export type SignInActionType = {

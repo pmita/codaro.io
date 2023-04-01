@@ -34,7 +34,7 @@ export const useGithubSignIn = () => {
         email: response.user.email,
       })
 
-      dispatch({ type: AuthActionType.SIGN_UP_WITH_GITHUB, payload: response.user });
+      dispatch({ type: AuthActionType.SIGN_IN_WITH_GITHUB, payload: response.user });
       router.push('/');
 
       if(!isCancelled){

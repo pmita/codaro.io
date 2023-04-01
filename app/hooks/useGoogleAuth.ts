@@ -34,7 +34,7 @@ export const useGoogleAuth = () => {
         email: response.user.email,
       })
 
-      dispatch({ type: AuthActionType.SIGN_UP_WITH_GOOGLE, payload: response.user });
+      dispatch({ type: AuthActionType.SIGN_IN_WITH_GOOGLE, payload: response.user });
       router.push('/');
 
       if(!isCancelled){
