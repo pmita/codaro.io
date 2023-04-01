@@ -11,6 +11,7 @@ import {
   AuthActionType, 
   SignUpActionType,
   SignUpWithGoogleActionType,
+  SignUpWithGithubActionType,
   SignOutActionType,
   SignInActionType,
   AuthIsReadyActionType
@@ -25,11 +26,13 @@ export const AuthStateContext = createContext<AuthStateContextType | null>(null)
 
 export const AuthStateReducer = (
   state: AuthStateType, 
-  action: SignUpActionType | SignOutActionType | SignInActionType | AuthIsReadyActionType | SignUpWithGoogleActionType
+  action: SignUpActionType | SignOutActionType | SignInActionType | 
+  AuthIsReadyActionType | SignUpWithGoogleActionType | SignUpWithGithubActionType
 ) => {
   switch(action.type) {
     case AuthActionType.SIGN_UP:
     case AuthActionType.SIGN_UP_WITH_GOOGLE:
+    case AuthActionType.SIGN_UP_WITH_GITHUB:
     case AuthActionType.SIGN_IN:
     case AuthActionType.AUTH_IS_READY:
       return { ...state, user: action.payload };

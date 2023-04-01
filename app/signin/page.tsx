@@ -4,6 +4,7 @@
 import { useDarkMode } from '../context/DarkModeContext';
 import { useSignIn } from '../hooks/useSignIn';
 import { useGoogleAuth } from '../hooks/useGoogleAuth';
+import { useGithubSignIn } from '../hooks/useGithubSignIn';
 // LIBRARIES
 import { useForm, SubmitHandler } from 'react-hook-form';
 // TYPES
@@ -13,6 +14,7 @@ const SignIn = () => {
   const { darkMode } = useDarkMode();
   const { signIn } = useSignIn();
   const { signInWithGoogle } = useGoogleAuth();
+  const { signInWithGithub } = useGithubSignIn();
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -84,9 +86,19 @@ const SignIn = () => {
             Sign in with Google
           </button>
         </div>
+        <div className='text-center'>
+          <button 
+            type="button" 
+            className={`primary-btn ${darkMode ? "dark" : ""}`}
+            onClick={signInWithGithub}
+          >
+            Sign in with Github
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default SignIn;
+

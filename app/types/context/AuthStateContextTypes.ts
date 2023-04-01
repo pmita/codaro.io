@@ -9,6 +9,7 @@ export type AuthStateType = {
 export enum AuthActionType {
   SIGN_UP="SIGN_UP",
   SIGN_UP_WITH_GOOGLE="SIGN_UP_WITH_GOOGLE",
+  SIGN_UP_WITH_GITHUB="SIGN_UP_WITH_GITHUB",
   SIGN_IN="SIGN_IN",
   AUTH_IS_READY="AUTH_IS_READY",
   SIGN_OUT="SIGN_OUT",
@@ -20,6 +21,10 @@ export type SignUpActionType = {
 }
 export type SignUpWithGoogleActionType = {
   type: AuthActionType.SIGN_UP_WITH_GOOGLE,
+  payload: firebase.User | null
+}
+export type SignUpWithGithubActionType = {
+  type: AuthActionType.SIGN_UP_WITH_GITHUB,
   payload: firebase.User | null
 }
 export type SignInActionType = {
