@@ -66,40 +66,36 @@ const SignIn = () => {
           />
           {errors.password && <p className={`text-midnight`}>{errors.password?.message}</p>}
 
-          <div className='text-center'>
-            {isLoading
-              ? (
-                <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""} disabled:pointer-events-none`}>
-                  Sign in...
-                </button>
-              )
-              : (
-                <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""}`}>
-                  Sign in
-                </button>
-              )
-            }
-          </div>
+          {isLoading
+            ? (
+              <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""} disabled:pointer-events-none`}>
+                Sign in...
+              </button>
+            )
+            : (
+              <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""}`}>
+                Sign in
+              </button>
+            )
+          }
         </form>
 
-        <div className='text-center'>
+        <>
           <button 
             type="button" 
             className={`primary-btn ${darkMode ? "dark" : ""}`}
             onClick={signInWithGoogle}
           >
-            Sign in with Google
+            <img src={`/github_icon.png`} className="inline-block" /> Sign in with Google
           </button>
-        </div>
-        <div className='text-center'>
           <button 
             type="button" 
             className={`primary-btn ${darkMode ? "dark" : ""}`}
             onClick={signInWithGithub}
           >
-            Sign in with Github
+            <img src={`/google_icon.png`} className="inline-block" />Sign in with Github
           </button>
-        </div>
+        </>
       </div>
     </div>
   );
