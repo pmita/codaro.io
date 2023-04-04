@@ -3,8 +3,6 @@
 // HOOKS
 import { useDarkMode } from '../context/DarkModeContext';
 import { useSignIn } from '../hooks/useSignIn';
-import { useGoogleAuth } from '../hooks/useGoogleAuth';
-import { useGithubSignIn } from '../hooks/useGithubSignIn';
 // LIBRARIES
 import { useForm, SubmitHandler } from 'react-hook-form';
 // TYPES
@@ -12,9 +10,7 @@ import { SignInFormValues } from '../types/pages/SignInPageTypes';
 
 const SignIn = () => {
   const { darkMode } = useDarkMode();
-  const { signIn } = useSignIn();
-  const { signInWithGoogle } = useGoogleAuth();
-  const { signInWithGithub } = useGithubSignIn();
+  const { signIn, signInWithGoogle, signInWithGithub, isLoading } = useSignIn();
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormValues>({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -71,9 +67,18 @@ const SignIn = () => {
           {errors.password && <p className={`text-midnight`}>{errors.password?.message}</p>}
 
           <div className='text-center'>
-            <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""}`}>
-              Sign in
-            </button>
+            {isLoading
+              ? (
+                <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""} disabled:pointer-events-none`}>
+                  Sign in...
+                </button>
+              )
+              : (
+                <button type="submit" className={`primary-btn ${darkMode ? "dark" : ""}`}>
+                  Sign in
+                </button>
+              )
+            }
           </div>
         </form>
 

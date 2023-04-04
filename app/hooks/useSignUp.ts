@@ -41,8 +41,9 @@ export const useSignUp = () => {
       if(!isCancelled){
         setIsLoading(false);
         setError(null);
-        router.push('/');
       }
+      
+      router.push('/');
     }catch(error){
       if(!isCancelled){
         setIsLoading(false);
