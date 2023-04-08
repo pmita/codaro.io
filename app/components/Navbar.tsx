@@ -4,12 +4,19 @@ import Link from 'next/link'
 import { roboto, poppins } from '../utils/fonts'
 // CONTEXT
 import { useDarkMode } from '../context/DarkModeContext';
+import { useAuthState } from '../context/AuthenticationContext';
+// HOOKS
+import { useSignOut } from '../hooks/useSignOut';
 // SVGs
 import DarkModeSVG from './SVGs/DarkModeSVG';
 import LightModeSVG from './SVGs/LightModeSVG';
 
 const Navbar = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const { user } = useAuthState();
+  const { signOut } = useSignOut()
+
+  console.log(user)
 
   return (
     <nav className={`p-6 md:p-8 min-h-[10vh] flex justify-between items-center ${darkMode ? "dark" : ""}`}>
@@ -36,11 +43,24 @@ const Navbar = () => {
               courses
             </Link>
           </h4>
-          <button className={`cta-btn ${roboto.className} drop-shadow-[3px_3px_0_black] hover:drop-shadow-[0_0_7px_rgba(39,31,224,0.5)] transition-all duration-300`}>
-            <Link href={'/login'}>
-              LOGIN
-            </Link>
-          </button>
+
+          {user 
+            ? (
+              <button
+                className={`cta-btn ${roboto.className} drop-shadow-[3px_3px_0_black] hover:drop-shadow-[0_0_7px_rgba(39,31,224,0.5)] transition-all duration-300`}
+                onClick={signOut}
+              >
+                Logout
+              </button>
+            )
+            : (
+              <button className={`cta-btn ${roboto.className} drop-shadow-[3px_3px_0_black] hover:drop-shadow-[0_0_7px_rgba(39,31,224,0.5)] transition-all duration-300`}>
+              <Link href={'/signin'}>
+                LOGIN
+              </Link>
+            </button>
+            )
+          }
         </ul>
       </div>
     </nav>

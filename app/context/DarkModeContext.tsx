@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect } from "react"
-import { DarkModeProviderType, DarkModeContextType } from "../types/context/DarkModeContext"
+import { DarkModeProviderType, DarkModeContextType } from "../types/context/DarkModeContextTypes"
 
 export const DarkModeContext = createContext<DarkModeContextType | null>(null);
 
@@ -46,7 +46,7 @@ export const useDarkMode = () => {
   const darkModeContext = useContext(DarkModeContext);
 
   if(!darkModeContext) {
-    throw new Error('useDarkMode must be used within a DarkModeProvider. Check the your component is included in this context');
+    throw new Error('useDarkMode must be used within a DarkModeProvider. Check your component is included in this context');
   }
 
   return darkModeContext;

@@ -84,6 +84,12 @@
     color: theme('colors.main-white');
   }
 
+  input.dark{
+    background: theme('colors.secondary-black');
+    color: theme('colors.main-white');
+    border: 3px solid theme('colors.main-white');
+  }
+
   .container{
     max-width: 1536px;
     margin-left: auto;

@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
-import { DarkModeProvider, useDarkMode } from './context/DarkModeContext'
+import { DarkModeProvider } from './context/DarkModeContext'
+import { AuthStateProvider } from './context/AuthenticationContext'
 import { roboto, poppins } from './utils/fonts'
 import './globals.css'
 
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${roboto.className} ${poppins.className}`}>
       <body>
-        <DarkModeProvider>
-          <Navbar />
-          {children}
-        </DarkModeProvider>
+        <AuthStateProvider>
+          <DarkModeProvider>
+            <Navbar />
+            {children}
+          </DarkModeProvider>
+        </AuthStateProvider>
       </body>
     </html>
   )
