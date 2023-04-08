@@ -1,10 +1,11 @@
-import firebase from "firebase";
-import { firestore } from "@/app/firebase/config";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
+// FIREBASE
+import firebase from "firebase";
+import { firestore } from "@/app/firebase/config";
 
 interface Params extends ParsedUrlQuery {
-  course: string;
+  courseId: string;
   slug: string;
 }
 
@@ -14,12 +15,9 @@ type ChapterPageProps = {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
-  const { course, slug } = params as Params;
+  const { courseId, slug } = params as Params;
 
-  console.log(params);
-
-  // const chapterDetails = await firestore.collection("courses").doc()
-  const chapterDetails = await firestore.collection("courses").doc(course)
+  const chapterDetails = await firestore.collection("courses").doc(courseId)
     .collection("chapter").doc(slug).get().then((doc) => {
       if (doc.exists) {
         return { ...doc.data() }
@@ -41,8 +39,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       const { courseId, slug } = doc.data();
       return { 
         params: {
-          course: courseId,
-          slug: slug
+          courseId,
+          slug
         }
       }
     })

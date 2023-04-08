@@ -4,7 +4,7 @@ import { ParsedUrlQuery } from "querystring";
 import firebase from "firebase"
 
 interface Params extends ParsedUrlQuery {
-  course: string;
+  courseId: string;
 }
 
 type PageProps = {
@@ -14,9 +14,9 @@ type PageProps = {
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { course } = context.params as Params;
+  const { courseId } = context.params as Params;
 
-  const courseDetails = await firestore.collection('courses').doc(course).get().then((doc) => {
+  const courseDetails = await firestore.collection('courses').doc(courseId).get().then((doc) => {
     if (doc.exists) {
       return { ...doc.data() }
     } else {
@@ -39,7 +39,6 @@ const CoursePage: React.FC<PageProps> = ({ courseDetails }) => {
     <div className="random">
       <h1>CoursePage.tsx CoursePage</h1>
       {courseDetails && <h1>{courseDetails?.content}</h1>}
-      {/* <Test content={courseDetails?.content} /> */}
     </div>
   );
 }
