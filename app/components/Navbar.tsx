@@ -16,8 +16,6 @@ const Navbar = () => {
   const { user } = useAuthState();
   const { signOut } = useSignOut()
 
-  console.log(user)
-
   return (
     <nav className={`p-6 md:p-8 min-h-[10vh] flex justify-between items-center ${darkMode ? "dark" : ""}`}>
       <div className="container flex justify-between items-center ">
