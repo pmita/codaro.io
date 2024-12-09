@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/components/navbar/Navbar";
 import { roboto, poppins } from "@/ui/fonts";
 import "./globals.css";
 
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${poppins.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

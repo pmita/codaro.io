@@ -2,20 +2,198 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer components {
+  .button {
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    border: 0.3rem solid theme('colors.secondary');
+    border-radius: 0.6rem;
+    transition: var(--transition);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .button:hover {
+    cursor: pointer;
+  }
+
+  .button.primary {
+    background-color: theme('colors.primary');
+    color: theme('colors.neutral');
+    border-color: theme('colors.primary');
+  }
+
+  .button.primary:hover {
+    background-color: theme('colors.neutral');
+    color: theme('colors.primary');
+  }
+
+  .button.primary-outlined {
+    background-color: theme('colors.neutral');
+    color: theme('colors.primary');
+    border-color: theme('colors.primary');
+  }
+
+  .button.primary-outlined:hover {
+    background-color: theme('colors.primary');
+    color: theme('colors.neutral');
+  }
+  
+  .button.secondary {
+    background-color: theme('colors.secondary');
+    color: theme('colors.neutral');
+    border-color: theme('colors.secondary');
+  }
+
+  .button.secondary:hover {
+    background-color: theme('colors.neutral');
+    color: theme('colors.secondary');
+  }
+
+  .button.secondary-outlined {
+    background-color: theme('colors.neutral');
+    color: theme('colors.secondary');
+    border-color: theme('colors.secondary');
+  }
+
+  .button.secondary-outlined:hover {
+    background-color: theme('colors.secondary');
+    color: theme('colors.neutral');
   }
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+html{
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+iframe {
+  @apply absolute top-0 left-0 w-full h-full
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-family: var(--font-roboto), "sans-serif";
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border: 3px solid theme('colors.primary-black');
+  font-size: 1.2rem;
+}
+
+input::placeholder {
+  font-family: var(--font-roboto), "sans-serif";
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 15px;
+  box-shadow: 1px 0px 0px 0px #E8E8E8 inset, -1px 0px 0px 0px #F0F0F0 inset; 
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 1px 0px 0px 0px #E8E8E8 inset, -1px 0px 0px 0px #F0F0F0 inset; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #C1C1C1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22C55E; 
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+.container{
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rowCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowLeftCenter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.columnCenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.columnTopCenter{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.columnTopLeft{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.columnCenterLeft{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+@layer base {
+  /* This is not working currently */
+  :root {
+    --primary-black: 30 30 30;
+    --light-black: 43 43 43;
+    --baige: 255 246 234;
+    --action: 123 185 250;
+    --grey: 95 95 95;
+    --error: 206 76 76;
+    --test: 206 76 76;
+    --primary: 34 197 94; /* Green */
+    --secondary: 30 30 30; /* Black */
+    --alterate-one: 39 31 224; /* Blue */
+    --alternate-two: 131 18 209; /* Purple */
+    --danger: 183 43 26; /* Red */
+    --neutral: 255 255 255; /* White */
+    --muted: 241 245 249; /* gray */
+
+    --transition: all 0.3s ease-in-out;
+  }
 }
