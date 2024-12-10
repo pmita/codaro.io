@@ -1,0 +1,21 @@
+.section {
+  @apply w-full 
+    flex 
+    flex-col 
+    justify-center 
+    items-start 
+    gap-5;
+}
+
+.input {
+  @apply w-full 
+    border-solid 
+    border-[0.3rem] 
+    border-secondary 
+    p-4 
+    rounded-[6px];
+}
+
+.error {
+  @apply text-destructive;
+}
