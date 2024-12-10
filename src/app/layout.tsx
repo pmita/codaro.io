@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { AuthContextProvider } from "@/context/AuthContext/AuthContext";
 import { Navbar } from "@/components/navbar/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { roboto, poppins } from "@/ui/fonts";
 import "./globals.css";
 
@@ -14,13 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${roboto.variable} ${poppins.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
-      </body>
-    </html>
+    <AuthContextProvider>
+      <html lang="en">
+        <body
+          className={`${roboto.variable} ${poppins.variable} antialiased`}
+        >
+          <Navbar />
+          {children}
+          <Toaster />
+        </body>
+      </html>
+    </AuthContextProvider>
   );
 }

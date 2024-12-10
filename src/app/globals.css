@@ -193,3 +193,14 @@ a {
     @apply bg-background text-foreground;
   }
 }
+
+.spinner{
+  transform-origin:center;
+  animation:spinner_svv2 .75s infinite linear
+}
+
+@keyframes spinner_svv2{
+  100% {
+    transform:rotate(360deg)
+  }
+}

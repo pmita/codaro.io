@@ -1,0 +1,15 @@
+.container {
+  @apply w-[350] 
+    p-2 
+    flex 
+    flex-col 
+    justify-center 
+    items-stretch 
+    gap-5 
+    text-center;
+}
+
+.highlight {
+  @apply font-semibold 
+    underline;
+}
