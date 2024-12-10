@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { Button, buttonVariants } from "../ui/button"
+import { cn } from "@/lib/utils"
 
 export async function Navbar() {
   return (
@@ -27,6 +29,11 @@ export async function Navbar() {
           <Link href={"/courses"}>
             Courses
           </Link>
+        </li>
+        <li className="hover:scale-105 hover:opacity-75 font-semibold">
+          <Button className={cn(buttonVariants({ size: 'lg' }))}>
+            Courses
+          </Button>
         </li>
       </ul>
     </nav>
