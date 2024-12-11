@@ -22,11 +22,11 @@ export function SignInForm(){
 
 
   // USE EFFECT
-  useEffect(() => {
-    if (user) {
-      router.push('/');
-    }
-  }, [router, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push('/');
+  //   }
+  // }, [router, user]);
 
   return (
     <form 
@@ -53,7 +53,7 @@ export function SignInForm(){
         Sign In
       </Button>
 
-      <p>- OR CONTINUE WITH -</p>
+      <p>- or continue with -</p>
 
       <Button
         // onClick={signInWithGoogle}

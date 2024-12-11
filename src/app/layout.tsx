@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { AuthContextProvider } from "@/context/AuthContext/AuthContext";
+import { AuthContextProvider } from "@/context/auth-context/AuthContext";
 import { Navbar } from "@/components/navbar/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { roboto, poppins } from "@/ui/fonts";
 import "./globals.css";
+import { ReactQueryProvider } from "@/providers/react-query";
 
 export const metadata: Metadata = {
   title: 'Codaro.io - The easiest way to learn to code in Greek!',
@@ -16,16 +17,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthContextProvider>
-      <html lang="en">
-        <body
-          className={`${roboto.variable} ${poppins.variable} antialiased`}
-        >
-          <Navbar />
-          {children}
-          <Toaster />
-        </body>
-      </html>
-    </AuthContextProvider>
+        <html lang="en">
+          <body
+            className={`${roboto.variable} ${poppins.variable}`}
+            >
+            <ReactQueryProvider>
+              <AuthContextProvider>
+                <Navbar />
+                {children}
+                <Toaster />
+              </AuthContextProvider>
+            </ReactQueryProvider>
+          </body>
+        </html>
   );
 }

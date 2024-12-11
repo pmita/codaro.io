@@ -1,9 +1,9 @@
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { AuthActionTypes } from "@/context/AuthContext/types";
+import { AuthActionTypes } from "@/context/auth-context/types";
 import { useAuth } from "../useAuth";
 import { toast } from "sonner";
-import { signUserIn, saveFirebaseCookie } from "./utils";
+import { signUserIn } from "./utils";
 
 
 export const useSignin = () => {
@@ -15,7 +15,7 @@ export const useSignin = () => {
         const response = await signUserIn(email, password);
         
         if(response.user) {
-          await saveFirebaseCookie();
+          // await saveFirebaseCookie();
           dispatch({ type: AuthActionTypes.SIGN_IN_SUCCESS, payload: response.user });
         }
       },

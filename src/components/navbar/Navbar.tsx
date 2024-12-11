@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Button, buttonVariants } from "../ui/button"
+import { buttonVariants } from "../ui/button"
+import { AuthCheck } from "@/components/auth-check"
 import { cn } from "@/lib/utils"
 
 export async function Navbar() {
@@ -31,9 +32,15 @@ export async function Navbar() {
           </Link>
         </li>
         <li className="hover:scale-105 hover:opacity-75 font-semibold">
-          <Button className={cn(buttonVariants({ size: 'lg' }))}>
-            Courses
-          </Button>
+          <AuthCheck fallback={(
+            <Link href="/signin" className={cn(buttonVariants({ size: 'lg' }))}>
+              Sign in
+            </Link>
+          )}>
+            <Link href="/dashboard" className={cn(buttonVariants({ variant: "link", size: 'lg' }))}>
+              Dashboard
+            </Link>
+          </AuthCheck>
         </li>
       </ul>
     </nav>
