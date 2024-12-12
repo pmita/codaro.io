@@ -26,3 +26,27 @@ export const signinFields = [
     }
   }
 ];
+
+export const signupFields = [
+  ...signinFields,
+  {
+    id: 3,
+    name: 'username',
+    type: 'text',
+    placeholder: 'Username',
+    validationSchema: {
+      required: "Username is required",
+      minLength: {
+        value: 3,
+        message: "Username must have at least 3 characters",
+      },
+      maxLength: {
+        value: 20,
+        message: "Username must have at most 20 characters",
+      },
+      pattern: {
+        value: /^[a-zA-Z0-9]+$/,
+        message: "Username must contain only letters and numbers",
+      }
+    }}
+];

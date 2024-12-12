@@ -1,8 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ISignInForm } from "../../types";
 import { useSignin } from "@/hooks/useSignin";
-import { LoadingSpinner } from "@/components/loading-spinner";
-import { toast } from "sonner";
+import { showLoadingToast } from "@/lib/toasts";
+import { ISignInForm } from "../../types";
 
 
 export const useSigninForm = () => {
@@ -20,12 +19,7 @@ export const useSigninForm = () => {
     mutation.mutate({ email, password });
 
     if (mutation.isIdle) {
-      toast(
-        <div className="flex justify-center items-center gap-4">
-          <LoadingSpinner /> Loadding...
-        </div>, {
-          id: 'loading-signin-form',
-      })
+      showLoadingToast('loading-signin-form');
     }
   }
 

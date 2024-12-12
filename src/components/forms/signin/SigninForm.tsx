@@ -1,32 +1,20 @@
 "use client" 
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
 import { useSignin } from '@/hooks/useSignin';
 import { useSigninForm } from './hooks/useSigninForm/useSigninForm';
 // import { useGoogleSignIn } from '@/hooks/useGoogleSignIn';
 import { FieldWithLabel } from '../components/field-wtih-label';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import styles from './styles.module.css'
 import { signinFields } from '@/config/forms';
 import { ISignInFormErrors } from './types';
-import styles from './styles.module.css'
 
 export function SignInForm(){
-  const router = useRouter();
-  const { user } = useAuth();
   const mutation= useSignin();
   // const { signInWithGoogle } = useGoogleSignIn();
   const { register, handleSubmit, onSubmit, errors } = useSigninForm();
-
-
-  // USE EFFECT
-  // useEffect(() => {
-  //   if (user) {
-  //     router.push('/');
-  //   }
-  // }, [router, user]);
 
   return (
     <form 
@@ -46,7 +34,7 @@ export function SignInForm(){
       ))}
 
       <Button
-        className={buttonVariants({ variant: "secondary" })}
+        className={buttonVariants({ size: "lg" })}
         disabled={mutation.isPending}
         type="submit"
       >
@@ -57,6 +45,7 @@ export function SignInForm(){
 
       <Button
         // onClick={signInWithGoogle}
+        className={cn(buttonVariants({ variant: "secondary", size: "lg" }), styles.googleBtn)}
         type="button"
       >
         Sign in with Google
