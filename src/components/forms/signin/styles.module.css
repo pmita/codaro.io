@@ -1,6 +1,5 @@
 .container {
-  @apply w-[500px] 
-    p-2 
+  @apply p-2 
     flex 
     flex-col 
     justify-center 

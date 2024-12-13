@@ -11,10 +11,16 @@ export const metadata: Metadata = {
   description: 'The number one platform for web development taught in Greek'
 };
 
+type SearchParams = {
+  [key: string]: string | undefined;
+}
+
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: SearchParams;
 }>) {
   return (
         <html lang="en">

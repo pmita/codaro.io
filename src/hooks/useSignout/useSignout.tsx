@@ -18,7 +18,7 @@ export const useSignout = () => {
       },
       onSuccess: () => {
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
-        router.push('/signin');
+        router.push('/');
       },
       onSettled: () => {
         toast.dismiss('loading-signin-form');

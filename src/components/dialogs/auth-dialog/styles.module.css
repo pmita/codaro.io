@@ -1,0 +1,6 @@
+.highlight {
+  @apply font-bold 
+    underline
+    text-secondary
+    hover:opacity-50;
+}

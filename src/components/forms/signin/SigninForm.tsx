@@ -1,6 +1,5 @@
 "use client" 
 
-import Link from 'next/link';
 import { useSignin } from '@/hooks/useSignin';
 import { useSigninForm } from './hooks/useSigninForm/useSigninForm';
 // import { useGoogleSignIn } from '@/hooks/useGoogleSignIn';
@@ -41,8 +40,6 @@ export function SignInForm(){
         Sign In
       </Button>
 
-      <p>- or continue with -</p>
-
       <Button
         // onClick={signInWithGoogle}
         className={cn(buttonVariants({ variant: "secondary", size: "lg" }), styles.googleBtn)}
@@ -50,13 +47,6 @@ export function SignInForm(){
       >
         Sign in with Google
       </Button>
-      
-      <Link 
-        href="/signup" 
-        className={styles.highlight}
-      >
-        Not a member? Sign Up
-      </Link>
     </form>
   );
 }
