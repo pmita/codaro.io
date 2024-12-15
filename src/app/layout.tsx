@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AuthContextProvider } from "@/context/auth-context/AuthContext";
-import { Navbar } from "@/components/navbar/Navbar";
+import { Navbar } from "@/components/layouts/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { roboto, poppins } from "@/ui/fonts";
 import "./globals.css";

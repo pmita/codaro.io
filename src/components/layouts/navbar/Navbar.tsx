@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { AuthCheck } from "@/components/auth-check"
-import { buttonVariants } from "../ui/button"
-import { AuthDialog } from "../dialogs/auth-dialog"
+import { buttonVariants } from "@/components/ui/button"
+import { AuthDialog } from "@/components/dialogs/auth-dialog"
 import { cn } from "@/lib/utils"
 
 export async function Navbar() {

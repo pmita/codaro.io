@@ -1,0 +1,22 @@
+.container {
+  @apply flex
+    flex-col
+    justify-start
+    items-start
+    gap-2;
+}
+
+.item {
+  @apply font-poppins  
+    font-bold
+    text-secondary;
+}
+
+.item.active {
+  @apply text-opacity-50;
+}
+
+.disabled {
+  @apply cursor-not-allowed
+    text-opacity-25;
+}
