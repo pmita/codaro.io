@@ -1,7 +1,6 @@
-.container {
-  @apply flex 
-   flex-col 
-   justify-center 
-   items-start 
-   gap-4;
+.layout {
+  @apply container
+    max-w-3xl
+    py-6
+    lg:py-12;
 }

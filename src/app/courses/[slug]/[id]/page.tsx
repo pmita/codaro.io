@@ -6,6 +6,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm'; // Parse raw HTML
 import rehypePrettyCode from "rehype-pretty-code"; // Sanitize HTML
 import { Mdx } from '@/components/mdx';
+import { MdxLayout } from '@/components/layouts/mdx-layout/MdxLayout';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -59,8 +60,10 @@ export default async function ChapterPage(props: ChapterPageProps) {
   console.log(typeof mdxSource.compiledSource);
 
   return (
-    <div className="p-4">
-      <Mdx mdxSource={mdxSource} />
-    </div> 
+    // <div className="p-4">
+      <MdxLayout>
+        <Mdx mdxSource={mdxSource} />
+      </MdxLayout>
+    // </div> 
   );
 }
