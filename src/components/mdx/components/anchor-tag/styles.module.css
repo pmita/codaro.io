@@ -1,0 +1,6 @@
+.anchorTag {
+  @apply font-medium
+   underline
+   underline-offset-4
+   text-primary;
+}

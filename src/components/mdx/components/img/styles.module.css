@@ -1,0 +1,4 @@
+.orderedList {
+  @apply rounded
+    border;
+}

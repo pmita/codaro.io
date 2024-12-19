@@ -1,0 +1,9 @@
+.subheader {
+  @apply mt-8
+   scroll-m-20
+   text-3xl
+   font-poppins
+   font-semibold
+   tracking-tight
+   first:mt-0;
+}

@@ -1,0 +1,8 @@
+.header { 
+  @apply mt-20
+   scroll-m-20
+   text-4xl
+   font-poppins
+   font-bold
+   tracking-tight;
+}
