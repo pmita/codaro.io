@@ -44,8 +44,6 @@ export default async function ChapterPage(props: ChapterPageProps) {
   const params = await props.params;
   const post = await getCourseChapterMdx(params);
 
-  console.log(post);
-
   // Serialize the MDX content
   const mdxSource: MDXRemoteSerializeResult = await serialize(
     post.content, 
@@ -56,8 +54,6 @@ export default async function ChapterPage(props: ChapterPageProps) {
       },
       parseFrontmatter: true }
   );
-
-  console.log(typeof mdxSource.compiledSource);
 
   return (
     // <div className="p-4">
