@@ -6,5 +6,4 @@ free: true
 date: "2023-01-08"
 ---
 
-This is some next.js based content
-
+This is some svelt based content

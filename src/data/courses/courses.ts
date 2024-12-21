@@ -2,20 +2,23 @@ import fs from "fs";
 import matter from "gray-matter";
 import { compareAsc } from "date-fns";
 import { Courses } from "@/types/courses";
+import { cache } from 'react';
 
-export const getCourseChapters = async (params: Promise<{ slug: string, id: string }>) => {
-  const slug = (await params).slug;
-  const folder = `courses/${slug}`;
+export const getCourseChapters = cache((course: string) => {
+  // grab all the files within a course folder
+  const folder = `courses/${course}`;
   const files = fs.readdirSync(folder);
 
+  // read through each file and grab the frontmatter
   const codes = files.map((file: any) => {
-    const code = fs.readFileSync(`${folder}/${file}`, 'utf-8');
-    const matterResults = matter(code);
-    const fileName = file.replace('.md', '');
+  const code = fs.readFileSync(`${folder}/${file}`, 'utf-8');
+  const matterResults = matter(code);
+  const fileName = file.replace('.md', '');
 
+  // shape the data
     return ({
       chapter: fileName,
-      slug: `${slug}/${fileName}`,
+      slug: `${course}/${fileName}`,
       title: matterResults.data?.title,
       description: matterResults.data?.description,
       weight: matterResults.data?.weight,
@@ -26,8 +29,9 @@ export const getCourseChapters = async (params: Promise<{ slug: string, id: stri
       date: matterResults.data?.date,
       lastmod: matterResults.data?.lastmod,
       free: matterResults.data?.free,
-    })
-
+    });
   })
+
+  // sort the data by weight
   return (codes as unknown as Courses[]).sort((a, b) => compareAsc(a.weight, b.weight));
-}
+});

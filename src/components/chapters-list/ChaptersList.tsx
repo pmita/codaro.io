@@ -1,15 +1,9 @@
 import Link from 'next/link';
 import { AuthCheck } from '../auth-check';
+import { Courses } from '@/types/courses';
 import styles from './styles.module.css';
-import { getCourseChapters } from '@/data/courses';
 
-interface IChapterList {
-  params: Promise<{ slug: string, id: string }>;
-}
-
-export const ChaptersList = async ({ params}: IChapterList ) => {
-  const chapters = await getCourseChapters(params);
-
+export const ChaptersList =  ({ chapters }: { chapters: Courses[] | undefined }) => {
   if (!chapters) return null;
 
   return (
