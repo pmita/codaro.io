@@ -1,5 +1,6 @@
 import { app, auth } from "@/firebase/client/config";
 import { getAuth, getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { setAuthCookie } from "@/lib/cookies";
 
 
 export const signUserIn = async (email: string, password: string) => {
@@ -11,6 +12,6 @@ export const saveFirebaseCookie = async () => {
   const currentUser = getAuth(app).currentUser;
   if (currentUser) {
     const idToken = await getIdToken(currentUser, true);
-    // setAuthCookie(idToken);
+    setAuthCookie(idToken);
   }
 }

@@ -3,8 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AuthActionTypes } from "@/context/auth-context/types";
 import { useAuth } from "../useAuth";
-import { signUserIn } from "./utils";
+import { saveFirebaseCookie, signUserIn } from "./utils";
 import { showErrorToast } from "@/lib/toasts";
+import { removeAuthCookie } from "@/lib/cookies";
 
 
 export const useSignin = () => {
@@ -16,7 +17,7 @@ export const useSignin = () => {
         const response = await signUserIn(email, password);
         
         if(response.user) {
-          // await saveFirebaseCookie();
+          await saveFirebaseCookie();
           dispatch({ type: AuthActionTypes.SIGN_IN_SUCCESS, payload: response.user });
         }
       },
@@ -27,7 +28,7 @@ export const useSignin = () => {
         toast.dismiss('loading-signin-form');
       },
       onError: (error) => {
-        // setUser(null);
+        removeAuthCookie();
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
         showErrorToast(error.message);
       },

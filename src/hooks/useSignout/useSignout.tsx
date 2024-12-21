@@ -4,6 +4,7 @@ import { useAuth } from "../useAuth";
 import { AuthActionTypes } from "@/context/auth-context/types";
 import { toast } from "sonner";
 import { signout } from "./utils";
+import { removeAuthCookie } from "@/lib/cookies";
 
 
 
@@ -17,6 +18,7 @@ export const useSignout = () => {
         
       },
       onSuccess: () => {
+        removeAuthCookie();
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
         router.push('/');
       },

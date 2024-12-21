@@ -8,6 +8,8 @@ import {
   type AuthReducerState 
 } from './types';
 import { auth } from "@/firebase/client/config";
+import { saveFirebaseCookie } from '@/hooks/useSignin/utils';
+import { removeAuthCookie } from '@/lib/cookies';
 
 export const AuthContext = createContext<AuthReducerState | undefined | null>(null);
 
@@ -33,10 +35,12 @@ export const AuthContextProvider: FC<{children: React.ReactNode}> = ({ children 
   const [state, dispatch] = useReducer(reducer, initialState);
   
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if(user) {
+        await saveFirebaseCookie();
         dispatch({ type: AuthActionTypes.AUTH_HAS_CHANGED_SUCCESS, payload: user })
       } else {
+        removeAuthCookie();
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS })
       }
     })
