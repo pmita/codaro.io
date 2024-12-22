@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { AuthCheck } from '../auth-check';
-import { Courses } from '@/types/courses';
+import { useChapters } from '@/hooks/useChapters';
 import styles from './styles.module.css';
 
-export const ChaptersList =  ({ chapters }: { chapters: Courses[] | undefined }) => {
+export const ChaptersList =  ({ course }: { course: string }) => {
+  const { data: chapters, isPending, isError, error } = useChapters(course);
+
   if (!chapters) return null;
 
   return (

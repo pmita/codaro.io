@@ -2,9 +2,8 @@ import fs from "fs";
 import matter from "gray-matter";
 import { compareAsc } from "date-fns";
 import { Courses } from "@/types/courses";
-import { cache } from 'react';
 
-export const getCourseChapters = cache((course: string) => {
+export const getCourseChapters = (course: string) => {
   // grab all the files within a course folder
   const folder = `courses/${course}`;
   const files = fs.readdirSync(folder);
@@ -34,4 +33,4 @@ export const getCourseChapters = cache((course: string) => {
 
   // sort the data by weight
   return (codes as unknown as Courses[]).sort((a, b) => compareAsc(a.weight, b.weight));
-});
+};
