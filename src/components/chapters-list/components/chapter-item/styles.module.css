@@ -1,0 +1,30 @@
+.container {
+  @apply flex
+    justify-between
+    items-center
+    p-2
+    min-h-[48px];
+}
+
+.subContainer {
+  @apply flex
+    justify-start
+    items-center
+    gap-2;
+}
+
+.free {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%]
+    opacity-75
+    bg-secondary;
+}
+
+.length {
+  @apply bg-primary
+    bg-opacity-50
+    border-none
+    rounded-[6px]
+    p-2;
+}

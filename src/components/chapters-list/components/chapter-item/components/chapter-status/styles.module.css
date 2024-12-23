@@ -1,0 +1,20 @@
+.completed {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%]
+    bg-primary;
+}
+
+.uncompleted {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%]
+    bg-secondary;
+}
+
+.locked {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%]
+    bg-danger;
+}
