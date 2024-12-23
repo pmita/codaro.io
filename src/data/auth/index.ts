@@ -1,0 +1,1 @@
+export { validateUserServerSide } from './auth';

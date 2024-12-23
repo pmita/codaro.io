@@ -1,10 +1,14 @@
+"use client"
+
 import Link from 'next/link';
 import { AuthCheck } from '../auth-check';
 import { useChapters } from '@/hooks/useChapters';
 import styles from './styles.module.css';
+import { useCompletedChapters } from '@/hooks/useCompletedChapters';
 
 export const ChaptersList =  ({ course }: { course: string }) => {
-  const { data: chapters, isPending, isError, error } = useChapters(course);
+  const { data: chapters } = useChapters(course);
+  const { data: completedChapters } = useCompletedChapters(course);
 
   if (!chapters) return null;
 

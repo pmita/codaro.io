@@ -1,9 +1,11 @@
+"use server"
+
 import fs from "fs";
 import matter from "gray-matter";
 import { compareAsc } from "date-fns";
 import { Courses } from "@/types/courses";
 
-export const getCourseChapters = (course: string) => {
+export const getCourseChapters = async (course: string) => {
   // grab all the files within a course folder
   const folder = `courses/${course}`;
   const files = fs.readdirSync(folder);
