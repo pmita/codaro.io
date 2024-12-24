@@ -1,0 +1,13 @@
+.container {
+  @apply flex-[1_1_300px] 
+    self-stretch 
+    flex 
+    flex-col 
+    flex-start 
+    items-between 
+    gap-2 
+    order-2 
+    lg:order-1 
+    min-h-[90vh] 
+    overflow-scroll;
+}

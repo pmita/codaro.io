@@ -5,9 +5,11 @@ import {
 } from "@tanstack/react-query"
 import { getCourseChapters } from "@/data/courses";
 import { ChaptersList } from "@/components/chapters-list";
-import '@/styles/mdx.css';
 import { getCompletedChapters } from "@/data/progress";
-import { validateUserServerSide } from "@/data/auth";
+import { ChapterLayout } from "@/components/layouts/content/courses/chapter-layout";
+import { ChapterAside } from "@/components/layouts/content/courses/chapter-aside";
+import { ChapterMain } from "@/components/layouts/content/courses/chapter-main";
+import '@/styles/mdx.css';
 
 interface CourseChapterLayoutProps {
   children: React.ReactNode;
@@ -41,14 +43,14 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <section className="flex flex-wrap flex-row justify-center items-stretch">
-        <aside className="flex-[1_1_300px] self-stretch flex flex-col flex-start items-between gap-2 order-2 lg:order-1 min-h-[90vh] overflow-scroll">
+      <ChapterLayout>
+        <ChapterAside>
             <ChaptersList course={course} />
-        </aside>
-        <section className="flex-[4_1_670px] self-stretch w-full order-1 lg:order-2">
+        </ChapterAside>
+        <ChapterMain>
           {children}
-        </section>
-      </section>
+        </ChapterMain>
+      </ChapterLayout>
     </HydrationBoundary>
   );
 }

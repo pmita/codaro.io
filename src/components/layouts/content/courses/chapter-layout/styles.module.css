@@ -1,0 +1,7 @@
+.container {
+  @apply flex
+    flex-wrap
+    flex-row
+    justify-center
+    items-stretch;
+}

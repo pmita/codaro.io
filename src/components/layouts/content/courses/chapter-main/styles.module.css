@@ -1,0 +1,7 @@
+.container {
+  @apply flex-[4_1_670px] 
+    self-stretch 
+    w-full 
+    order-1 
+    lg:order-2;
+}
