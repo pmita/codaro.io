@@ -1,4 +1,7 @@
-export type Courses = {
+import { MDXRemoteSerializeResult } from "next-mdx-remote"
+
+export type Chapter = {
+  chapter: string,
   title: string
   description?: string | undefined
   weight: number
@@ -12,7 +15,7 @@ export type Courses = {
   lastmod?: Date | undefined
   free?: boolean | undefined
   /** MDX file body */
-  // body: MDX
+  mdx?: MDXRemoteSerializeResult
   slug: string
   slugAsParams: string
 }  

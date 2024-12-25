@@ -1,17 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { dashboardConfig } from "@/config/navigation"
 import { cn } from "@/lib/utils"
 import { INavigationItem } from "./types"
 import styles from './styles.module.css'
 
-export function DashboardNavigation() {
-  const pathname = usePathname();
-
-  console.log(pathname);
-
+export function DashboardNavbar() {
   return (
     <nav className={styles.container}>
       {dashboardConfig.map((item: INavigationItem) => (

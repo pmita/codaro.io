@@ -3,9 +3,9 @@
 import fs from "fs";
 import matter from "gray-matter";
 import { compareAsc } from "date-fns";
-import { Courses } from "@/types/courses";
+import { Chapter } from "@/types/courses";
 
-export const getCourseChapters = async (course: string) => {
+export const getCourseChapters = async (course: string): Promise<Chapter[]> => {
   // grab all the files within a course folder
   const folder = `courses/${course}`;
   const files = fs.readdirSync(folder);
@@ -20,6 +20,7 @@ export const getCourseChapters = async (course: string) => {
     return ({
       chapter: fileName,
       slug: `${course}/${fileName}`,
+      slugAsParams: `${course}/${fileName}`,
       title: matterResults.data?.title,
       description: matterResults.data?.description,
       weight: matterResults.data?.weight,
@@ -34,5 +35,5 @@ export const getCourseChapters = async (course: string) => {
   })
 
   // sort the data by weight
-  return (codes as unknown as Courses[]).sort((a, b) => compareAsc(a.weight, b.weight));
+  return (codes).sort((a, b) => compareAsc(a.weight, b.weight));
 };

@@ -1,14 +1,16 @@
+import { getCourseChapters } from "@/data/courses";
+import { ChaptersList } from "@/components/chapters-list";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query"
-import { getCourseChapters } from "@/data/courses";
-import { ChaptersList } from "@/components/chapters-list";
+import {
+  RootLayout,
+  AsideLayout,
+  MainLayout
+} from "@/components/layouts/content/course";
 import { getCompletedChapters } from "@/data/progress";
-import { ChapterLayout } from "@/components/layouts/content/courses/chapter-layout";
-import { ChapterAside } from "@/components/layouts/content/courses/chapter-aside";
-import { ChapterMain } from "@/components/layouts/content/courses/chapter-main";
 import '@/styles/mdx.css';
 
 interface CourseChapterLayoutProps {
@@ -43,14 +45,14 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ChapterLayout>
-        <ChapterAside>
+      <RootLayout>
+        <AsideLayout>
             <ChaptersList course={course} />
-        </ChapterAside>
-        <ChapterMain>
+        </AsideLayout>
+        <MainLayout>
           {children}
-        </ChapterMain>
-      </ChapterLayout>
+        </MainLayout>
+      </RootLayout>
     </HydrationBoundary>
   );
 }

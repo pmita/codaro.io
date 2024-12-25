@@ -1,0 +1,6 @@
+.layout {
+  @apply container
+    max-w-3xl
+    py-6
+    lg:py-12;
+}

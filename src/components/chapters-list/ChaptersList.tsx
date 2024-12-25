@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useChapters } from '@/hooks/useChapters';
 import styles from './styles.module.css';
-import { Courses } from '@/types/courses';
+import { Chapter } from '@/types/courses';
 import { ChapterItem } from './components/chapter-item';
 
 export const ChaptersList =  ({ course }: { course: string }) => {
@@ -13,7 +13,7 @@ export const ChaptersList =  ({ course }: { course: string }) => {
 
   return (
     <>
-      {chapters.map((chapter: Courses) => (
+      {chapters.map((chapter: Chapter) => (
         <Link href={`/courses/${chapter.slug}`} key={chapter.weight} className={styles.link}>
           <ChapterItem chapter={chapter} />
         </Link>
