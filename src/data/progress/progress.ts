@@ -16,7 +16,6 @@ export const getCompletedChapters = async () => {
     const docRef = adminDb.collection('progression').doc(user.uid);
     progressData = (await docRef.get()).data();
   }
-
-  console.log('progressData', progressData);
+  
   return progressData as FirebaseFirestore.DocumentData | null;
 }

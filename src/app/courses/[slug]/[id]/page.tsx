@@ -1,12 +1,33 @@
 import { getCourseChapter } from '@/data/content/course';
 import { MdxLayout, PageLayout } from "@/components/layouts/content/course";
 import { Mdx } from '@/components/mdx';
+import fs from 'fs';
 
 interface ChapterPageProps {
   params: Promise<{
     slug: string;
     id: string;
   }>;
+}
+
+export async function generateStaticParams() {
+  const allCourseFolders = fs.readdirSync('courses');
+  let chaptersPaths: { slug: any; id: any; }[] = [];
+
+  const paths = allCourseFolders.map((course: any) => {
+    const folder = `courses/${course}`;
+    const files = fs.readdirSync(folder);
+    return files.map((file: any) => {
+      const code = fs.readFileSync(`${folder}/${file}`, 'utf-8');
+      const fileName = file.replace('.md', '');
+      chaptersPaths.push({
+        slug: course,
+        id: fileName,
+      })
+    });
+  });
+
+  return chaptersPaths;
 }
 
 export default async function ChapterPage(props: ChapterPageProps) {
