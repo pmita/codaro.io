@@ -1,13 +1,15 @@
 import { AuthCheck } from "@/components/auth-check"
 import { ChapterStatus } from "./components/chapter-status"
 import { ChapterStatusFallback } from "./components/chapter-status-fallback"
-import { Courses } from "@/types/courses"
+import { Chapter } from "@/types/courses"
 import styles from './styles.module.css';
 
 export const ChapterItem = ({
   chapter
-}: { chapter: Courses }) => {
+}: { chapter: Chapter }) => {
   if (!chapter) return null;
+  console.table(chapter.chapter)
+
 
   return (
     <div className={styles.container}>

@@ -6,4 +6,6 @@ vimeo: 902736844
 video_length: 02:10
 free: true
 date: "2023-01-08"
+nextChapter: basics-route-handlers
+prevChapter: basics
 ---
