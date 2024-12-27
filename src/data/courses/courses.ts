@@ -31,6 +31,8 @@ export const getCourseChapters = async (course: string): Promise<Chapter[]> => {
       date: matterResults.data?.date,
       lastmod: matterResults.data?.lastmod,
       free: matterResults.data?.free,
+      nextChapter: matterResults.data?.nextChapter,
+      prevChapter: matterResults.data?.prevChapter,
     });
   })
 

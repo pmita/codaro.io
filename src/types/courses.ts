@@ -1,5 +1,10 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote"
 
+enum ChapterPaginationEnum {
+  START = "START",
+  END = "END"
+}
+
 export type Chapter = {
   chapter: string,
   title: string
@@ -18,4 +23,6 @@ export type Chapter = {
   mdx?: MDXRemoteSerializeResult
   slug: string
   slugAsParams: string
+  nextChapter: string | ChapterPaginationEnum;
+  prevChapter: string | ChapterPaginationEnum;
 }  
