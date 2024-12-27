@@ -30,7 +30,7 @@ export const getCourseChapter = async (course: string, chapter: string): Promise
     lastmod: matterResults.data?.lastmod,
     free: matterResults.data?.free,
     mdx: mdxSource,
-    nextChapter: matterResults.data?.nextChapter,
-    prevChapter: matterResults.data?.prevChapter,
+    nextChapter: `${course}/${matterResults.data?.nextChapter}`,
+    prevChapter: `${course}/${matterResults.data?.prevChapter}`,
   }); 
 }

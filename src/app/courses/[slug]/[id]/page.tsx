@@ -1,5 +1,7 @@
 import { getCourseChapter } from '@/data/content/course';
 import { MdxLayout, PageLayout } from "@/components/layouts/content/course";
+import { NavigationControls } from '@/components/chapters-list/navigation-controls';
+import { ControlsLayout } from '@/components/layouts/content/course/controls-layout';
 import { Mdx } from '@/components/mdx';
 import fs from 'fs';
 
@@ -38,9 +40,10 @@ export default async function ChapterPage(props: ChapterPageProps) {
       <div className="grid place-items-center w-full h-[650px] bg-primary">
         <h1>Video Player goes here</h1>
       </div>
-      <div className="grid place-items-center w-full h-[100px] bg-secondary">
+      <ControlsLayout>
+        <NavigationControls nextChapter={data.nextChapter} prevChapter={data.prevChapter} />
         <h1>Controls go here</h1>
-      </div>
+      </ControlsLayout>
       <div className="flex flex-col justify-center items-start gap-5">
         <h1>{data.title}</h1>
         <p>{data.description}</p>
