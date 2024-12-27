@@ -10,15 +10,14 @@ interface ChapterPageProps {
   }>;
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string; id: string; }[]> {
   const allCourseFolders = fs.readdirSync('courses');
   let chaptersPaths: { slug: any; id: any; }[] = [];
 
-  const paths = allCourseFolders.map((course: any) => {
+  allCourseFolders.forEach((course: any) => {
     const folder = `courses/${course}`;
     const files = fs.readdirSync(folder);
-    return files.map((file: any) => {
-      const code = fs.readFileSync(`${folder}/${file}`, 'utf-8');
+    files.forEach((file: any) => {
       const fileName = file.replace('.md', '');
       chaptersPaths.push({
         slug: course,
