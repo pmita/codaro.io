@@ -1,9 +1,12 @@
 import { getCourseChapter } from '@/data/content/course';
 import { MdxLayout, PageLayout } from "@/components/layouts/content/course";
-import { NavigationControls } from '@/components/chapters-list/navigation-controls';
+import { NavigationControls } from '@/components/chapter/navigation-controls';
 import { ControlsLayout } from '@/components/layouts/content/course/controls-layout';
+import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
 import { Mdx } from '@/components/mdx';
 import fs from 'fs';
+import { QueryClient } from '@tanstack/react-query';
+import { getIsChapterCompleted } from '@/data/progress/progress';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -34,6 +37,14 @@ export async function generateStaticParams(): Promise<{ slug: string; id: string
 export default async function ChapterPage(props: ChapterPageProps) {
   const { slug:course, id: chapter } = await props.params;
   const data = await getCourseChapter(course, chapter);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['progress'],
+    queryFn: async () => {
+      return await getIsChapterCompleted(`${course}/${chapter}`);
+    }
+  })
 
   return (
     <PageLayout>
@@ -43,6 +54,8 @@ export default async function ChapterPage(props: ChapterPageProps) {
       <ControlsLayout>
         <NavigationControls nextChapter={data.nextChapter} prevChapter={data.prevChapter} />
         <h1>Controls go here</h1>
+        <ToggleChapterProgress chapterId={data.slug} isFree={data.free} /> 
+        {/*ToggleChapterProgress */}
       </ControlsLayout>
       <div className="flex flex-col justify-center items-start gap-5">
         <h1>{data.title}</h1>

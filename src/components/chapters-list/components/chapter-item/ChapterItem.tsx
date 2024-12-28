@@ -8,8 +8,6 @@ export const ChapterItem = ({
   chapter
 }: { chapter: Chapter }) => {
   if (!chapter) return null;
-  console.table(chapter.chapter)
-
 
   return (
     <div className={styles.container}>

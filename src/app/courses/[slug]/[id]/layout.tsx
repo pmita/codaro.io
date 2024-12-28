@@ -1,4 +1,4 @@
-import { getCourseChapters } from "@/data/courses";
+import { getCourseChapters } from "@/data/content/courses";
 import { ChaptersList } from "@/components/chapters-list";
 import {
   dehydrate,
@@ -32,7 +32,7 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
       }
     }),
     queryClient.prefetchQuery({
-      queryKey: ['progression', course],
+      queryKey: ['progress'],
       queryFn: async () => {
         return await getCompletedChapters();
       },
