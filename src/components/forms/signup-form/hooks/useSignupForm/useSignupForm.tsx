@@ -1,11 +1,11 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useSignup } from "@/hooks/useSignup";
+import { useSignupMutation } from "@/hooks/useSignupMutation";
 import { showLoadingToast } from "@/lib/toasts";
 import { ISignUpForm } from "../../types";
 
 
 export const useSignupForm = () => {
-  const mutation= useSignup();
+  const mutation= useSignupMutation();
   const { register, handleSubmit, formState: {errors } } = useForm<ISignUpForm>({
     mode: 'onBlur',
     reValidateMode: 'onChange',

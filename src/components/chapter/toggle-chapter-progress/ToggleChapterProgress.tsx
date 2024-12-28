@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { useCheckProgress } from "@/hooks/useCheckProgress";
-import { useToggleProgress } from "@/hooks/useToggleProgress/useToggleProgress";
+import { useToggleProgressMutation } from "@/hooks/useToggleProgressMutation";
 import { showLoadingToast } from "@/lib/toasts";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ import { ToggleChapterProgressProps } from "./types";
 export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapterProgressProps) => {
   const { user } = useAuth();
   const { isCompleted } = useCheckProgress();
-  const mutation = useToggleProgress();
+  const mutation = useToggleProgressMutation();
 
   const handleClick = useCallback(() => {
     mutation.mutate({ chapterId, isCompleted: isCompleted(chapterId) });
@@ -29,12 +29,18 @@ export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapte
         <>
           <span className={styles.highlightedText}>Completed: </span>
           <button 
-            className={cn("w-[20px] h-[20px] bg-primary rounded-[50%]", isCompleted(chapterId) ? "bg-primary" : "bg-secondary")}
+            className={cn(
+              styles.toggleButton, 
+              isCompleted(chapterId) ? styles.completed : styles.uncompleted
+            )}
             onClick={handleClick}
           />
         </>
       ) : (
-        <div className={styles.locked} />
+        <>
+          <span className={styles.highlightedText}>Locked: </span>
+          <div className={styles.locked} />
+        </>
       )}
     </div>
   )

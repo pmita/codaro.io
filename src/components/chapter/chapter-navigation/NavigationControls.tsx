@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { NavigationControlsProps } from './type';
+import { ChapterNavigationProps } from './types';
 import { StartOrEndEnum } from '@/types/courses';
 import styles from './styles.module.css';
 
-export const NavigationControls = ({ nextChapter, prevChapter }: NavigationControlsProps) => {
+export const ChapterNavigation = ({ nextChapter, prevChapter }: ChapterNavigationProps) => {
 
   return (
     <div className={styles.container}>

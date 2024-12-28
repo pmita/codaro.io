@@ -9,7 +9,7 @@ import {
   RootLayout,
   AsideLayout,
   MainLayout
-} from "@/components/layouts/content/course";
+} from "@/layouts/content/course";
 import { getCompletedChapters } from "@/data/progress";
 import '@/styles/mdx.css';
 

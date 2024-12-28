@@ -8,7 +8,7 @@ import { removeAuthCookie } from "@/lib/cookies";
 
 
 
-export const useSignout = () => {
+export const useSignoutMutation = () => {
     const router = useRouter();
     const { dispatch } = useAuth();
     return useMutation({

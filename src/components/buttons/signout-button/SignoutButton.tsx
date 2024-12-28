@@ -2,10 +2,10 @@
 
 import { useCallback } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useSignout } from "@/hooks/useSignout"
+import { useSignoutMutation } from "@/hooks/useSignoutMutation"
 
 export const SignoutButton = () => {
-  const mutation = useSignout();
+  const mutation = useSignoutMutation();
 
   const onClick = useCallback(() => mutation.mutate(), [mutation]);
 

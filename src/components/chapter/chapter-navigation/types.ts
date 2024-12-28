@@ -1,6 +1,6 @@
 import { StartOrEndEnum } from '@/types/courses';
 
-export type NavigationControlsProps = {
+export type ChapterNavigationProps = {
   nextChapter: string | StartOrEndEnum;
   prevChapter: string | StartOrEndEnum;
 }

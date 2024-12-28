@@ -2,7 +2,7 @@ import { toggleChapterProgress } from "@/data/progress"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 
-export const useToggleProgress = () => {
+export const useToggleProgressMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['progress'],

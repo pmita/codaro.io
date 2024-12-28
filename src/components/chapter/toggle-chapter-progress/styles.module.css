@@ -5,16 +5,31 @@
     gap-2.5;
 }
 
+.toggleButton {
+  @apply w-[20px]
+    h-[20px]
+    rounded-full
+    cursor-pointer;
+}
+
+.completed {
+  @apply bg-primary;
+}
+
+.uncompleted {
+  @apply bg-secondary;
+}
+
 .highlightedText {
   @apply font-roboto
     font-bold
-    text-4xl
+    text-xl
     text-secondary;
 }
 
 .locked {
   @apply w-[20px]
     h-[20px]
-    bg-secondary
-    opacity-50;
+    rounded-[50%]
+    bg-danger;
 }

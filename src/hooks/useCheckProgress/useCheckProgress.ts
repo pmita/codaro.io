@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { useCompletedChapters } from "../useCompletedChapters"
+import { useCompletedChaptersQuery } from "../useCompletedChaptersQuery"
 
 
 export const useCheckProgress = () => {
-  const { data: completedChapters } = useCompletedChapters();
+  const { data: completedChapters } = useCompletedChaptersQuery();
 
   const isCompleted = useCallback((chapterId: string) => (
     Object.keys(completedChapters || {}).includes(chapterId || '')

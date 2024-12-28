@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCompletedChapters } from '@/data/progress';
 
-export const useCompletedChapters = () => {
+export const useCompletedChaptersQuery = () => {
   return useQuery<FirebaseFirestore.DocumentData | undefined>({
     queryKey: ['progress'],
     queryFn: async () => {

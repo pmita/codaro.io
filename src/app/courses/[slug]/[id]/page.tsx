@@ -1,12 +1,12 @@
-import { getCourseChapter } from '@/data/content/course';
-import { MdxLayout, PageLayout } from "@/components/layouts/content/course";
-import { NavigationControls } from '@/components/chapter/navigation-controls';
-import { ControlsLayout } from '@/components/layouts/content/course/controls-layout';
-import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
-import { Mdx } from '@/components/mdx';
 import fs from 'fs';
-import { QueryClient } from '@tanstack/react-query';
+import { getCourseChapter } from '@/data/content/course';
 import { getIsChapterCompleted } from '@/data/progress/progress';
+import { QueryClient } from '@tanstack/react-query';
+import { MdxLayout, PageLayout } from "@/layouts/content/course";
+import { ControlsLayout } from '@/layouts/content/course/controls-layout';
+import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
+import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
+import { Mdx } from '@/components/mdx';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -52,10 +52,8 @@ export default async function ChapterPage(props: ChapterPageProps) {
         <h1>Video Player goes here</h1>
       </div>
       <ControlsLayout>
-        <NavigationControls nextChapter={data.nextChapter} prevChapter={data.prevChapter} />
-        <h1>Controls go here</h1>
+        <ChapterNavigation nextChapter={data.nextChapter} prevChapter={data.prevChapter} />
         <ToggleChapterProgress chapterId={data.slug} isFree={data.free} /> 
-        {/*ToggleChapterProgress */}
       </ControlsLayout>
       <div className="flex flex-col justify-center items-start gap-5">
         <h1>{data.title}</h1>
