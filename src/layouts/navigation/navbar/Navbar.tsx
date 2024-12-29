@@ -3,36 +3,37 @@ import { AuthCheck } from "@/components/auth-check"
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"
 import { cn } from "@/lib/utils"
+import styles from './styles.module.css'
 
 export async function Navbar() {
   return (
-    <nav className="container min-h-10 w-screen p-4 sm:p-10 md:p-8 flex justify-between items-center bg-white">
-      <div className="flex justify-center items-center">
+    <nav className={styles.navbar}>
+      <div className={styles.logoContainer}>
         <Link href={"/"}>
           <h2 
-            className="text-2xl font-poppins font-bold"
+            className={styles.logo}
           >
-            Codaro<span className="text-primary">.io</span>
+            Codaro<span className={styles.highlightedText}>.io</span>
           </h2>
         </Link>
       </div>
-      <ul className="flex-1 flex justify-end items-center gap-5 content-between">
-        <li className="hover:scale-105 hover:opacity-75 font-semibold">
+      <ul className={styles.linksContainer}>
+        <li className={styles.link}>
           <Link href={"/pro"}>
             Blog
             </Link>
           </li>
-        <li className="hover:scale-105 hover:opacity-75 font-semibold">
+        <li className={styles.link}>
           <Link href={"/blog"}>
             Blog
             </Link>
           </li>
-        <li className="hover:scale-105 hover:opacity-75 font-semibold">
+        <li className={styles.link}>
           <Link href={"/courses"}>
             Courses
           </Link>
         </li>
-        <li className="hover:scale-105 hover:opacity-75 font-semibold">
+        <li className={styles.link}>
           <AuthCheck fallback={(
             <AuthDialog />
           )}>

@@ -1,0 +1,42 @@
+.navbar {
+  @apply min-h-10 
+    w-full 
+    p-4 
+    sm:p-10 
+    md:p-8 
+    flex 
+    justify-between 
+    items-center 
+    bg-white;
+}
+
+.logoContainer {
+  @apply flex
+    justify-center
+    items-center;
+}
+
+.logo {
+  @apply text-2xl
+    font-poppins
+    font-bold;
+}
+
+.highlightedText {
+  @apply text-primary;
+}
+
+.linksContainer {
+  @apply flex-1
+    flex
+    justify-end
+    items-center
+    /* content-between */
+    gap-5;
+}
+
+.link {
+  @apply font-semibold
+    hover:scale-105
+    hover:opacity-75;
+}
