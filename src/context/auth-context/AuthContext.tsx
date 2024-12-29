@@ -8,7 +8,7 @@ import {
   type AuthReducerState 
 } from './types';
 import { auth } from "@/firebase/client/config";
-import { saveFirebaseCookie } from '@/hooks/useSigninMutation/utils';
+import { saveFirebaseCookie } from '@/hooks/mutations/useSigninMutation/utils';
 import { removeAuthCookie } from '@/lib/cookies';
 
 export const AuthContext = createContext<AuthReducerState | undefined | null>(null);

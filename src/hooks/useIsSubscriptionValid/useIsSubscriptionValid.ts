@@ -1,5 +1,5 @@
 import { differenceInDays } from "date-fns";
-import { useUserQuery } from "../useUserQuery"
+import { useUserQuery } from "../queries/useUserQuery"
 import { PRO_STATUS } from "@/types/firestore";
 
 

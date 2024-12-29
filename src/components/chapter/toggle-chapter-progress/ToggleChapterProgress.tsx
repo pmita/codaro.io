@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { useCheckProgress } from "@/hooks/useCheckProgress";
-import { useToggleProgressMutation } from "@/hooks/useToggleProgressMutation";
+import { useToggleProgressMutation } from "@/hooks/mutations/useToggleProgressMutation";
 import { useIsSubscriptionValid } from "@/hooks/useIsSubscriptionValid";
 import { useAuth } from "@/hooks/useAuth";
 import { showLoadingToast } from "@/lib/toasts";

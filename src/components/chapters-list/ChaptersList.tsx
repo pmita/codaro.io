@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link';
-import { useChaptersQuery } from '@/hooks/useChaptersQuery';
+import { useChaptersQuery } from '@/hooks/queries/useChaptersQuery';
 import styles from './styles.module.css';
 import { Chapter } from '@/types/courses';
 import { ChapterItem } from './components/chapter-item';

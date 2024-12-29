@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useSignupMutation } from "@/hooks/useSignupMutation";
+import { useSignupMutation } from "@/hooks/mutations/useSignupMutation";
 import { showLoadingToast } from "@/lib/toasts";
 import { ISignUpForm } from "../../types";
 

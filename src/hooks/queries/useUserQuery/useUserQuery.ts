@@ -1,6 +1,6 @@
 import { getUser } from "@/data/user";
 import { useQuery } from "@tanstack/react-query"
-import { useAuth } from "../useAuth";
+import { useAuth } from "../../useAuth";
 
 
 export const useUserQuery = () => {

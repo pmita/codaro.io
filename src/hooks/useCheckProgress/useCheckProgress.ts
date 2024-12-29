@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useCompletedChaptersQuery } from "../useCompletedChaptersQuery"
+import { useCompletedChaptersQuery } from "../queries/useCompletedChaptersQuery"
 
 
 export const useCheckProgress = () => {

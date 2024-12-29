@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { useSignoutMutation } from "@/hooks/useSignoutMutation"
+import { useSignoutMutation } from "@/hooks/mutations/useSignoutMutation"
 
 export const SignoutButton = () => {
   const mutation = useSignoutMutation();

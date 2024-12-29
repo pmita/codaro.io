@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "../useAuth";
+import { useAuth } from "../../useAuth";
 import { AuthActionTypes } from "@/context/auth-context/types";
 import { toast } from "sonner";
 import { signout } from "./utils";

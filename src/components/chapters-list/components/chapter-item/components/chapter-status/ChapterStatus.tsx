@@ -2,7 +2,7 @@
 
 import { LockKeyhole } from "lucide-react";
 import { useCheckProgress } from "@/hooks/useCheckProgress";
-import { useUserQuery } from "@/hooks/useUserQuery";
+import { useUserQuery } from "@/hooks/queries/useUserQuery";
 import { cn } from "@/lib/utils";
 import { IChapterStatus } from "./types";
 import styles from './styles.module.css';

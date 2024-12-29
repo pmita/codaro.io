@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { AuthActionTypes } from "@/context/auth-context/types";
-import { useAuth } from "../useAuth";
+import { useAuth } from "../../useAuth";
 import { toast } from "sonner";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "@/firebase/client/config";
