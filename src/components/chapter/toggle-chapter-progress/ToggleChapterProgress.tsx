@@ -8,6 +8,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import styles from './styles.module.css';
 import { ToggleChapterProgressProps } from "./types";
+import { LockKeyhole, Lock, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 
 export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapterProgressProps) => {
@@ -27,19 +29,21 @@ export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapte
     <div className={styles.container}>
       {isFree && user ? (
         <>
-          <span className={styles.highlightedText}>Completed: </span>
-          <button 
+          <Button 
             className={cn(
               styles.toggleButton, 
               isCompleted(chapterId) ? styles.completed : styles.uncompleted
             )}
             onClick={handleClick}
-          />
+          >
+            {isCompleted(chapterId) ? <Check width={20} height={20} color="#fff" /> : null}
+          </Button>
+          <span className={styles.highlightedText}>Completed</span>
         </>
       ) : (
         <>
-          <span className={styles.highlightedText}>Locked: </span>
-          <div className={styles.locked} />
+          <LockKeyhole width={38} height={36} color="#b72b1a" />
+          <span className={styles.highlightedText}>Locked</span>
         </>
       )}
     </div>
