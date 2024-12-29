@@ -1,15 +1,19 @@
-.completed {
+.status {
   @apply w-[20px]
-    h-[20px]
-    rounded-[50%]
+  h-[20px]
+  rounded-[50%]
+  border-solid
+  border-primary
+  border-[3px];
+}
+
+.completed {
+  @apply
     bg-primary;
 }
 
 .uncompleted {
-  @apply w-[20px]
-    h-[20px]
-    rounded-[50%]
-    bg-secondary;
+  @apply bg-transparent;
 }
 
 .locked {

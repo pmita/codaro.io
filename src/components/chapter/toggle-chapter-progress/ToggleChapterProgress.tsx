@@ -3,19 +3,22 @@
 import { useCallback } from "react";
 import { useCheckProgress } from "@/hooks/useCheckProgress";
 import { useToggleProgressMutation } from "@/hooks/useToggleProgressMutation";
-import { showLoadingToast } from "@/lib/toasts";
+import { useIsSubscriptionValid } from "@/hooks/useIsSubscriptionValid";
 import { useAuth } from "@/hooks/useAuth";
-import { cn } from "@/lib/utils";
-import styles from './styles.module.css';
-import { ToggleChapterProgressProps } from "./types";
-import { LockKeyhole, Lock, Check } from "lucide-react";
+import { showLoadingToast } from "@/lib/toasts";
+import { LockKeyhole, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ToggleChapterProgressProps } from "./types";
+import styles from './styles.module.css';
 
 
 export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapterProgressProps) => {
   const { user } = useAuth();
   const { isCompleted } = useCheckProgress();
   const mutation = useToggleProgressMutation();
+
+  const canAccess = useIsSubscriptionValid();
 
   const handleClick = useCallback(() => {
     mutation.mutate({ chapterId, isCompleted: isCompleted(chapterId) });
@@ -27,7 +30,7 @@ export const ToggleChapterProgress = ({ chapterId, isFree = false }:ToggleChapte
 
   return (
     <div className={styles.container}>
-      {isFree && user ? (
+      {(isFree || canAccess) && user ? (
         <>
           <Button 
             className={cn(

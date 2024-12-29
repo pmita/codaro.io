@@ -38,7 +38,7 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
       },
       staleTime: 1000 * 60 * 5,
       gcTime: 1000 * 60 * 30,
-    })
+    }),
   ]);
 
 

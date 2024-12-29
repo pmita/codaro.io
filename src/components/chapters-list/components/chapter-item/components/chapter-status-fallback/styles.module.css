@@ -1,13 +1,8 @@
-.completed {
+.fallbackStatus {
   @apply w-[20px]
     h-[20px]
     rounded-[50%]
-    bg-primary;
-}
-
-.locked {
-  @apply w-[20px]
-    h-[20px]
-    rounded-[50%]
-    bg-danger;
+    border-solid
+    border-[3px]
+    border-primary;
 }
