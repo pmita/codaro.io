@@ -1,4 +1,4 @@
-import { AuthCheck } from "@/components/auth-check";
+import { AuthCheck } from "@/components/pemrissions/auth-check";
 import { DashboardNavbar } from "@/layouts/navigation";
 
 

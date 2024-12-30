@@ -1,4 +1,4 @@
-import { AuthCheck } from "@/components/auth-check"
+import { AuthCheck } from "@/components/pemrissions/auth-check"
 import { ChapterStatus } from "./components/chapter-status"
 import { ChapterStatusFallback } from "./components/chapter-status-fallback"
 import { Chapter } from "@/types/courses"

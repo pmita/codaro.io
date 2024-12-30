@@ -1,9 +1,10 @@
 import Link from "next/link"
-import { AuthCheck } from "@/components/auth-check"
+import { AuthCheck } from "@/components/pemrissions/auth-check"
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"
 import { cn } from "@/lib/utils"
 import styles from './styles.module.css'
+import { SubscriptionCheck } from "@/components/pemrissions/subscription-check"
 
 export async function Navbar() {
   return (
@@ -19,9 +20,13 @@ export async function Navbar() {
       </div>
       <ul className={styles.linksContainer}>
         <li className={styles.link}>
-          <Link href={"/pro"}>
-            Blog
+          <SubscriptionCheck fallback={(
+            <Link href={"/pro"}>
+              Pro
             </Link>
+          )}>
+            {null}
+          </SubscriptionCheck>
           </li>
         <li className={styles.link}>
           <Link href={"/blog"}>
