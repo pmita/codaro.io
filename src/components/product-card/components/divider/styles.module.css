@@ -1,0 +1,21 @@
+.container {
+  @apply mt-10
+    flex
+    items-center
+    gap-x-4;
+}
+
+.title {
+  @apply flex-none 
+    text-sm 
+    font-semibold 
+    leading-6 
+    text-secondary;
+}
+
+.divider {
+  @apply h-px
+    flex-auto
+    bg-secondary
+    opacity-50;
+}

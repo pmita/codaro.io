@@ -1,0 +1,34 @@
+.container {
+  @apply flex
+    flex-col 
+    items-center; 
+}
+
+.text {
+  @apply text-base 
+   font-semibold 
+   text-secondary;
+}
+
+.pricingContainer {
+  @apply mt-6 
+   flex 
+   items-baseline 
+   justify-center 
+   gap-x-2;
+}
+
+.price {
+  @apply text-5xl 
+  font-bold 
+  tracking-tight 
+  text-secondary;
+}
+
+.frequency {
+  @apply text-sm 
+    font-semibold 
+    leading-6 
+    tracking-wide 
+    text-secondary;
+}

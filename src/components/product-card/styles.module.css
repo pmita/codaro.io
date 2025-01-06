@@ -1,0 +1,27 @@
+
+.card {
+  @apply border-[3px]
+   border-secondary;
+}
+
+.header {
+  @apply bg-primary
+    m-2
+    rounded-t-[8px];
+}
+
+.title {
+  @apply text-2xl 
+    font-bold 
+    tracking-tight 
+    text-neutral 
+    font-poppins;
+}
+
+.description {
+  @apply mt-6 
+    text-base 
+    leading-7 
+    text-neutral 
+    font-roboto;
+}
