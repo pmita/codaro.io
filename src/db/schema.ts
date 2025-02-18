@@ -1,14 +1,34 @@
+import {
+  integer,
+  pgTable,
+  serial,
+  text,
+  varchar,
+  timestamp
+} from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { serial, pgTable, varchar, timestamp, text, integer, index } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
+  email: text('email').notNull().unique(),
   tier: varchar('tier', { length: 20 }).default('free'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
   deletedAt: timestamp('deleted_at'),
+});
+
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('text').notNull(),
+  content: text('content').notNull(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
 
 export const customers = pgTable('customers', {
@@ -33,7 +53,7 @@ export const invoices = pgTable('invoices', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
-// DB Relationships
+// DB Relations
 export const usersRelations = relations(users, ({ one }) => ({
   customer: one(customers, {
     fields: [users.id],
@@ -66,3 +86,9 @@ export type NewCustomer = typeof customers.$inferInsert;
 export type Invoice = typeof invoices.$inferSelect;
 export type NewInvoice = typeof invoices.$inferInsert;
 
+
+export type InserUser = typeof users.$inferInsert;
+export type SelectUser = typeof users.$inferSelect;
+
+export type InsertPost = typeof posts.$inferInsert;
+export type SelectPost = typeof posts.$inferSelect;
