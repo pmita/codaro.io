@@ -1,8 +1,8 @@
 import { relations } from 'drizzle-orm';
-import { serial, pgTable, varchar, timestamp, text, integer } from 'drizzle-orm/pg-core';
+import { serial, pgTable, varchar, timestamp, text, integer, index } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
-  id: serial('id').primaryKey().notNull(),
+  id: serial('id').primaryKey(),
   name: varchar({ length: 255 }).notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
   tier: varchar('tier', { length: 20 }).default('free'),
@@ -13,7 +13,7 @@ export const users = pgTable('users', {
 
 export const customers = pgTable('customers', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id').notNull().references(() => users.id),
+  userId: integer('user_id').references(() => users.id),
   stripeCustomerId: text('stripe_customer_id').unique(),
   stripeSubscriptionId: text('stripe_subscription_id').unique(),
   stripeProductId: text('stripe_product_id').unique(),
@@ -25,7 +25,7 @@ export const customers = pgTable('customers', {
 
 export const invoices = pgTable('invoices', {
   id: serial('id').primaryKey(),
-  customerId: integer('customer_id').notNull().references(() => customers.id),
+  customerId: integer('customer_id').references(() => customers.id),
   invoiceStatus: varchar('invoice_status', { length: 20 }),
   stripeInvoiceId: text('stripe_invoice_id').unique(),
   amountPaid: integer('amount_paid'),
