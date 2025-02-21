@@ -3,6 +3,7 @@ import {
   pgTable,
   serial,
   text,
+  boolean,
   varchar,
   timestamp
 } from 'drizzle-orm/pg-core';
@@ -30,6 +31,12 @@ export const posts = pgTable('posts', {
     .notNull()
     .$onUpdate(() => new Date()),
 });
+
+export const todo = pgTable('todo', {
+  id: integer('id').primaryKey(),
+  text: text('text').notNull(),
+  done: boolean('done').default(false).notNull(),
+})
 
 export const customers = pgTable('customers', {
   id: serial('id').primaryKey(),
@@ -92,3 +99,6 @@ export type SelectUser = typeof users.$inferSelect;
 
 export type InsertPost = typeof posts.$inferInsert;
 export type SelectPost = typeof posts.$inferSelect;
+
+export type InsertTodo = typeof todo.$inferInsert;
+export type SelectTodo = typeof todo.$inferSelect;
