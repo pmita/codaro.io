@@ -7,9 +7,11 @@ import {
   type AuthReducerActionsType, 
   type AuthReducerState 
 } from './types';
-import { auth } from "@/firebase/client/config";
 import { saveFirebaseCookie } from '@/hooks/mutations/useSigninMutation/utils';
-import { removeAuthCookie } from '@/lib/cookies';
+import { removeAuthCookie, setAuthCookie } from '@/lib/cookies';
+import { getAuth, getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { app, auth } from "@/firebase/client/config";
+import { createSessionCookie } from '@/data/auth/createSessionCookie';
 
 export const AuthContext = createContext<AuthReducerState | undefined | null>(null);
 
@@ -37,7 +39,18 @@ export const AuthContextProvider: FC<{children: React.ReactNode}> = ({ children 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if(user) {
-        await saveFirebaseCookie();
+        // await saveFirebaseCookie();
+        
+        const currentUser = getAuth(app).currentUser;
+        if (currentUser) {
+          const idToken = await getIdToken(currentUser, true);
+          const sessionCookie = await createSessionCookie(idToken, {
+            expiresIn: 60 * 60 * 24 * 5,
+          });
+
+          setAuthCookie(sessionCookie);
+        }
+
         dispatch({ type: AuthActionTypes.AUTH_HAS_CHANGED_SUCCESS, payload: user })
       } else {
         removeAuthCookie();
