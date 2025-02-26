@@ -7,6 +7,7 @@ import { createUser, createUserDoc, updateDisplayName } from "./utils";
 import { showErrorToast } from "@/lib/toasts";
 import { auth } from "@/firebase/client/config";
 import { ISignUpForm } from "@/components/forms/signup-form/types";
+import { createUserTable } from "@/data/db/user/insert";
 
 
 export const useSignupMutation = () => {
@@ -20,6 +21,7 @@ export const useSignupMutation = () => {
         if(response.user) {
           await updateDisplayName(username);
           await createUserDoc(username, email);
+          
           dispatch({ type: AuthActionTypes.SIGN_UP_SUCCESS, payload: auth.currentUser });
         }
       },

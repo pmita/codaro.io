@@ -5,7 +5,10 @@ import { AuthActionTypes } from "@/context/auth-context/types";
 import { useAuth } from "../../useAuth";
 import { saveFirebaseCookie, signUserIn } from "./utils";
 import { showErrorToast } from "@/lib/toasts";
-import { removeAuthCookie } from "@/lib/cookies";
+import { removeAuthCookie, setAuthCookie } from "@/lib/cookies";
+import { getAuth, getIdToken, signInWithEmailAndPassword } from "firebase/auth";
+import { app, auth } from "@/firebase/client/config";
+import { createSessionCookie } from "@/data/auth/createSessionCookie";
 
 
 export const useSigninMutation = () => {
@@ -17,8 +20,17 @@ export const useSigninMutation = () => {
         const response = await signUserIn(email, password);
         
         if(response.user) {
-          await saveFirebaseCookie();
-          dispatch({ type: AuthActionTypes.SIGN_IN_SUCCESS, payload: response.user });
+          const currentUser = getAuth(app).currentUser;
+          if (currentUser) {
+            const idToken = await getIdToken(currentUser, true);
+            const sessionCookie = await createSessionCookie(idToken, {
+              expiresIn: 60 * 60 * 24 * 5,
+            });
+
+            setAuthCookie(sessionCookie);
+
+            dispatch({ type: AuthActionTypes.SIGN_IN_SUCCESS, payload: response.user });
+          }
         }
       },
       onSuccess: () => {

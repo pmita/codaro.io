@@ -4,7 +4,9 @@ import { useAuth } from "../../useAuth";
 import { AuthActionTypes } from "@/context/auth-context/types";
 import { toast } from "sonner";
 import { signout } from "./utils";
-import { removeAuthCookie } from "@/lib/cookies";
+import { getAuthCookie, removeAuthCookie } from "@/lib/cookies";
+import { cookies } from "next/headers";
+import { revokeAllSessions } from "@/data/auth/revokeAllSessionCookies";
 
 
 
@@ -15,10 +17,17 @@ export const useSignoutMutation = () => {
       mutationKey: ['signin'],
       mutationFn: async () => {
         await signout();
+
+        const sessionCookie = getAuthCookie();
+
+        removeAuthCookie();
+        
+        if (sessionCookie) {
+          await revokeAllSessions(sessionCookie);
+        }
         
       },
       onSuccess: () => {
-        removeAuthCookie();
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
         router.push('/');
       },
