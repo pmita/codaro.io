@@ -15,12 +15,16 @@ import { SignupForm } from "../../forms/signup-form"
 import styles from "./styles.module.css"
 
 export const AuthDialog = () => {
-  const [showSignup, setShowSignup] = useState(false)
+  const [showSignup, setShowSignup] = useState(false);
+
+  const handleToggle = () => {
+    console.log('toggle');
+  };
   
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="default">Sign in</Button>
+        <Button variant="default" onClick={handleToggle}>Sign in</Button>
       </DialogTrigger>
       <DialogContent className="w-[800px] p-2 flex flex-col justify-center items-stretch gap-5 text-center">
         <DialogTitle>{showSignup ? "Sign Up" : "Sign in"}</DialogTitle>

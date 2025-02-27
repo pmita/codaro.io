@@ -1,14 +1,6 @@
 import Cookies from 'js-cookie';
 
-export function getAuthCookie(): string | undefined {
-  return Cookies.get('__session');
-}
-
-export function removeAuthCookie(): void {
-  return Cookies.remove('__session');
-}
-
-export function setAuthCookie(token: string): string | undefined {
+export function saveSessionCookieClientSide(token: string): string | undefined {
   return Cookies.set('__session', token, {
     expires: 5, // 5 days
     secure: true,
@@ -17,3 +9,12 @@ export function setAuthCookie(token: string): string | undefined {
     sameSite: 'none',
   });
 }
+
+export function removeSessionCookieClientSide(): void {
+  return Cookies.remove('__session');
+}
+
+export function getSessionCookieClientSide(): string | undefined {
+  return Cookies.get('__session');
+}
+
