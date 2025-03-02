@@ -15,6 +15,13 @@
       "when": 1740176765174,
       "tag": "0001_curvy_smiling_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740939812854,
+      "tag": "0002_ancient_gideon",
+      "breakpoints": true
     }
   ]
 }
