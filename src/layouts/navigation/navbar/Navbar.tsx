@@ -1,12 +1,15 @@
 import Link from "next/link"
-import { AuthCheck } from "@/components/pemrissions/auth-check"
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"
 import { cn } from "@/lib/utils"
 import styles from './styles.module.css'
 import { SubscriptionCheck } from "@/components/pemrissions/subscription-check"
+import { getCurrentUser } from "@/data/auth/getCurrentUser"
 
 export async function Navbar() {
+  const currentUser = await getCurrentUser();
+
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoContainer}>
@@ -38,15 +41,13 @@ export async function Navbar() {
             Courses
           </Link>
         </li>
-        <li className={styles.link}>
-          <AuthCheck fallback={(
-            <AuthDialog />
-          )}>
+        {currentUser ? (
+          <li className={styles.link}>
             <Link href="/dashboard" className={cn(buttonVariants({ variant: "link", size: 'lg' }))}>
               Dashboard
             </Link>
-          </AuthCheck>
-        </li>
+          </li>
+        ): <AuthDialog />}
       </ul>
     </nav>
   )

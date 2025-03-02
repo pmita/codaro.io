@@ -2,6 +2,7 @@
 
 import { getSessionCookie } from './getSessionCookie';
 import { adminAuth } from "../../firebase/server/config";
+import { revokeAllSessions } from './revokeAllSessionCookies';
 
 export const validateUserSession = async () => {
   const session = await getSessionCookie();
@@ -15,6 +16,13 @@ export const validateUserSession = async () => {
 
   if (!decodedIdToken) {
     console.warn('No decoded token was found');
+    return null;
+  }
+
+  const currentTime = Math.floor(Date.now() / 1000);
+  if(decodedIdToken.exp < currentTime) {
+    await revokeAllSessions(session!);
+    console.warn('Session expired');
     return null;
   }
 
