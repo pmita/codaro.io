@@ -1,7 +1,7 @@
 "use server"
 
 import { adminAuth } from "@/firebase/server/config";
-import { validateUserSession } from "./validateUserSession";
+import { validateUserSession } from "./sessions";
 
 export const getCurrentUser = async () => {
   const decodedIdToken = await validateUserSession();

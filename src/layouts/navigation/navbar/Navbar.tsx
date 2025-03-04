@@ -1,10 +1,15 @@
+// NEXT.JS
 import Link from "next/link"
+// DATA
+import { getCurrentUser } from "@/data/auth/currentUser"
+// COMPONENTS
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"
-import { cn } from "@/lib/utils"
-import styles from './styles.module.css'
 import { SubscriptionCheck } from "@/components/pemrissions/subscription-check"
-import { getCurrentUser } from "@/data/auth/getCurrentUser"
+// UTILS
+import { cn } from "@/lib/utils"
+// STYLES
+import styles from './styles.module.css'
 
 export async function Navbar() {
   const currentUser = await getCurrentUser();

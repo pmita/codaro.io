@@ -1,6 +1,9 @@
+// NEXT.JS
 import { NextRequest, NextResponse } from "next/server";
+// DATA
+import { revokeAllSessions } from "@/data/auth/sessions";
+// CONFIG
 import { adminAuth } from "@/firebase/server/config";
-import { revokeAllSessions } from "@/data/auth/revokeAllSessionCookies";
 
 export async function GET(req: NextRequest) {
   const sessionCookie = req.cookies.get("__session")?.value;

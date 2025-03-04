@@ -1,8 +1,15 @@
-import { createSessionCookie } from "@/data/auth/createSessionCookie";
-import { app } from "@/firebase/client/config"
+// DATA
+import { createSessionCookie, revokeAllSessions } from "@/data/auth/sessions";
+// FIREBASE
 import { getAuth, getIdToken } from "firebase/auth"
-import { getSessionCookieClientSide, removeSessionCookieClientSide, saveSessionCookieClientSide } from "./cookies";
-import { revokeAllSessions } from "@/data/auth/revokeAllSessionCookies";
+// CONFIG
+import { app } from "@/firebase/client/config"
+// LIB
+import { 
+  getSessionCookieClientSide, 
+  removeSessionCookieClientSide, 
+  saveSessionCookieClientSide 
+} from "./cookies";
 
 
 export const syncSessionCookie = async () => {

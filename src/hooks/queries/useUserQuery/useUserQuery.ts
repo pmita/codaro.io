@@ -1,4 +1,4 @@
-import { getUser } from "@/data/user";
+import { getUser } from "@/data/user-2";
 import { useQuery } from "@tanstack/react-query"
 import { useAuth } from "../../useAuth";
 

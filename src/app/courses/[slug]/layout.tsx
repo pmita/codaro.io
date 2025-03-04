@@ -1,4 +1,4 @@
-import { getUser } from "@/data/user";
+import { getUser } from "@/data/user-2";
 import {
   dehydrate,
   HydrationBoundary,

@@ -5,6 +5,8 @@ export async function middleware(req: NextRequest) {
   const sessionCookie = req.cookies.get("__session")?.value;
 
   if (!sessionCookie) {
+    req.cookies.delete("__session");
+    
     return NextResponse.redirect(new URL("/", req.url));
   }
 

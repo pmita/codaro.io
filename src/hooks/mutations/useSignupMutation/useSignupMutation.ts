@@ -1,13 +1,23 @@
+// NEXT.JS
 import { useRouter } from "next/navigation";
+// DATA 
+import { createUserTable } from "@/data/db/user/insert";
+// PACKAGES
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+// CONTEXT
 import { AuthActionTypes } from "@/context/auth-context/types";
+// HOOKS
 import { useAuth } from "../../useAuth";
-import { createUser, createUserDoc, updateDisplayName } from "./utils";
-import { showErrorToast } from "@/lib/toasts";
+// UTILS
+import { createUser } from "./utils";
+// CONFIG
 import { auth } from "@/firebase/client/config";
-import { ISignUpForm } from "@/components/forms/signup-form/types";
+// LIB
+import { showErrorToast } from "@/lib/toasts";
 import { syncSessionCookie } from "@/lib/auth";
+// TYPES
+import { ISignUpForm } from "@/components/forms/signup-form/types";
 
 
 export const useSignupMutation = () => {
@@ -19,10 +29,13 @@ export const useSignupMutation = () => {
         const response = await createUser(email, password);
         
         if(response.user) {
+          const userData = {
+            email,
+            username,
+          }
           await Promise.all([
             syncSessionCookie(),
-            updateDisplayName(username),
-            createUserDoc(username, email),
+            createUserTable(userData),
           ])
           
           dispatch({ type: AuthActionTypes.SIGN_UP_SUCCESS, payload: auth.currentUser });

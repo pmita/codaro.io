@@ -23,6 +23,7 @@ export const useSignoutMutation = () => {
       },
       onSuccess: () => {
         router.push('/');
+        router.refresh();
       },
       onSettled: () => {
         toast.dismiss('loading-signin-form');
