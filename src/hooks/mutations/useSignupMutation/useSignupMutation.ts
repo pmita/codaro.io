@@ -1,7 +1,7 @@
 // NEXT.JS
 import { useRouter } from "next/navigation";
 // DATA 
-import { createUserTable } from "@/data/db/user/insert";
+import { addUserToDb } from "@/data/db/user";
 // PACKAGES
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -32,10 +32,11 @@ export const useSignupMutation = () => {
           const userData = {
             email,
             username,
+            id: response.user.uid,
           }
           await Promise.all([
             syncSessionCookie(),
-            createUserTable(userData),
+            addUserToDb(userData),
           ])
           
           dispatch({ type: AuthActionTypes.SIGN_UP_SUCCESS, payload: auth.currentUser });

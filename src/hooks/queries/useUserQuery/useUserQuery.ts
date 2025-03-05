@@ -7,7 +7,7 @@ export const useUserQuery = () => {
   const { user } = useAuth();
   
   return useQuery({
-    queryKey: ['userDetails'],
+    queryKey: ['user'],
     queryFn: async () => {
       return await getUser();
     },

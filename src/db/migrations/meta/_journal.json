@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1739917547871,
-      "tag": "0000_ancient_smasher",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1740176765174,
-      "tag": "0001_curvy_smiling_tiger",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1740939812854,
-      "tag": "0002_ancient_gideon",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1741038052132,
-      "tag": "0003_awesome_shadow_king",
+      "when": 1741211688420,
+      "tag": "0000_calm_stingray",
       "breakpoints": true
     }
   ]

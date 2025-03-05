@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 export const ChapterItem = ({
   chapter
-}: { chapter: Chapter }) => {
+}: { chapter: any }) => {
   if (!chapter) return null;
 
   return (

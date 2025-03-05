@@ -8,7 +8,7 @@ import {
   timestamp,
   jsonb
 } from 'drizzle-orm/pg-core';
-import { desc, relations } from 'drizzle-orm';
+import { relations } from 'drizzle-orm';
 
 const timestamps = {
   createdAt: timestamp('created_at')
@@ -20,7 +20,7 @@ const timestamps = {
 }
 
 export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
+  id: varchar('id', { length: 128 }).primaryKey(),
   username: varchar('username', { length: 50 }).notNull(),
   email: text('email').notNull().unique(),
   tier: varchar('tier', { length: 20 }).default('free'),
@@ -29,13 +29,14 @@ export const users = pgTable('users', {
 
 export const progress = pgTable('progress', {
   id: serial('id').primaryKey(),
-  userId: integer('user_id')
+  userId: varchar('user_id', { length: 128 })
     .references(() => users.id, { onDelete: 'cascade' }),
   completedChapters: jsonb("completed_chapters").default({}).notNull(),
 });
 
 export const courses = pgTable('courses', {
   id: serial('id').primaryKey(), 
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
   title: text('title').notNull(),
   description: text('description').notNull(),
 });
@@ -43,39 +44,22 @@ export const courses = pgTable('courses', {
 export const chapters = pgTable('chapters', {
   id: serial('id').primaryKey(),
   courseId: integer('course_id')
-    .references(() => courses.id),
+    .references(() => courses.id, { onDelete: 'cascade' }),
   slug: varchar('slug', { length: 100 }).notNull(),
   title: text('title').notNull(),
   description: text('description').notNull(),
   content: text('content').notNull(),
+  weight: integer('weight').notNull().unique(),
+  videoId: varchar('video_id', { length: 100 }),
+  videoLength: integer('video_length'),
   isFree: boolean('is_free').default(false).notNull(),
   ...timestamps,
 });
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  userId: integer('user_id')
-    .notNull()
-    .references(() => users.id),
-  ...timestamps,
-});
-
-export const todo = pgTable('todo', {
-  id: integer('id')
-    .primaryKey(),
-  text: text('text')
-    .notNull(),
-  done: boolean('done')
-    .default(false)
-    .notNull(),
-})
-
 export const customers = pgTable('customers', {
   id: serial('id')
     .primaryKey(),
-  userId: integer('user_id')
+  userId: varchar('user_id', { length : 128 })
     .references(() => users.id, { onDelete: 'cascade' }),
   stripeCustomerId: text('stripe_customer_id')
     .unique(),
@@ -161,14 +145,3 @@ export type Course = typeof courses.$inferSelect;
 export type NewCourse = typeof courses.$inferInsert;
 export type Chapter = typeof chapters.$inferSelect;
 export type NewChapter = typeof chapters.$inferInsert;
-
-
-
-export type InserUser = typeof users.$inferInsert;
-export type SelectUser = typeof users.$inferSelect;
-
-export type InsertPost = typeof posts.$inferInsert;
-export type SelectPost = typeof posts.$inferSelect;
-
-export type InsertTodo = typeof todo.$inferInsert;
-export type SelectTodo = typeof todo.$inferSelect;

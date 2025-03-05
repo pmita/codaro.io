@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCourseChapters } from "@/data/content/courses";
-import { Chapter } from "@/types/courses";
+import { Chapter } from '@/db/schema';
+import { getCourseChapters } from '@/data/db/courses';
+
+type ChapterDataType = Pick<Chapter, 'id' | 'title' | 'slug' | 'videoLength'>;
 
 export const useChaptersQuery = (course: string) => {
-  return useQuery<Chapter[] | undefined>({
+  return useQuery<ChapterDataType[] | undefined>({
     queryKey: ['chapters', course],
-    queryFn: () => {
-      return getCourseChapters(course);
-    }
+    queryFn: async () => (
+      await getCourseChapters(course)
+    ),
   });
 }

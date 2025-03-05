@@ -1,5 +1,4 @@
 import { getCurrentUser } from "@/data/auth/currentUser";
-import { getUser } from "@/data/user-2";
 import {
   dehydrate,
   HydrationBoundary,
@@ -18,11 +17,8 @@ export default async function CourseLayout({ children }: CourseLayoutProps ) {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['user'],
-    // queryFn: async () => {
-    //   return await getUser();
-    // },
     queryFn: async () => {
-      return await getCurrentUser ();
+      return await getCurrentUser();
     },
     staleTime: 1000 * 60 * 60 * 2, // 2 hours
     gcTime: 1000 * 60 * 60 * 2, 

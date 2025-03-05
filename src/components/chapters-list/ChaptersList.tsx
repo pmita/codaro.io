@@ -9,12 +9,14 @@ import { ChapterItem } from './components/chapter-item';
 export const ChaptersList =  ({ course }: { course: string }) => {
   const { data: chapters } = useChaptersQuery(course);
 
+  console.log(chapters, 'chapters');
+
   if (!chapters) return null;
 
   return (
     <>
-      {chapters.map((chapter: Chapter) => (
-        <Link href={`/courses/${chapter.slug}`} key={chapter.weight} className={styles.link}>
+      {chapters.map((chapter) => (
+        <Link href={`/courses/${chapter.slug}`} key={chapter.id} className={styles.link}>
           <ChapterItem chapter={chapter} />
         </Link>
       ))}

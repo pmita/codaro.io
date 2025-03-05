@@ -1,10 +1,12 @@
 "use server"
 
-import { validateUserServerSide } from "../auth/auth";
+// DATA
+import { getCurrentUser } from "../auth/currentUser";
+// CONFIG
 import { adminDb, deleteField } from "@/firebase/server/config";
 
 export const getCompletedChapters = async () => {
-  const user = await validateUserServerSide();
+  const user = await getCurrentUser();
 
   if (!user) {
     return null;
@@ -27,7 +29,7 @@ export const getIsChapterCompleted = async (chapterId: string) => {
 }
 
 export const toggleChapterProgress = async (chapterId: string, isCompleted: boolean) => {
-  const user = await validateUserServerSide();
+  const user = await getCurrentUser();
 
   if (!user) {
     return null;

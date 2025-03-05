@@ -5,7 +5,7 @@ import { db } from "@/db";
 import { eq } from 'drizzle-orm';
 
 
-export const createUserTable = async (data: NewUser) => {
+export const addUserToDb = async (data: NewUser) => {
   const existingUser = await db
     .select()
     .from(users)

@@ -1,4 +1,4 @@
-import { getCourseChapters } from "@/data/content/courses";
+import { getCourseChapters } from "@/data/db/courses";
 import { ChaptersList } from "@/components/chapters-list";
 import {
   dehydrate,
@@ -27,9 +27,12 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ['chapters', course],
-      queryFn: async () => {
-        return await getCourseChapters(course);
-      }
+      // queryFn: async () => {
+      //   return await getCourseChapters(course);
+      // }
+      queryFn: async () => (
+        await getCourseChapters(course)
+      )
     }),
     // queryClient.prefetchQuery({
     //   queryKey: ['progress'],
@@ -40,6 +43,11 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
     //   gcTime: 1000 * 60 * 30,
     // }),
   ]);
+
+  const chapterData = await getCourseChapters(course);
+
+  console.log('course', course);
+  console.log('chapterData', chapterData);
 
 
 

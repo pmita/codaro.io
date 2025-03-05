@@ -4,18 +4,18 @@ import { PRO_STATUS } from "@/types/firestore";
 
 
 export const useIsSubscriptionValid = () => {
-  const { data: userDetails } = useUserQuery();
+  const { data: user } = useUserQuery();
 
-  if (!userDetails) {
+  if (!user) {
     return false;
   }
 
-  const expires = userDetails.expires ?? 0;
+  const expires = user.expires ?? 0;
   const today = new Date().getTime();
   const isPeriodValid = expires > today;
   const daysPastExpired = differenceInDays(today, new Date(expires));
 
-  switch(userDetails.proStatus) {
+  switch(user.proStatus) {
     case PRO_STATUS.LIFE_TIME:
       return true;
     case PRO_STATUS.ACTIVE:
