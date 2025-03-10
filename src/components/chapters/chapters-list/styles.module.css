@@ -1,0 +1,4 @@
+.link {
+  @apply hover:text-primary
+    w-full;
+}

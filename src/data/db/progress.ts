@@ -1,37 +1,13 @@
+"use server"
+
+// DRIZZLE
 import { db } from "@/db"
-import { NewChapter, NewProgress, progress } from "@/db/schema"
-import { eq, sql } from "drizzle-orm";
-import { getCurrentUser } from "../auth/currentUser";
+import { chapters, users, courses, progress } from "@/db/schema"
+import { and, eq } from "drizzle-orm";
+// DATA
+import { getCurrentUser } from "@/data/auth/currentUser";
 
-
-export async function markChapterCompleted(userId: number, chapterSlug: string) {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    throw new Error('No user found');
-  }
-
-  await db.execute(sql`
-    UPDATE progress
-    SET completed_chapters = jsonb_set(completed_chapters, '{${chapterSlug}}', 'true', true)
-    WHERE user_id = ${userId}
-  `);
-}
-
-export const markChapterUnCompleted = async (userId: number, chapterSlug: string) => {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    throw new Error('No user found');
-  }
-  await db.execute(sql`
-    UPDATE progress
-    SET completed_chapters = completed_chapters - ${chapterSlug}
-    WHERE user_id = ${userId}
-  `);
-}
-
-export const getUserProgress = async () => {
+export const getUserProgress = async (courseSlug: string) => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -40,10 +16,22 @@ export const getUserProgress = async () => {
 
   const data = await db
     .select({
-      completedChapters: progress.completedChapters
+      chapterId: progress.chapterId,
+      isCompleted: progress.isCompleted,
+      isFree: chapters.isFree,
+      chapterSlug: chapters.slug
     })
     .from(progress)
-    .where(eq(progress.userId, currentUser.uid));
+    .innerJoin(users, eq(progress.userId, currentUser.uid))
+    .innerJoin(chapters, eq(progress.chapterId, chapters.id))
+    .innerJoin(courses, eq(chapters.courseId, courses.id))
+    .where(
+      and(
+        eq(progress.userId, currentUser.uid),
+        eq(courses.slug, courseSlug),
+        eq(progress.isCompleted, true)
+      )
+    )
 
-  return data?.length ? data[0].completedChapters : {};
-}
+    return data.length ? data : [];
+} 

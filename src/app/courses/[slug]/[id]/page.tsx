@@ -47,9 +47,9 @@ export default async function ChapterPage(props: ChapterPageProps) {
   //   }
   // })
 
-  const progressData = await getUserProgress();
+  // const progressData = await getUserProgress();
 
-  console.log('progressData here ------>', progressData);
+  // console.log('progressData here ------>', progressData);
 
   return (
     <PageLayout>

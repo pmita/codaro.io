@@ -1,4 +1,4 @@
-import { getCourseChapters } from "@/data/db/courses";
+import { getAllChapters, getCourseChapters } from "@/data/db/courses";
 import { ChaptersList } from "@/components/chapters-list";
 import {
   dehydrate,
@@ -12,6 +12,10 @@ import {
 } from "@/layouts/content/course";
 import { getCompletedChapters } from "@/data/progress";
 import '@/styles/mdx.css';
+import { getUserProgress } from "@/data/db/progress";
+import { getCurrentUser } from "@/data/auth/currentUser";
+import { notFound } from "next/navigation";
+import { AllChapters } from "@/components/courses/all-chapters";
 
 interface CourseChapterLayoutProps {
   children: React.ReactNode;
@@ -27,27 +31,26 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ['chapters', course],
-      // queryFn: async () => {
-      //   return await getCourseChapters(course);
-      // }
       queryFn: async () => (
         await getCourseChapters(course)
       )
     }),
     // queryClient.prefetchQuery({
     //   queryKey: ['progress'],
-    //   queryFn: async () => {
-    //     return await getCompletedChapters();
-    //   },
+    //   queryFn: async () => (
+    //     await getUserProgress(course)
+    //   ),
     //   staleTime: 1000 * 60 * 5,
     //   gcTime: 1000 * 60 * 30,
-    // }),
+    // })
   ]);
 
-  const chapterData = await getCourseChapters(course);
+  const chapters = await getAllChapters(course);
+  const completedChapters = await getUserProgress(course);
 
-  console.log('course', course);
-  console.log('chapterData', chapterData);
+  console.log('completed chapters from server ----->', completedChapters);
+
+  if (!chapters.length) { notFound(); }
 
 
 
@@ -55,7 +58,10 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
     <HydrationBoundary state={dehydrate(queryClient)}>
       <RootLayout>
         <AsideLayout>
-            <ChaptersList course={course} />
+            <AllChapters 
+              chapters={chapters}
+              course={course} 
+            />
         </AsideLayout>
         <MainLayout>
           {children}

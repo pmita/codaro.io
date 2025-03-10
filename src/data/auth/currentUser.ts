@@ -24,7 +24,15 @@ export const getCurrentUser = async () => {
       return null;
     }
 
-    return currentUser;
+    // return currentUser;
+
+    return {
+      uid: currentUser.uid,
+      email: currentUser.email,
+      displayName: currentUser.displayName,
+      photoURL: currentUser.photoURL,
+      emailVerified: currentUser.emailVerified,
+    }
   } catch(error) {
     console.error('An error occurred while validating the user:', error);
     return null;

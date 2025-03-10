@@ -7,6 +7,7 @@ import { Chapter } from '@/types/courses';
 import { ChapterItem } from './components/chapter-item';
 
 export const ChaptersList =  ({ course }: { course: string }) => {
+  
   const { data: chapters } = useChaptersQuery(course);
 
   console.log(chapters, 'chapters');

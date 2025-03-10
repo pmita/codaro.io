@@ -6,7 +6,6 @@ import {
   boolean,
   varchar,
   timestamp,
-  jsonb
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -31,7 +30,11 @@ export const progress = pgTable('progress', {
   id: serial('id').primaryKey(),
   userId: varchar('user_id', { length: 128 })
     .references(() => users.id, { onDelete: 'cascade' }),
-  completedChapters: jsonb("completed_chapters").default({}).notNull(),
+  chapterId: integer('chapter_id')
+    .references(() => chapters.id, { onDelete: 'cascade' })
+    .notNull(),
+  isCompleted: boolean('is_completed').default(false).notNull(),
+  ...timestamps,
 });
 
 export const courses = pgTable('courses', {
@@ -87,30 +90,35 @@ export const invoices = pgTable('invoices', {
   ...timestamps,
 });
 
-// DB Relations
-export const usersRelations = relations(users, ({ one }) => ({
+// Relations
+export const usersRelations = relations(users, ({ one, many }) => ({
   customer: one(customers, {
     fields: [users.id],
     references: [customers.userId],
     relationName: "user_customer",
   }),
-  progress: one(progress, {
-    fields: [users.id],
-    references: [progress.userId],
-    relationName: 'user_progress',
-  })
+  progress: many(progress),
+}));
+
+export const progressRelations = relations(progress, ({ one, many}) => ({
+  user: one(users, {
+    fields: [progress.userId],
+    references: [users.id],
+    relationName: 'progress_user',
+  }),
 }));
 
 export const coursesRelations = relations(courses, ({ many }) => ({
   chapters: many(chapters),
 }));
 
-export const chaptersRelations = relations(chapters, ({ one }) => ({
+export const chaptersRelations = relations(chapters, ({ one, many }) => ({
   courses: one(courses, {
     fields: [chapters.courseId],
     references: [courses.id],
     relationName: 'chapter_course',
   }),
+  progress: many(progress),
 }));
 
 export const customersRelation = relations(customers, ({ many, one }) => ({

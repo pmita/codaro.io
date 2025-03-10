@@ -17,7 +17,9 @@ export async function GET(req: NextRequest) {
 
     const currentTime = Math.floor(Date.now() / 1000);
     if (decodedToken.exp < currentTime) {
-      await revokeAllSessions(sessionCookie);
+      // await revokeAllSessions(sessionCookie);
+
+      await adminAuth.revokeRefreshTokens(decodedToken.sub);
       return NextResponse.json({ valid: false, error: "Session expired" }, { status: 401 });
     }
 
