@@ -46,9 +46,6 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
   ]);
 
   const chapters = await getAllChapters(course);
-  const completedChapters = await getUserProgress(course);
-
-  console.log('completed chapters from server ----->', completedChapters);
 
   if (!chapters.length) { notFound(); }
 
