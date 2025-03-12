@@ -1,21 +1,23 @@
-import { getAllChapters, getCourseChapters } from "@/data/db/courses";
-import { ChaptersList } from "@/components/chapters-list";
+// DATA
+import { getCourseChapters } from "@/data/db/courses";
+import { getProgressChapters } from "@/data/db/progress";
+import { getCurrentUser } from "@/data/auth/currentUser";
+// PACKAGES
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query"
+// LAYOUTS
 import {
   RootLayout,
   AsideLayout,
   MainLayout
 } from "@/layouts/content/course";
-import { getCompletedChapters } from "@/data/progress";
-import '@/styles/mdx.css';
-import { getUserProgress } from "@/data/db/progress";
-import { getCurrentUser } from "@/data/auth/currentUser";
-import { notFound } from "next/navigation";
+// COMPONENTS
 import { AllChapters } from "@/components/courses/all-chapters";
+// STYLES
+import '@/styles/mdx.css';
 
 interface CourseChapterLayoutProps {
   children: React.ReactNode;
@@ -27,6 +29,7 @@ interface CourseChapterLayoutProps {
 
 export default async function CourseChapterLayout({ children, params}: CourseChapterLayoutProps ) {
   const { slug: course } = await params;
+  const currentUser = await getCurrentUser();
   const queryClient = new QueryClient();
   await Promise.all([
     queryClient.prefetchQuery({
@@ -35,28 +38,21 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
         await getCourseChapters(course)
       )
     }),
-    // queryClient.prefetchQuery({
-    //   queryKey: ['progress'],
-    //   queryFn: async () => (
-    //     await getUserProgress(course)
-    //   ),
-    //   staleTime: 1000 * 60 * 5,
-    //   gcTime: 1000 * 60 * 30,
-    // })
+    queryClient.prefetchQuery({
+      queryKey: ['chapters-progress', currentUser?.uid, course],
+      queryFn: async () => (
+        await getProgressChapters(course)
+      ),
+      staleTime: 1000 * 60 * 5,
+      gcTime: 1000 * 60 * 30,
+    })
   ]);
-
-  const chapters = await getAllChapters(course);
-
-  if (!chapters.length) { notFound(); }
-
-
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <RootLayout>
         <AsideLayout>
             <AllChapters 
-              chapters={chapters}
               course={course} 
             />
         </AsideLayout>

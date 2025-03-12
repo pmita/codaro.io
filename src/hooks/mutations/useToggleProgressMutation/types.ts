@@ -1,4 +1,4 @@
-export type ToggleChapterProgressProps = {
+export type ToggleProgressMutationProps = {
   chapterSlug: string;
   courseSlug: string;
-};
+}

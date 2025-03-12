@@ -9,8 +9,6 @@ import { ChapterPros } from "./types";
 import styles from './styles.module.css';
 
 export const Chapter = ({ title, videoLength, isFree, completionStatus }: ChapterPros) => {
-
-  console.log('completionStatus', completionStatus)
   return (
     <div className={styles.container}>
       <span className={styles.subContainer}>
