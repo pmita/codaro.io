@@ -1,7 +1,10 @@
+// REACT
+import { Suspense } from "react";
 // DATA
 import { getCourseChapters } from "@/data/db/courses";
 import { getProgressChapters } from "@/data/db/progress";
 import { getCurrentUser } from "@/data/auth/currentUser";
+import { getUserSubscriptionStatus } from "@/data/db/user";
 // PACKAGES
 import {
   dehydrate,
@@ -14,11 +17,11 @@ import {
   AsideLayout,
   MainLayout
 } from "@/layouts/content/course";
+import { AsideLayoutSkeleton } from "@/layouts/content/course/aside-layout/components/AsideLayoutSkeleton";
 // COMPONENTS
-import { AllChapters } from "@/components/courses/all-chapters";
+import { ChaptersList } from "@/components/courses/chapters-list";
 // STYLES
 import '@/styles/mdx.css';
-import { getUserSubscriptionStatus } from "@/data/db/user";
 
 interface CourseChapterLayoutProps {
   children: React.ReactNode;
@@ -56,12 +59,14 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <RootLayout>
-        <AsideLayout>
-            <AllChapters 
-              course={course} 
-              allChapters={allChapters}
-            />
-        </AsideLayout>
+        <Suspense fallback={<AsideLayoutSkeleton />}>
+          <AsideLayout>
+              <ChaptersList 
+                course={course} 
+                allChapters={allChapters}
+              />
+          </AsideLayout>
+        </Suspense>
         <MainLayout>
           {children}
         </MainLayout>

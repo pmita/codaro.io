@@ -7,15 +7,15 @@ import { useCallback } from 'react';
 // HOOKS
 import { useChaptersQuery } from '@/hooks/queries/useChaptersQuery';
 import { useCompletedChaptersQuery } from '@/hooks/queries/useCompletedChaptersQuery';
+import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
 // COMPONENTS
 import { Chapter } from './components/chapter';
 // TYPES
-import { AllChaptersProps } from './types';
+import { ChaptersListProps } from './types';
 // STYLES
 import styles from './styles.module.css';
-import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
 
-export const AllChapters =  ({ course, allChapters }: AllChaptersProps) => {
+export const ChaptersList =  ({ course, allChapters }: ChaptersListProps) => {
   // const { data: allChapters } = useChaptersQuery(course, initialData);
   const { data: completedChapters } = useCompletedChaptersQuery(course);
   const { data: userStatus } = useUserSubscriptionStatusQuery();
