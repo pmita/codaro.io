@@ -1,6 +1,9 @@
 // COMPONENTS
 import { AuthCheck } from "@/components/pemrissions/auth-check"
-import { StatusFallback } from "./components/status-fallback";
+import { StatusIndicator } from "./components/status-indicator";
+import { TimeStamp } from "./components/time-stamp";
+// PACKAGES
+import { LockKeyhole } from "lucide-react";
 // UTILS
 import { cn } from "@/lib/utils";
 // TYPES
@@ -8,27 +11,26 @@ import { ChapterPros } from "./types";
 // STYLES
 import styles from './styles.module.css';
 
-export const Chapter = ({ title, videoLength, isFree, completionStatus }: ChapterPros) => {
+export const Chapter = ({ 
+  title, 
+  videoLength, 
+  completionStatus,
+  canAccess,
+}: ChapterPros) => {
   return (
     <div className={styles.container}>
       <span className={styles.subContainer}>
-        <AuthCheck 
-          fallback={<StatusFallback isFree={isFree} />}
-        >
-          <div 
-            className={cn(
-              styles.status, 
-              completionStatus ? styles.completed : styles.uncompleted
-            )} 
-          />
+        <AuthCheck fallback={(<LockKeyhole width={20} height={20} color="#b72b1a" />)}>
+          {canAccess 
+            ? <StatusIndicator status={completionStatus} /> 
+            : <LockKeyhole width={20} height={20} color="#b72b1a" />
+          }
+          <h1>{title}</h1>
         </AuthCheck>
-        <h3>{title}</h3>
       </span>
-      {videoLength ? (
-        <span 
-          className={styles.length}
-        >{videoLength}</span>
-      ): null}
+      <TimeStamp 
+        time={videoLength}
+      />
     </div>
   )
 }

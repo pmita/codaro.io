@@ -1,0 +1,14 @@
+.status {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%];
+}
+
+.completed {
+  @apply bg-primary;
+}
+
+.uncompleted {
+  @apply bg-secondary
+    opacity-25;
+}
