@@ -51,21 +51,22 @@ export async function generateStaticParams() {
 
 export default async function ChapterPage({ params }: ChapterPageProps) {
   const { slug:course, id: chapter } = await params;
-  const currentUser = await getCurrentUser();
   const queryClient = new QueryClient();
-
   const chapterData = await getCourseChapter(course, chapter);
-
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['chapter-progress', currentUser?.uid, course, chapter],
-      queryFn: async () => {
-        return await getProgressChapter(course, chapter);
-      }
-    })
-  ])
+  const currentUser = await getCurrentUser();
 
   if (!chapterData) { notFound(); }
+
+  if (currentUser) {
+    await Promise.all([
+      queryClient.prefetchQuery({
+        queryKey: ['chapter-progress', course, chapter],
+        queryFn: async () => {
+          return await getProgressChapter(course, chapter);
+        }
+      })
+    ]);
+  }
 
   return (
     <PageLayout>

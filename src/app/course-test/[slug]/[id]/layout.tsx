@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { getCourseChapters } from "@/data/db/courses";
 import { getProgressChapters } from "@/data/db/progress";
 import { getCurrentUser } from "@/data/auth/currentUser";
-import { getUserSubscriptionStatus } from "@/data/db/user";
+import { isSubscriptionValid } from "@/data/db/user";
 // PACKAGES
 import {
   dehydrate,
@@ -42,15 +42,15 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
       queryClient.prefetchQuery({
         queryKey: ['chapters-progress', course],
         queryFn: async () => (
-          await getProgressChapters(course)
+          getProgressChapters(course)
         ),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       }),
       queryClient.prefetchQuery({
-        queryKey: ['subscription-status'],
+        queryKey: ['access-status'],
         queryFn: async () => (
-          await getUserSubscriptionStatus()
+          isSubscriptionValid()
         )
       })
     ])

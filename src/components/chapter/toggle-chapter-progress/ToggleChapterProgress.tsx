@@ -17,16 +17,20 @@ import { cn } from "@/lib/utils";
 import styles from './styles.module.css';
 // TYPES
 import { ToggleChapterProgressProps } from "./types";
+import { useIsSubscriptionValidQuery } from "@/hooks/queries/useIsSubscriptionValidQuery";
+import { AuthCheck } from "@/components/pemrissions/auth-check";
 
 
 export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapterProgressProps) => {
   // HOOKS
-  const { user } = useAuth();
   const { data: chapterDetails } = useCompletedChapterQuery(courseSlug, chapterSlug)
+  const { data: canAccess } = useIsSubscriptionValidQuery();
   const mutation = useToggleProgressMutation(courseSlug, chapterSlug)
 
   // EVENTS
   const handleClick = useCallback(() => {
+    console.log('courseSlug', courseSlug);
+    console.log('chapterSlug', chapterSlug);
     mutation.mutate({ courseSlug, chapterSlug });
 
     if(mutation.isIdle) {
@@ -36,25 +40,25 @@ export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapter
 
   return (
     <div className={styles.container}>
-      {(chapterDetails?.isFree || chapterDetails?.tier === 'PRO') && user ? (
-        <>
-          <Button 
-            className={cn(
-              styles.toggleButton, 
-              chapterDetails?.isCompleted ? styles.completed : styles.uncompleted
-            )}
-            onClick={handleClick}
-          >
-            {chapterDetails?.isCompleted ? <Check width={20} height={20} color="#fff" /> : null}
-          </Button>
-          <span className={styles.highlightedText}>Completed</span>
-        </>
-      ) : (
-        <>
-          <LockKeyhole width={38} height={36} color="#b72b1a" />
-          <span className={styles.highlightedText}>Locked</span>
-        </>
-      )}
+      <AuthCheck fallback={(<LockKeyhole width={20} height={20} color="#b72b1a" />)}>
+        {(chapterDetails?.isFree || canAccess) 
+          ? (
+            <>
+              <Button 
+                className={cn(
+                  styles.toggleButton, 
+                  chapterDetails?.isCompleted ? styles.completed : styles.uncompleted
+                )}
+                onClick={handleClick}
+              >
+                {chapterDetails?.isCompleted ? <Check width={20} height={20} color="#fff" /> : null}
+              </Button>
+              <span className={styles.highlightedText}>Completed</span>
+            </>
+            ) 
+          : null
+        }
+      </AuthCheck>
     </div>
   )
 }

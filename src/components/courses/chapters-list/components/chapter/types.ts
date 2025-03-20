@@ -3,5 +3,5 @@ export type ChapterPros = {
   videoLength: number | null;
   isFree: boolean;
   completionStatus: boolean;
-  canAccess: boolean;
+  canAccess: boolean | undefined | null;
 }

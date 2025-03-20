@@ -74,7 +74,6 @@ export const toggleUserProgress = async (courseSlug: string, chapterSlug: string
   }
 
   try {
-    // const chapterAlreadyInProgress = await checkIfChapterAlreadyInProgress(chapterSlug, currentUser.uid);
     const { progressId, chapterId } = await getChapterDetails(courseSlug, chapterSlug, currentUser.uid);
   
     if (!progressId) {

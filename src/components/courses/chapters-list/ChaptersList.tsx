@@ -5,27 +5,18 @@ import Link from 'next/link';
 // REACT
 import { useCallback } from 'react';
 // HOOKS
-import { useChaptersQuery } from '@/hooks/queries/useChaptersQuery';
 import { useCompletedChaptersQuery } from '@/hooks/queries/useCompletedChaptersQuery';
-import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
+import { useIsSubscriptionValidQuery } from '@/hooks/queries/useIsSubscriptionValidQuery';
 // COMPONENTS
 import { Chapter } from './components/chapter';
 // TYPES
 import { ChaptersListProps } from './types';
 // STYLES
 import styles from './styles.module.css';
-import { Badge } from '@/components/ui/badge';
-import { AuthCheck } from '@/components/pemrissions/auth-check';
-import { LockKeyhole } from 'lucide-react';
-import { StatusIndicator } from './components/chapter/components/status-indicator/StatusIndicator';
-import { TimeStamp } from './components/chapter/components/time-stamp';
-import { isSubscriptionValid } from '@/utils/permissions';
 
 export const ChaptersList =  ({ course, allChapters }: ChaptersListProps) => {
-  // const { data: allChapters } = useChaptersQuery(course, initialData);
   const { data: completedChapters } = useCompletedChaptersQuery(course);
-  const { data: userStatus } = useUserSubscriptionStatusQuery();
-  const canAccess = isSubscriptionValid(userStatus?.tier, userStatus?.currentPeriodEnd);
+  const { data: canAccess } = useIsSubscriptionValidQuery();
 
   if (!allChapters || !allChapters.length) return null;
 
