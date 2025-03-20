@@ -18,6 +18,7 @@ import {
 import { AllChapters } from "@/components/courses/all-chapters";
 // STYLES
 import '@/styles/mdx.css';
+import { getUserSubscriptionStatus } from "@/data/db/user";
 
 interface CourseChapterLayoutProps {
   children: React.ReactNode;
@@ -29,24 +30,28 @@ interface CourseChapterLayoutProps {
 
 export default async function CourseChapterLayout({ children, params}: CourseChapterLayoutProps ) {
   const { slug: course } = await params;
-  const currentUser = await getCurrentUser();
   const queryClient = new QueryClient();
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['chapters', course],
-      queryFn: async () => (
-        await getCourseChapters(course)
-      )
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ['chapters-progress', currentUser?.uid, course],
-      queryFn: async () => (
-        await getProgressChapters(course)
-      ),
-      staleTime: 1000 * 60 * 5,
-      gcTime: 1000 * 60 * 30,
-    })
-  ]);
+  const currentUser = await getCurrentUser();
+  const allChapters = await getCourseChapters(course);
+
+  if (currentUser) {
+    await Promise.all([
+      queryClient.prefetchQuery({
+        queryKey: ['chapters-progress', course],
+        queryFn: async () => (
+          await getProgressChapters(course)
+        ),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 30,
+      }),
+      queryClient.prefetchQuery({
+        queryKey: ['subscription-status'],
+        queryFn: async () => (
+          await getUserSubscriptionStatus()
+        )
+      })
+    ])
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -54,6 +59,7 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
         <AsideLayout>
             <AllChapters 
               course={course} 
+              allChapters={allChapters}
             />
         </AsideLayout>
         <MainLayout>

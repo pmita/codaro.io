@@ -1,10 +1,5 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote"
 
-export enum StartOrEndEnum {
-  START = "START",
-  END = "END"
-}
-
 export type Chapter = {
   chapter: string,
   title: string
@@ -23,6 +18,6 @@ export type Chapter = {
   mdx?: MDXRemoteSerializeResult
   slug: string
   slugAsParams: string
-  nextChapter: string | StartOrEndEnum;
-  prevChapter: string | StartOrEndEnum;
+  nextChapter: string;
+  prevChapter: string;
 }  

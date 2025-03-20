@@ -1,17 +1,26 @@
+// NEXT
 import Link from 'next/link';
+// COMPONENTS
 import { buttonVariants } from '@/components/ui/button';
+// UTILS
 import { cn } from '@/lib/utils';
-import { ChapterNavigationProps } from './types';
-import { StartOrEndEnum } from '@/types/courses';
+// STYLES
 import styles from './styles.module.css';
+// TYPES
+import { ChapterNavigationProps } from './types';
 
-export const ChapterNavigation = ({ nextChapter, prevChapter }: ChapterNavigationProps) => {
+export const ChapterNavigation = ({ playPrevious, playNext }: ChapterNavigationProps) => {
+  if (!playNext && !playPrevious) {
+    return null;
+  }
+
+  console.log(playNext, playPrevious);
 
   return (
     <div className={styles.container}>
-      {prevChapter !== StartOrEndEnum.START ? (
+      {playPrevious ? (
         <Link
-          href={prevChapter}
+          href={playPrevious}
           className={cn(buttonVariants({
             variant: 'default',
             size: 'lg'
@@ -20,9 +29,9 @@ export const ChapterNavigation = ({ nextChapter, prevChapter }: ChapterNavigatio
           Play Previous
         </Link>
       ): null}
-      {prevChapter !== StartOrEndEnum.END ? (
+      {playNext ? (
         <Link
-          href={nextChapter}
+          href={playNext}
           className={cn(buttonVariants({
             variant: 'default',
             size: 'lg'

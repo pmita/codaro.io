@@ -49,6 +49,8 @@ export const chapters = pgTable('chapters', {
   courseId: integer('course_id')
     .references(() => courses.id, { onDelete: 'cascade' }),
   slug: varchar('slug', { length: 100 }).notNull(),
+  previousChapterSlug: varchar('previous_chapter_slug', { length: 100 }),
+  nextChapterSlug: varchar('next_chapter_slug', { length: 100 }),
   title: text('title').notNull(),
   description: text('description').notNull(),
   content: text('content').notNull(),
@@ -100,7 +102,7 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   progress: many(progress),
 }));
 
-export const progressRelations = relations(progress, ({ one, many}) => ({
+export const progressRelations = relations(progress, ({ one }) => ({
   user: one(users, {
     fields: [progress.userId],
     references: [users.id],

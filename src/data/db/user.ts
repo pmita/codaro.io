@@ -19,7 +19,7 @@ export const addUserToDb = async (data: NewUser) => {
   await db.insert(users).values(data);
 }
 
-export const getUserAccess = async (userId: string) => {
+export const getUserSubscriptionStatus = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -29,12 +29,13 @@ export const getUserAccess = async (userId: string) => {
   const data = await db
     .select({
       id: users.id,
+      tier: users.tier,
       subscriptionStatus: customers.subscriptionStatus,
       currentPeriodEnd: customers.currentPeriodEnd,
     })
     .from(users)
     .innerJoin(customers, eq(users.id, customers.userId))
-    .where(eq(users.id, userId));
+    .where(eq(users.id, currentUser.uid));
 
   return data.length ? data[0] : null;
 }

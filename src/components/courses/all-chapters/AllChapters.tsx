@@ -13,10 +13,12 @@ import { Chapter } from './components/chapter';
 import { AllChaptersProps } from './types';
 // STYLES
 import styles from './styles.module.css';
+import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
 
-export const AllChapters =  ({ course }: AllChaptersProps) => {
-  const { data: allChapters } = useChaptersQuery(course);
+export const AllChapters =  ({ course, allChapters }: AllChaptersProps) => {
+  // const { data: allChapters } = useChaptersQuery(course, initialData);
   const { data: completedChapters } = useCompletedChaptersQuery(course);
+  const { data: userStatus } = useUserSubscriptionStatusQuery();
 
   if (!allChapters || !allChapters.length) return null;
 
@@ -34,7 +36,7 @@ export const AllChapters =  ({ course }: AllChaptersProps) => {
   return (
     <>
       {allChapters.map((chapter) => (
-        <Link href={`/courses/${chapter.slug}`} key={chapter.id} className={styles.link}>
+        <Link href={`/course-test/${course}/${chapter.slug}`} key={chapter.id} className={styles.link}>
           <Chapter 
             title={chapter.title}
             videoLength={chapter.videoLength}

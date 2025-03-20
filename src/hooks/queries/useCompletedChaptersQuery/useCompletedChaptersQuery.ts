@@ -10,10 +10,11 @@ import { CompletedChaptersQueryData } from './types';
 export const useCompletedChaptersQuery = (courseSlug: string) => {
   const { user } = useAuth();
   return useQuery<CompletedChaptersQueryData>({
-    queryKey: ['chapters-progress', user?.uid, courseSlug],
+    queryKey: ['chapters-progress', courseSlug],
     queryFn: async () => (
       await getProgressChapters(courseSlug)
     ),
+    enabled: !!user,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 30,
   });

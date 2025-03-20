@@ -15,6 +15,9 @@ import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
 import { Mdx } from '@/components/mdx';
+import { notFound } from 'next/navigation';
+import { db } from '@/db';
+import { chapters, courses } from '@/db/schema';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -23,20 +26,37 @@ interface ChapterPageProps {
   }>;
 }
 
-// TODO - ISR for all course/chapters combinations from db
+// REVALIDATE EVERY HALF DAY
+export const revalidate = 60 * 60 * 12;
+
+// ISR PAGE CONTENTS
+export async function generateStaticParams() {
+  const allCourses = await db.select().from(courses);
+  const allChapters = await db.select().from(chapters);
+
+  const paths = allCourses.map((course) => {
+    return allChapters.map((chapter) => {
+      return {
+        params: {
+          slug: course.slug,
+          id: chapter.slug
+        }
+      }
+    })
+  }).flat();
+
+  return paths;
+}
+
 
 export default async function ChapterPage({ params }: ChapterPageProps) {
   const { slug:course, id: chapter } = await params;
   const currentUser = await getCurrentUser();
   const queryClient = new QueryClient();
 
+  const chapterData = await getCourseChapter(course, chapter);
+
   await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ['chapter', course, chapter],
-      queryFn: async () => (
-        await getCourseChapter(course, chapter)
-      )
-    }),
     queryClient.prefetchQuery({
       queryKey: ['chapter-progress', currentUser?.uid, course, chapter],
       queryFn: async () => {
@@ -45,22 +65,27 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     })
   ])
 
+  if (!chapterData) { notFound(); }
+
   return (
     <PageLayout>
       <div className="grid place-items-center w-full h-[650px] bg-primary">
         <h1>Video Player goes here</h1>
       </div>
       <ControlsLayout>
-        {/* <ChapterNavigation nextChapter={data.nextChapter} prevChapter={data.prevChapter} /> */}
+        <ChapterNavigation
+          playPrevious={`/course-test/${course}/${chapterData.previousChapterSlug}`}
+          playNext={`/course-test/${course}/${chapterData.nextChapterSlug}`}
+        />
         <ToggleChapterProgress 
           courseSlug={course}
           chapterSlug={chapter} 
         /> 
       </ControlsLayout>
-      {/*<div className="flex flex-col justify-center items-start gap-5">
-        <h1>{data.title}</h1>
-        <p>{data.description}</p>
-      </div> */}
+      <div className="flex flex-col justify-center items-start gap-5">
+        <h1>{chapterData.title}</h1>
+        <p>{chapterData.description}</p>
+      </div>
       {/* <MdxLayout>
         <Mdx mdxSource={data.mdx } />
       </MdxLayout> */}

@@ -30,6 +30,8 @@ export const validateUserSession = async () => {
 
   try {
     const decodedIdToken = await adminAuth.verifySessionCookie(session!);
+
+    // const test = await adminAuth.createCustomToken(decodedIdToken.sub);
   
     if (!decodedIdToken) {
       console.warn('No decoded token was found');

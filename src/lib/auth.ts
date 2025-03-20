@@ -18,7 +18,7 @@ export const syncSessionCookie = async () => {
   if (currentUser) {
     const idToken = await getIdToken(currentUser, true);
     const sessionCookie = await createSessionCookie(idToken, {
-      expiresIn: 60 * 60 * 24 * 5,
+      expiresIn: 60 * 60 * 24 * 12 * 1000, // 12 days
     });
 
     saveSessionCookieClientSide(sessionCookie);    
