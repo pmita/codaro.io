@@ -58,7 +58,6 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   if (!chapterData) { notFound(); }
 
   if (currentUser) {
-    console.log('chapter-progress from server', currentUser?.uid, courseSlug, chapterSlug);
     await Promise.all([
       queryClient.prefetchQuery({
         queryKey: ['chapter-progress', currentUser?.uid, courseSlug, chapterSlug],
