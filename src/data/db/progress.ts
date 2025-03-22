@@ -22,7 +22,7 @@ export const getProgressChapters = async (courseSlug: string) => {
       chapterSlug: chapters.slug
     })
     .from(progress)
-    .innerJoin(users, eq(progress.userId, currentUser.uid))
+    .innerJoin(users, eq(progress.userId, users.id))
     .innerJoin(chapters, eq(progress.chapterId, chapters.id))
     .innerJoin(courses, eq(chapters.courseId, courses.id))
     .where(
@@ -82,7 +82,8 @@ export const toggleUserProgress = async (courseSlug: string, chapterSlug: string
       await updateExistingChapterInProgress(chapterId, currentUser.uid);
     }
   } catch(error) {
-    throw new Error('Something went wrong');
+    console.error(error);
+    throw new Error('Something went wrong with db');
   }
 }
 
@@ -90,7 +91,7 @@ export const getChapterDetails = async (courseSlug: string, chapterSlug: string,
   const matchingData =  await db
     .select({
       progressId: progress.id,
-      chapterId: progress.chapterId,
+      chapterId: chapters.id,
     })
     .from(chapters)
     .innerJoin(courses, eq(chapters.courseId, courses.id))
@@ -106,9 +107,13 @@ export const getChapterDetails = async (courseSlug: string, chapterSlug: string,
     )
     .limit(1);
 
+    if (!matchingData.length) { 
+      throw new Error('No matching data found');
+    }
+    
     const { progressId, chapterId } = matchingData[0];
-
-    if(!chapterId) {
+    
+    if (!chapterId) { 
       throw new Error('No chapter found');
     }
 
@@ -138,23 +143,6 @@ export const updateExistingChapterInProgress = async (chapterId: number, userId:
       )
     )
   );
-}
-
-export const checkIfChapterAlreadyInProgress = async (chapterSlug: string, userId: string) => {
-  const data = await db
-    .select({
-      progressId: progress.id,
-    })
-    .from(progress)
-    .innerJoin(chapters, eq(progress.chapterId, courses.id))
-    .where(
-      and(
-        eq(progress.userId, userId),
-        eq(chapters.slug, chapterSlug)
-      )
-    )
-
-  return data.length ? true : false;
 }
 
 

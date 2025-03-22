@@ -50,20 +50,21 @@ export async function generateStaticParams() {
 
 
 export default async function ChapterPage({ params }: ChapterPageProps) {
-  const { slug:course, id: chapter } = await params;
+  const { slug: courseSlug, id: chapterSlug } = await params;
   const queryClient = new QueryClient();
-  const chapterData = await getCourseChapter(course, chapter);
+  const chapterData = await getCourseChapter(courseSlug, chapterSlug);
   const currentUser = await getCurrentUser();
 
   if (!chapterData) { notFound(); }
 
   if (currentUser) {
+    console.log('chapter-progress from server', currentUser?.uid, courseSlug, chapterSlug);
     await Promise.all([
       queryClient.prefetchQuery({
-        queryKey: ['chapter-progress', course, chapter],
-        queryFn: async () => {
-          return await getProgressChapter(course, chapter);
-        }
+        queryKey: ['chapter-progress', currentUser?.uid, courseSlug, chapterSlug],
+        queryFn: () => (
+          getProgressChapter(courseSlug, chapterSlug)
+        )
       })
     ]);
   }
@@ -75,12 +76,12 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
       </div>
       <ControlsLayout>
         <ChapterNavigation
-          playPrevious={`/course-test/${course}/${chapterData.previousChapterSlug}`}
-          playNext={`/course-test/${course}/${chapterData.nextChapterSlug}`}
+          playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
+          playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}
         />
         <ToggleChapterProgress 
-          courseSlug={course}
-          chapterSlug={chapter} 
+          courseSlug={courseSlug}
+          chapterSlug={chapterSlug} 
         /> 
       </ControlsLayout>
       <div className="flex flex-col justify-center items-start gap-5">

@@ -1,5 +1,5 @@
 {
-  "id": "ddd2981d-3d30-4de3-afce-b82fb821e209",
+  "id": "482e50d3-9bee-4359-9f81-2e6a5ffb99c9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -25,6 +25,18 @@
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
+        },
+        "previous_chapter_slug": {
+          "name": "previous_chapter_slug",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "next_chapter_slug": {
+          "name": "next_chapter_slug",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
         },
         "title": {
           "name": "title",

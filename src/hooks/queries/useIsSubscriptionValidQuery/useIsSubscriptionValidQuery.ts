@@ -9,7 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 export const useIsSubscriptionValidQuery = () => {
   const { user } = useAuth();
   return useQuery<boolean | null>({
-    queryKey: ['access-status'],
+    queryKey: ['subscription-access', user?.uid],
     queryFn: async () => (
       await isSubscriptionValid()
     ),

@@ -29,8 +29,6 @@ export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapter
 
   // EVENTS
   const handleClick = useCallback(() => {
-    console.log('courseSlug', courseSlug);
-    console.log('chapterSlug', chapterSlug);
     mutation.mutate({ courseSlug, chapterSlug });
 
     if(mutation.isIdle) {

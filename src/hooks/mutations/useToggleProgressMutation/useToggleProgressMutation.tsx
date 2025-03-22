@@ -10,12 +10,13 @@ import { ToggleProgressMutationProps } from "./types"
 export const useToggleProgressMutation = (courseSlug: string, chapterSlug: string) => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
+
   return useMutation({
     mutationKey: ['chapter-progress', user?.uid, courseSlug, chapterSlug],
     mutationFn: async ({ courseSlug, chapterSlug }: ToggleProgressMutationProps) => {
       await toggleUserProgress(courseSlug, chapterSlug);
     },
-    onMutate: async ({ chapterSlug }) => {
+    onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ['chapter-progress', user?.uid, courseSlug, chapterSlug] });
 
       const previousData = queryClient.getQueryData(['chapter-progress', user?.uid, courseSlug, chapterSlug]);
@@ -30,7 +31,9 @@ export const useToggleProgressMutation = (courseSlug: string, chapterSlug: strin
       return { previousData };
     },
     onError: (_error, _variables, context) => {
-      queryClient.setQueryData(['chapter-progress', user?.uid, courseSlug, chapterSlug], context?.previousData);
+      if (context?.previousData) {
+        queryClient.setQueryData(['chapter-progress', user?.uid, courseSlug, chapterSlug], context.previousData);
+      }
       toast("Something went wrong", {
         description: _error.message,
         action: {
@@ -40,7 +43,6 @@ export const useToggleProgressMutation = (courseSlug: string, chapterSlug: strin
       })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['chapters-progress', user?.uid, courseSlug] });
       toast.dismiss('loading-toggle-progress');
     },
     onSuccess: () => {

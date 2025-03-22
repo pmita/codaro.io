@@ -32,24 +32,25 @@ interface CourseChapterLayoutProps {
 }
 
 export default async function CourseChapterLayout({ children, params}: CourseChapterLayoutProps ) {
-  const { slug: course } = await params;
+  const { slug: courseSlug } = await params;
   const queryClient = new QueryClient();
   const currentUser = await getCurrentUser();
-  const allChapters = await getCourseChapters(course);
+  const allChapters = await getCourseChapters(courseSlug);
 
   if (currentUser) {
+    console.log('currentUser', currentUser?.uid);
     await Promise.all([
       queryClient.prefetchQuery({
-        queryKey: ['chapters-progress', course],
-        queryFn: async () => (
-          getProgressChapters(course)
+        queryKey: ['chapters-progress', currentUser?.uid, courseSlug],
+        queryFn: () => (
+          getProgressChapters(courseSlug)
         ),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
       }),
       queryClient.prefetchQuery({
-        queryKey: ['access-status'],
-        queryFn: async () => (
+        queryKey: ['subscription-access', currentUser?.uid],
+        queryFn: () => (
           isSubscriptionValid()
         )
       })
@@ -62,7 +63,7 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
         <Suspense fallback={<AsideLayoutSkeleton />}>
           <AsideLayout>
               <ChaptersList 
-                course={course} 
+                course={courseSlug} 
                 allChapters={allChapters}
               />
           </AsideLayout>

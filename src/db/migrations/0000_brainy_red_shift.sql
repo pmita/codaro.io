@@ -2,6 +2,8 @@ CREATE TABLE "chapters" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"course_id" integer,
 	"slug" varchar(100) NOT NULL,
+	"previous_chapter_slug" varchar(100),
+	"next_chapter_slug" varchar(100),
 	"title" text NOT NULL,
 	"description" text NOT NULL,
 	"content" text NOT NULL,
