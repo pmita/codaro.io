@@ -1,8 +1,12 @@
-
+// NEXT
+import { notFound } from 'next/navigation';
 // DATA
 import { getCourseChapter } from '@/data/db/courses';
 import { getProgressChapter  } from '@/data/db/progress';
 import { getCurrentUser } from '@/data/auth/currentUser';
+// DB
+import { db } from '@/db';
+import { chapters, courses } from '@/db/schema';
 // PACKAGES
 import { QueryClient } from '@tanstack/react-query';
 // LAYOUTS
@@ -15,9 +19,8 @@ import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
 import { Mdx } from '@/components/mdx';
-import { notFound } from 'next/navigation';
-import { db } from '@/db';
-import { chapters, courses } from '@/db/schema';
+// UTILS
+import { serializeMDX } from '@/data/content/course/utils';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -54,7 +57,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   const queryClient = new QueryClient();
   const chapterData = await getCourseChapter(courseSlug, chapterSlug);
   const currentUser = await getCurrentUser();
-
+  
   if (!chapterData) { notFound(); }
 
   if (currentUser) {
@@ -87,9 +90,9 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
         <h1>{chapterData.title}</h1>
         <p>{chapterData.description}</p>
       </div>
-      {/* <MdxLayout>
-        <Mdx mdxSource={data.mdx } />
-      </MdxLayout> */}
+      <MdxLayout>
+        <Mdx mdxSource={await serializeMDX(chapterData.content)} />
+      </MdxLayout>
     </PageLayout>
   );
 }
