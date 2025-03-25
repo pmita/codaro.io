@@ -38,28 +38,12 @@ export async function generateStaticParams(): Promise<{ slug: string; id: string
 export default async function ChapterPage(props: ChapterPageProps) {
   const { slug:course, id: chapter } = await props.params;
   const data = await getCourseChapter(course, chapter);
-  const queryClient = new QueryClient();
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['progress'],
-  //   queryFn: async () => {
-  //     return await getIsChapterCompleted(`${course}/${chapter}`);
-  //   }
-  // })
-
-  // const progressData = await getUserProgress();
-
-  // console.log('progressData here ------>', progressData);
 
   return (
     <PageLayout>
       <div className="grid place-items-center w-full h-[650px] bg-primary">
         <h1>Video Player goes here</h1>
       </div>
-      <ControlsLayout>
-        <ChapterNavigation nextChapter={data.nextChapter} prevChapter={data.prevChapter} />
-        <ToggleChapterProgress chapterId={data.slug} isFree={data.free} /> 
-      </ControlsLayout>
       <div className="flex flex-col justify-center items-start gap-5">
         <h1>{data.title}</h1>
         <p>{data.description}</p>

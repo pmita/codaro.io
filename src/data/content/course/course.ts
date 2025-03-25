@@ -15,6 +15,10 @@ export const getCourseChapter = async (course: string, chapter: string): Promise
 
   const mdxSource = await serializeMDX(matterResults.content);
 
+  console.log('code', code);
+  console.log('matterResults', matterResults);
+  console.log('mdxSource', mdxSource);
+
   return ({
     chapter: fileName.split('/').pop() || '',
     slug: fileName.split('/').slice(1).join('/'),
