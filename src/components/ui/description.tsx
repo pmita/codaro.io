@@ -9,17 +9,19 @@ export const descriptionVariants = cva(
     variant: {
       primary: "text-primary",
       secondary: "text-secondary",
+      alternateOne: "text-alternate-one",
+      alternateTwo: "text-alternate-two",
       neutral: "text-neutral"
     },
     size: {
-      default: "text-md",
+      default: "text-lg",
       sm: "text-2xl",
       lg: "text-4xl",
       xl: "text-6xl"
       }
     },
     defaultVariants: {
-      variant: "secondary",
+      variant: "primary",
       size: "default"
     }
   }

@@ -9,6 +9,8 @@ export const titleVariants = cva(
     variant: {
       primary: "text-primary",
       secondary: "text-secondary",
+      alternateOne: "text-alternate-one",
+      alternateTwo: "text-alternate-two",
       neutral: "text-neutral"
     },
     size: {
@@ -19,7 +21,7 @@ export const titleVariants = cva(
       }
     },
     defaultVariants: {
-      variant: "secondary",
+      variant: "primary",
       size: "lg"
     }
   }

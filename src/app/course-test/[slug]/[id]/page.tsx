@@ -20,6 +20,11 @@ import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
 import { Mdx } from '@/components/mdx';
+import { Header } from '@/components/ui/header';
+import { Description } from '@/components/ui/description';
+import { Title, titleVariants } from '@/components/ui/title';
+// UTILS
+import { cn } from '@/lib/utils';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -86,10 +91,17 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
           chapterSlug={chapterSlug} 
         /> 
       </ControlsLayout>
-      <div className="flex flex-col justify-center items-start gap-5">
-        <h1>{chapterData.title}</h1>
-        <p>{chapterData.description}</p>
-      </div>
+      <Header className="flex-start items-start">
+        <Title 
+          title={chapterData.title}
+          className={cn(titleVariants({
+            className: "capitalize"
+          }))}
+        />
+        <Description
+          description={chapterData.description}
+        />
+      </Header>
       <MdxLayout>
         <Mdx mdxSource={mdxSource.mdx} />
       </MdxLayout>

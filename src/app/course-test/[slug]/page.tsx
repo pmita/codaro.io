@@ -30,17 +30,12 @@ export default async function CourseDetailsPage({ params }: AllChaptersPageProps
         <Title 
           title={courseData.title}
           className={cn(titleVariants({
-            variant: "primary",
             size: "xl",
             className: "capitalize"
           }))}
         />
         <Description
           description={courseData.description}
-          className={cn(descriptionVariants({
-            variant: "primary",
-            size: "default"
-          }))}
         />
       </Header>
       <Mdx mdxSource={courseMarkdown.mdx} />
