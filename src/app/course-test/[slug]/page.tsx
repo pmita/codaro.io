@@ -1,5 +1,49 @@
-export default function AllChaptersPage() {
+// NEXT
+import { notFound } from "next/navigation";
+// DATA
+import { getCourseMarkdown } from "@/data/content/markdown";
+import { getCourse } from "@/data/db/courses";
+// COMPONENTS
+import { Header } from "@/components/ui/header";
+import { Title, titleVariants } from "@/components/ui/title";
+import { Description, descriptionVariants } from "@/components/ui/description";
+import { Mdx } from "@/components/mdx";
+// UTITLS
+import { cn } from "@/lib/utils";
+
+interface AllChaptersPageProps {
+  params: Promise<{
+    slug: string
+  }>
+}
+
+export default async function CourseDetailsPage({ params }: AllChaptersPageProps) {
+  const { slug: courseSlug } = await params;
+  const courseData = await getCourse(courseSlug);
+  const courseMarkdown = await getCourseMarkdown(courseSlug);
+
+  if (!courseData) { notFound(); }
+  
   return (
-    <h1>Welcom to all chapters</h1>
+    <>
+      <Header>
+        <Title 
+          title={courseData.title}
+          className={cn(titleVariants({
+            variant: "primary",
+            size: "xl",
+            className: "capitalize"
+          }))}
+        />
+        <Description
+          description={courseData.description}
+          className={cn(descriptionVariants({
+            variant: "primary",
+            size: "default"
+          }))}
+        />
+      </Header>
+      <Mdx mdxSource={courseMarkdown.mdx} />
+    </>
   )
 }

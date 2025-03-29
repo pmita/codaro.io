@@ -1,8 +1,5 @@
 .layout {
-  @apply flex
-    flex-col
-    justify-center
-    items-stretch
-    gap-10
-    p-5;
+  @apply container
+    p-2
+    w-full;
 }

@@ -1,0 +1,1 @@
+Welcome to Next.js Fundamentals Course. We will be covering all the details from route-based navidation to building our own api; and we will doing so while following best web and react.js practises.

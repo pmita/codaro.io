@@ -32,3 +32,20 @@ export const getChapterMarkdown = async (chourseSlug: string, chapterSlug: strin
     mdx: mdxSource,
   }); 
 }
+
+export const getCourseMarkdown = async (course: string): Promise<any> => {
+  // grab all the files within a course folder
+  const folder = `courses/${course}`;
+  const files = fs.readdirSync(folder);
+
+  // search through all files and find the index.md file
+  const indexFile = files.find((file: any) => file === 'index.md');
+  const code = indexFile ? fs.readFileSync(`${folder}/${indexFile}`, 'utf-8') : null;
+  const matterResults = indexFile && code ? matter(code) : null;
+  const mdxSource = indexFile && code && matterResults ? await serializeMDX(matterResults.content) : null;
+
+  return {
+    course,
+    mdx: mdxSource,
+  }
+};

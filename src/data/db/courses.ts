@@ -4,7 +4,19 @@
 import { db } from "@/db"
 import { courses, chapters } from "@/db/schema"
 import { asc, eq, and } from "drizzle-orm";
-import { describe } from "node:test";
+
+export const getCourse = async (courseSlug: string) => {
+  const data = await db.select({
+    id: courses.id,
+    title: courses.title,
+    description: courses.description,
+    slug : courses.slug,
+  })
+  .from(courses)
+  .where(eq(courses.slug, courseSlug)); 
+
+  return data ? data[0] : null;
+}
 
 export const getCourseChapters = async (courseSlug: string) => {
   const data = await db.select({
