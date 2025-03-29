@@ -6,7 +6,7 @@ import matter from "gray-matter";
 // TYPES
 import { MDXRemoteSerializeResult } from "next-mdx-remote"
 // UTILS
-import { serializeMDX } from "@/utils/serialize-mdx";
+import { serializeMDX } from "@/utils/serialize-mdx/serialize-mdx";
 
 type ChapterMarkdownProps = {
   chapter: string;

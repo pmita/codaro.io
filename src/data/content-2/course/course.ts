@@ -2,7 +2,7 @@
 
 import fs from "fs";
 import matter from "gray-matter";
-import { serializeMDX } from "../../../utils/serialize-mdx";
+import { serializeMDX } from "../../../utils/serialize-mdx/serialize-mdx";
 import { Chapter } from "@/types/courses";
 
 
