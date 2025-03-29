@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import { getCourseChapter } from '@/data/db/courses';
 import { getProgressChapter  } from '@/data/db/progress';
 import { getCurrentUser } from '@/data/auth/currentUser';
+import { getChapterMarkdown } from '@/data/content/markdown';
 // DB
 import { db } from '@/db';
 import { chapters, courses } from '@/db/schema';
 // PACKAGES
 import { QueryClient } from '@tanstack/react-query';
-import he from 'he';
 // LAYOUTS
 import { 
   MdxLayout, 
@@ -20,9 +20,6 @@ import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
 import { Mdx } from '@/components/mdx';
-// UTILS
-import { serializeMDX } from '@/data/content/course/utils';
-import matter from 'gray-matter';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -53,22 +50,15 @@ export async function generateStaticParams() {
   return paths;
 }
 
-// content example
-const randomData = "\nThis is some next.js based content\n\n```ts title=\"page.tsx\"\nimport { Metadata } from 'next';\n\nexport const dynamic = 'force-static'; // no necessary, just for demonstration\n\nexport const metadata: Metadata = {\n  title: 'About Us',\n  description: 'About NextSpace',\n};\n\nexport default function Blog() {\n  return (\n    <div>\n      <h1>About us</h1>\n      <p>We are a social media company that wants to bring people together!</p>\n    </div>\n  );\n}\n```\n\n"
-
-
 export default async function ChapterPage({ params }: ChapterPageProps) {
-  const { slug: courseSlug, id: chapterSlug } = await params;
   const queryClient = new QueryClient();
+  const { slug: courseSlug, id: chapterSlug } = await params;
   const chapterData = await getCourseChapter(courseSlug, chapterSlug);
+  const mdxSource = await getChapterMarkdown(courseSlug, chapterSlug);
   const currentUser = await getCurrentUser();
 
   
   if (!chapterData) { notFound(); }
-
-// const dataMatter = matter(chapterData.content);
-const mdxSource = await serializeMDX(randomData);
-
   
   if (currentUser) {
     await Promise.all([
@@ -101,7 +91,7 @@ const mdxSource = await serializeMDX(randomData);
         <p>{chapterData.description}</p>
       </div>
       <MdxLayout>
-        <Mdx mdxSource={mdxSource} />
+        <Mdx mdxSource={mdxSource.mdx} />
       </MdxLayout>
     </PageLayout>
   );

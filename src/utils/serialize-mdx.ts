@@ -4,7 +4,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm'; // Parse raw HTML
 import rehypePrettyCode from "rehype-pretty-code";
 // CONFIG
-import { PRETTY_CODE_CONFIG } from "./config";
+import { PRETTY_CODE_CONFIG } from "../data/content-2/course/config";
 
 
 export const serializeMDX = async (content: string): Promise<MDXRemoteSerializeResult> => {

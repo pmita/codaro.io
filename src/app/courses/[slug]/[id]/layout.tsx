@@ -1,4 +1,4 @@
-import { getCourseChapters } from "@/data/content/courses";
+import { getCourseChapters } from "@/data/content-2/courses";
 import { ChaptersList } from "@/components/chapters-list";
 import {
   dehydrate,

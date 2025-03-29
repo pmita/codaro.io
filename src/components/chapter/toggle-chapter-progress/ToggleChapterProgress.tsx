@@ -6,7 +6,6 @@ import { useCallback } from "react";
 import { showLoadingToast } from "@/lib/toasts";
 import { LockKeyhole, Check } from "lucide-react";
 // HOOKS
-import { useAuth } from "@/hooks/useAuth";
 import { useToggleProgressMutation } from "@/hooks/mutations/useToggleProgressMutation";
 import { useCompletedChapterQuery } from "@/hooks/queries/useCompletedChapterQuery";
 // COMPONENTS

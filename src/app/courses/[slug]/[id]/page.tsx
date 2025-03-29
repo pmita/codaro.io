@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { getCourseChapter } from '@/data/content/course';
+import { getCourseChapter } from '@/data/content-2/course';
 import { getIsChapterCompleted } from '@/data/progress/progress';
 import { QueryClient } from '@tanstack/react-query';
 import { MdxLayout, PageLayout } from "@/layouts/content/course";
