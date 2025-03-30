@@ -81,16 +81,18 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
       <div className="grid place-items-center w-full h-[650px] bg-primary">
         <h1>Video Player goes here</h1>
       </div>
-      <ControlsLayout>
-        <ChapterNavigation
-          playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
-          playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}
-        />
-        <ToggleChapterProgress 
+      {/* <ControlsLayout> */}
+        {/* <div className="flex justify-between items-center w-full bg-secondary p-4"> */}
+          <ChapterNavigation
+            playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
+            playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}
+          />
+        {/* </div> */}
+        {/* <ToggleChapterProgress 
           courseSlug={courseSlug}
           chapterSlug={chapterSlug} 
-        /> 
-      </ControlsLayout>
+        />  */}
+      {/* </ControlsLayout> */}
       <Header className="flex-start items-start">
         <Title 
           title={chapterData.title}

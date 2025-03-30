@@ -14,17 +14,14 @@ export const ChapterNavigation = ({ playPrevious, playNext }: ChapterNavigationP
     return null;
   }
 
-  console.log(playNext, playPrevious);
-
   return (
     <div className={styles.container}>
       {playPrevious ? (
         <Link
           href={playPrevious}
           className={cn(buttonVariants({
-            variant: 'default',
-            size: 'lg'
-          }))}
+            size: 'lg',
+          }), styles.previous)}
         >
           Play Previous
         </Link>
@@ -33,9 +30,8 @@ export const ChapterNavigation = ({ playPrevious, playNext }: ChapterNavigationP
         <Link
           href={playNext}
           className={cn(buttonVariants({
-            variant: 'default',
             size: 'lg'
-          }))}
+          }), styles.next)}
         >
           Play Next
         </Link>
