@@ -8,16 +8,16 @@ import { LockKeyhole, Check } from "lucide-react";
 // HOOKS
 import { useToggleProgressMutation } from "@/hooks/mutations/useToggleProgressMutation";
 import { useCompletedChapterQuery } from "@/hooks/queries/useCompletedChapterQuery";
+import { useIsSubscriptionValidQuery } from "@/hooks/queries/useIsSubscriptionValidQuery";
 // COMPONENTS
 import { Button } from "@/components/ui/button";
+import { AuthCheck } from "@/components/pemrissions/auth-check";
 // UTILS
 import { cn } from "@/lib/utils";
 // STYLES
 import styles from './styles.module.css';
 // TYPES
 import { ToggleChapterProgressProps } from "./types";
-import { useIsSubscriptionValidQuery } from "@/hooks/queries/useIsSubscriptionValidQuery";
-import { AuthCheck } from "@/components/pemrissions/auth-check";
 
 
 export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapterProgressProps) => {
@@ -37,7 +37,7 @@ export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapter
 
   return (
     <div className={styles.container}>
-      <AuthCheck fallback={(<LockKeyhole width={20} height={20} color="#b72b1a" />)}>
+      <AuthCheck fallback={(<LockKeyhole width={38} height={36} color="#b72b1a" />)}>
         {(chapterDetails?.isFree || canAccess) 
           ? (
             <>
@@ -50,12 +50,12 @@ export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapter
               >
                 {chapterDetails?.isCompleted ? <Check width={20} height={20} color="#fff" /> : null}
               </Button>
-              <span className={styles.highlightedText}>Completed</span>
             </>
             ) 
-          : null
-        }
+            : null
+          }
       </AuthCheck>
+      <span className={styles.highlightedText}>Completed</span>
     </div>
   )
 }

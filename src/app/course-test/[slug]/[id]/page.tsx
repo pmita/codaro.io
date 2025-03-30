@@ -13,9 +13,7 @@ import { QueryClient } from '@tanstack/react-query';
 // LAYOUTS
 import { 
   MdxLayout, 
-  PageLayout 
 } from "@/layouts/content/course";
-import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 // COMPONENTS
 import { ToggleChapterProgress } from '@/components/chapters/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapters/chapter/chapter-navigation';
@@ -77,36 +75,34 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   }
 
   return (
-    <PageLayout>
+    <section className="container p-4 w-full">
       <div className="grid place-items-center w-full h-[650px] bg-primary">
         <h1>Video Player goes here</h1>
       </div>
-      {/* <ControlsLayout> */}
-        {/* <div className="flex justify-between items-center w-full bg-secondary p-4"> */}
-          <ChapterNavigation
-            playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
-            playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}
+      <ChapterNavigation
+        playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
+        playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}
+      />
+      <div className="w-full py-4 flex justify-between items-center">
+        <Header className="flex-start items-start gap-4">
+          <Title 
+            title={chapterData.title}
+            className={cn(titleVariants({
+              className: "capitalize"
+            }))}
           />
-        {/* </div> */}
-        {/* <ToggleChapterProgress 
+          <Description
+            description={chapterData.description}
+          />
+        </Header>
+        <ToggleChapterProgress 
           courseSlug={courseSlug}
           chapterSlug={chapterSlug} 
-        />  */}
-      {/* </ControlsLayout> */}
-      <Header className="flex-start items-start">
-        <Title 
-          title={chapterData.title}
-          className={cn(titleVariants({
-            className: "capitalize"
-          }))}
-        />
-        <Description
-          description={chapterData.description}
-        />
-      </Header>
+        /> 
+      </div>
       <MdxLayout>
         <Mdx mdxSource={mdxSource.mdx} />
       </MdxLayout>
-    </PageLayout>
+    </section>
   );
 }
