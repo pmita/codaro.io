@@ -4,8 +4,6 @@ import { StatusIndicator } from "./components/status-indicator";
 import { TimeStamp } from "./components/time-stamp";
 // PACKAGES
 import { LockKeyhole } from "lucide-react";
-// UTILS
-import { cn } from "@/lib/utils";
 // TYPES
 import { ChapterPros } from "./types";
 // STYLES
@@ -25,8 +23,8 @@ export const Chapter = ({
             ? <StatusIndicator status={completionStatus} /> 
             : <LockKeyhole width={20} height={20} color="#b72b1a" />
           }
-          <h1>{title}</h1>
         </AuthCheck>
+        <h1>{title}</h1>
       </span>
       <TimeStamp 
         time={videoLength}

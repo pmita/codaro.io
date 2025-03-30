@@ -1,7 +1,7 @@
 .container {
   @apply flex
     justify-between
-    items-center
+    items-stretch
     p-2
     min-h-[48px];
 }
