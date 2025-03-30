@@ -4,8 +4,8 @@ import { getIsChapterCompleted } from '@/data/progress/progress';
 import { QueryClient } from '@tanstack/react-query';
 import { MdxLayout, PageLayout } from "@/layouts/content/course";
 import { ControlsLayout } from '@/layouts/content/course/controls-layout';
-import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
-import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
+import { ToggleChapterProgress } from '@/components/chapters/chapter/toggle-chapter-progress';
+import { ChapterNavigation } from '@/components/chapters/chapter/chapter-navigation/ChapterNavigation';
 import { Mdx } from '@/components/mdx';
 import { getUserProgress } from '@/data/db/progress';
 

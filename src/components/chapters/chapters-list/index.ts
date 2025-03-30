@@ -1,1 +1,1 @@
-export { ChaptersList } from './ChaptersList';
+export { ChaptersList } from './ChaptersList'

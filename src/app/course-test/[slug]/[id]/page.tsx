@@ -17,8 +17,8 @@ import {
 } from "@/layouts/content/course";
 import { ControlsLayout } from '@/layouts/content/course/controls-layout';
 // COMPONENTS
-import { ToggleChapterProgress } from '@/components/chapter/toggle-chapter-progress';
-import { ChapterNavigation } from '@/components/chapter/chapter-navigation/NavigationControls';
+import { ToggleChapterProgress } from '@/components/chapters/chapter/toggle-chapter-progress';
+import { ChapterNavigation } from '@/components/chapters/chapter/chapter-navigation';
 import { Mdx } from '@/components/mdx';
 import { Header } from '@/components/ui/header';
 import { Description } from '@/components/ui/description';

@@ -19,7 +19,7 @@ import {
 } from "@/layouts/content/course";
 import { AsideLayoutSkeleton } from "@/layouts/content/course/aside-layout/components/AsideLayoutSkeleton";
 // COMPONENTS
-import { ChaptersList } from "@/components/courses/chapters-list";
+import { ChaptersList } from "@/components/chapters/chapters-list";
 // STYLES
 import '@/styles/mdx.css';
 

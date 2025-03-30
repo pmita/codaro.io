@@ -1,0 +1,35 @@
+.container {
+  @apply w-full 
+    border-[6px] 
+    border-solid 
+    border-secondary 
+    hover:border-primary 
+    flex 
+    flex-col 
+    justify-center 
+    items-start 
+    rounded-[12px] 
+    bg-neutral
+    p-4;
+}
+
+.header {
+  @apply w-full 
+    flex 
+    flex-col 
+    justify-start 
+    items-start;
+}
+
+.title {
+  @apply text-secondary 
+    font-poppins 
+    font-bold 
+    text-base;
+}
+
+.description {
+  @apply text-secondary
+    font-roboto
+    text-sm;
+}

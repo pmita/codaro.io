@@ -1,5 +1,6 @@
-.container {
-  @apply flex
+.wrapper {
+  @apply container
+    flex
     flex-wrap
     flex-row
     justify-center
