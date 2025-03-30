@@ -57,7 +57,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
   const queryClient = new QueryClient();
   const { slug: courseSlug, id: chapterSlug } = await params;
   const chapterData = await getCourseChapter(courseSlug, chapterSlug);
-  const mdxSource = await getChapterMarkdown(courseSlug, chapterSlug);
+  const chapterMarkdown = await getChapterMarkdown(courseSlug, chapterSlug);
   const currentUser = await getCurrentUser();
 
   
@@ -100,9 +100,9 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
           chapterSlug={chapterSlug} 
         /> 
       </div>
-      <MdxLayout>
-        <Mdx mdxSource={mdxSource.mdx} />
-      </MdxLayout>
+      <div className="container max-w-3xl py-6 lg:py-12">
+        <Mdx mdxSource={chapterMarkdown.mdx} />
+      </div>
     </section>
   );
 }

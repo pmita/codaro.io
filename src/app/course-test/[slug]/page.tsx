@@ -38,7 +38,9 @@ export default async function CoursePage({ params }: AllChaptersPageProps) {
         />
         <Description description={courseData.description} />
       </Header>
-      <Mdx mdxSource={courseMarkdown.mdx} />
+      <div className="container max-w-3xl py-6 lg:py-12">
+        <Mdx mdxSource={courseMarkdown.mdx} />
+      </div>
       <ChaptersTable chapters={chaptersData} />
     </>
   )
