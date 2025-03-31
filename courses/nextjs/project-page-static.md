@@ -1,17 +1,16 @@
+
 ---
-title: Static Pages
-description: Statically generate a dynamic list of routes
-weight: 11
-vimeo: 902736844
-video_length: 01:23
-free: false
-date: "2023-01-08"
-nextChapter: project-api
-prevChapter: project-nav
+title: Static pages
+description: Create a statically rendered page
+weight: 12
+lastmod: 2023-04-26T11:11:30-09:00
+draft: false
+vimeo: 822821511
+emoji: 🌠
+video_length: 1:15
 ---
 
-
-```ts title="page.tsx"
+```tsx title="page.tsx"
 import { Metadata } from 'next';
 
 export const dynamic = 'force-static'; // no necessary, just for demonstration
@@ -29,4 +28,5 @@ export default function Blog() {
     </div>
   );
 }
+
 ```

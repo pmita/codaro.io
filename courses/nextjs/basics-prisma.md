@@ -10,4 +10,4 @@ nextChapter: project-setup
 prevChapter: basics-auth
 ---
 
-Handle API requests directly into your Next.js application with Route Hanlders
+Prisma the ORM for the future
