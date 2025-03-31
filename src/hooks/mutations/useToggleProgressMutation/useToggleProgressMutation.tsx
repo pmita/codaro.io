@@ -22,6 +22,8 @@ export const useToggleProgressMutation = (courseSlug: string, chapterSlug: strin
       const previousData = queryClient.getQueryData(['chapter-progress', user?.uid, courseSlug, chapterSlug]);
 
       queryClient.setQueryData(['chapter-progress', user?.uid, courseSlug, chapterSlug], (old: any) => {
+        if (!old) return { isCompleted: true };
+        
         return {
           ...old,
           isCompleted: !old.isCompleted
