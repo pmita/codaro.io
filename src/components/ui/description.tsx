@@ -21,7 +21,7 @@ export const descriptionVariants = cva(
       }
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "secondary",
       size: "default"
     }
   }

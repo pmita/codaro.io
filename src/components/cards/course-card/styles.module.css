@@ -1,0 +1,40 @@
+.container {
+  @apply border-solid 
+    border-secondary
+    border-[3px]
+    rounded-[6px] 
+    w-full 
+    h-full
+    hover:border-primary
+    transition-all;
+}
+
+.imgContainer {
+  @apply w-full 
+    h-[65%] 
+    bg-primary
+    flex
+    flex-col
+    justify-center
+    items-stretch;
+}
+
+.content {
+  @apply flex
+    flex-col 
+    justify-start
+    items-start 
+    gap-4
+    p-4 
+    h-[35%]
+    w-full
+    text-lg
+    text-secondary
+    font-roboto;
+}
+
+.title {
+  @apply font-poppins
+    text-xl
+    text-secondary;
+}

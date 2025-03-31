@@ -21,7 +21,7 @@ export const titleVariants = cva(
       }
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "secondary",
       size: "lg"
     }
   }

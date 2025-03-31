@@ -5,6 +5,19 @@ import { db } from "@/db"
 import { courses, chapters } from "@/db/schema"
 import { asc, eq, and } from "drizzle-orm";
 
+export const getCourses = async () => {
+  const data = await db.select({
+    id: courses.id,
+    title: courses.title,
+    description: courses.description,
+    slug : courses.slug,
+  })
+  .from(courses)
+  // .orderBy(asc(courses.weight));
+
+  return data.length ? data : [];
+}
+
 export const getCourse = async (courseSlug: string) => {
   const data = await db.select({
     id: courses.id,
