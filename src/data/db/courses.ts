@@ -58,7 +58,6 @@ export const getCourseChapter = async (courseSlug: string, chapterSlug: string) 
       isFree: chapters.isFree,
       courseId: courses.id,
       description: chapters.description,
-      content: chapters.content,
       videoId: chapters.videoId,
     })
     .from(chapters)

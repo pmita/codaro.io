@@ -16,8 +16,6 @@ export default async function AllCoursesPage() {
     return <h1>No courses available at this time</h1>
   }
 
-  console.log('all available courses', coursesData);
-
   return (
     <section className="containter p-4 w-full">
       <Header className="justify-center items-center gap-4">

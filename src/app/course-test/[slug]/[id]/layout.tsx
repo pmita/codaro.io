@@ -38,7 +38,6 @@ export default async function CourseChapterLayout({ children, params}: CourseCha
   const allChapters = await getCourseChapters(courseSlug);
 
   if (currentUser) {
-    console.log('currentUser', currentUser?.uid);
     await Promise.all([
       queryClient.prefetchQuery({
         queryKey: ['chapters-progress', currentUser?.uid, courseSlug],
