@@ -42,7 +42,7 @@ export const courses = pgTable('courses', {
   slug: varchar('slug', { length: 100 }).notNull().unique(),
   title: text('title').notNull(),
   description: text('description').notNull(),
-  // weight: integer('weight').notNull().unique(),
+  weight: integer('weight').notNull().unique(),
 });
 
 export const chapters = pgTable('chapters', {
@@ -54,7 +54,6 @@ export const chapters = pgTable('chapters', {
   nextChapterSlug: varchar('next_chapter_slug', { length: 100 }),
   title: text('title').notNull(),
   description: text('description').notNull(),
-  content: text('content').notNull(),
   weight: integer('weight').notNull().unique(),
   videoId: varchar('video_id', { length: 100 }),
   videoLength: integer('video_length'),

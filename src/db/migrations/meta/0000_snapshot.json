@@ -1,5 +1,5 @@
 {
-  "id": "482e50d3-9bee-4359-9f81-2e6a5ffb99c9",
+  "id": "14d55c57-c8c3-4d52-a162-1398e668629d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -46,12 +46,6 @@
         },
         "description": {
           "name": "description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "content": {
-          "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -153,6 +147,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "weight": {
+          "name": "weight",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -164,6 +164,13 @@
           "nullsNotDistinct": false,
           "columns": [
             "slug"
+          ]
+        },
+        "courses_weight_unique": {
+          "name": "courses_weight_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "weight"
           ]
         }
       },

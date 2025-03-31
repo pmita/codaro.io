@@ -6,7 +6,6 @@ CREATE TABLE "chapters" (
 	"next_chapter_slug" varchar(100),
 	"title" text NOT NULL,
 	"description" text NOT NULL,
-	"content" text NOT NULL,
 	"weight" integer NOT NULL,
 	"video_id" varchar(100),
 	"video_length" integer,
@@ -21,7 +20,9 @@ CREATE TABLE "courses" (
 	"slug" varchar(100) NOT NULL,
 	"title" text NOT NULL,
 	"description" text NOT NULL,
-	CONSTRAINT "courses_slug_unique" UNIQUE("slug")
+	"weight" integer NOT NULL,
+	CONSTRAINT "courses_slug_unique" UNIQUE("slug"),
+	CONSTRAINT "courses_weight_unique" UNIQUE("weight")
 );
 --> statement-breakpoint
 CREATE TABLE "customers" (
