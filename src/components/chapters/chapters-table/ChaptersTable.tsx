@@ -19,11 +19,12 @@ export const ChaptersTable = ({ chapters }: { chapters: ChaptersBriefProps }) =>
 
   return (
     <section className={styles.container}>
-      {chapters.map((chapter: any) => (
+      {chapters.map((chapter) => (
         <Link href ={`/course-test/${chapterSlug}/${chapter.slug}`} key={chapter.id}>
           <ChapterBrief
-            title={chapter?.title}
-            description={chapter?.description || ''}
+            title={chapter.title}
+            description={chapter.description || ''}
+            weight={chapter?.weight}
           />
         </Link>
       ))}

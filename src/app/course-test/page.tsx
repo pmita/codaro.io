@@ -38,22 +38,6 @@ export default async function AllCoursesPage() {
             slug={course.slug}
           />
         ))}
-        {coursesData.map((course) => (
-          <CourseCard 
-            key={course.id} 
-            title={course.title}
-            description={course.description}
-            slug={course.slug}
-          />
-        ))}
-        {coursesData.map((course) => (
-          <CourseCard 
-            key={course.id} 
-            title={course.title}
-            description={course.description}
-            slug={course.slug}
-          />
-        ))}
       </section>
     </section>
   )

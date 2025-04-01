@@ -13,9 +13,12 @@ import { ChapterBriefProps } from './types';
 // STYLES
 import styles from './styles.module.css';
 
-export const ChapterBrief = ({ title, description }: ChapterBriefProps) => {
+export const ChapterBrief = ({ title, description, weight }: ChapterBriefProps) => {
   return (
     <Card className={styles.container}>
+      <span className={styles.chapterNumber}>
+        {weight}
+      </span>
       <CardHeader className={styles.header}>
         <CardTitle className={styles.title}>{title}</CardTitle>
       </CardHeader>

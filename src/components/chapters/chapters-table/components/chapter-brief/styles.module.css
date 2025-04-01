@@ -1,5 +1,6 @@
 .container {
   @apply w-full 
+    h-full
     border-[6px] 
     border-solid 
     border-secondary 
@@ -10,7 +11,26 @@
     items-start 
     rounded-[12px] 
     bg-neutral
-    p-4;
+    p-4
+    drop-shadow-[0_10px_20px_rgba(9,0,65,0.10)]
+    relative;
+}
+
+.chapterNumber {
+  @apply w-[40px]
+    h-[40px]
+    bg-secondary
+    text-neutral
+    font-roboto
+    font-bold
+    text-lg
+    grid
+    place-items-center
+    absolute
+    top-[0px]
+    translate-y-[-50%]
+    left-[20px]
+    rounded-[5px]
 }
 
 .header {

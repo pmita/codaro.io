@@ -35,9 +35,11 @@ export const getCourseChapters = async (courseSlug: string) => {
   const data = await db.select({
     id: chapters.id,
     title: chapters.title,
+    description: chapters.description,
     slug: chapters.slug,
     videoLength: chapters.videoLength,
     isFree: chapters.isFree,
+    weight: chapters.weight,
   })
   .from(chapters)
   .innerJoin(courses, eq(chapters.courseId, courses.id))
