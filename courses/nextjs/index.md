@@ -19,14 +19,14 @@ You will build a simple **Social Media Platform** inspired by sites like [MySpac
 
 ## 🤔 Is this Course Right for Me?
 
-<div class="box box-blue">
+<div className="box box-blue">
 This course is intermediate level 🟦 and expects some familiarity with React.js, JavaScript, and web development. The content is fast-paced and similar to my style on YouTube, but far more in-depth and should be followed in a linear format.
 </div>
 
 
 ## When was the course last updated?
 
-<span class="tag tag-sm tag-pro">Updated November 20th, 2024</span> <span class="tag tag-sm tag-next">next v15.0</span> <span class="tag tag-sm tag-next">react v19</span>
+<span className="tag tag-sm tag-pro">Updated November 20th, 2024</span> <span class="tag tag-sm tag-next">next v15.0</span> <span className="tag tag-sm tag-next">react v19</span>
 
 ## How do I enroll?
 
