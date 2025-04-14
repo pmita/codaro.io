@@ -74,10 +74,8 @@ export const customers = pgTable('customers', {
     .unique(),
   planName: varchar('plan_name', { length: 50 }),
   subscriptionStatus: varchar('subscription_status', { length: 20 }),
-  currentPeriodStart: timestamp('current_period_start')
-    .notNull(),
-  currentPeriodEnd: timestamp('current_period_end')
-    .notNull(),
+  currentPeriodStart: timestamp('current_period_start'),
+  currentPeriodEnd: timestamp('current_period_end'),
 });
 
 export const invoices = pgTable('invoices', {
