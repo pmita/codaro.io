@@ -4,7 +4,7 @@ import { AuthActionTypes } from "@/context/auth-context/types";
 import { useAuth } from "../../useAuth";
 import { toast } from "sonner";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "@/firebase/client/config";
+import { auth, db } from "@/lib/firebase/client/config";
 import { doc, setDoc } from "firebase/firestore";
 import { ISignUpForm } from "@/components/forms/signup-form/types";
 

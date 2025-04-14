@@ -8,7 +8,7 @@ import {
   type AuthReducerState 
 } from './types';
 import { removeSessionCookieClientSide } from '@/lib/cookies';
-import { auth } from "@/firebase/client/config";
+import { auth } from "@/lib/firebase/client/config";
 import { syncSessionCookie } from '@/lib/auth';
 
 export const AuthContext = createContext<AuthReducerState | undefined | null>(null);

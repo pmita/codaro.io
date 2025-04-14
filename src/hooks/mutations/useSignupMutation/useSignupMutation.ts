@@ -12,7 +12,7 @@ import { useAuth } from "../../useAuth";
 // UTILS
 import { createUser } from "./utils";
 // CONFIG
-import { auth } from "@/firebase/client/config";
+import { auth } from "@/lib/firebase/client/config";
 // LIB
 import { showErrorToast } from "@/lib/toasts";
 import { syncSessionCookie } from "@/lib/auth";

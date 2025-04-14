@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 // DATA
 import { revokeAllSessions } from "@/data/auth/sessions";
 // CONFIG
-import { adminAuth } from "@/firebase/server/config";
+import { adminAuth } from "@/lib/firebase/server/config";
 
 export async function GET(req: NextRequest) {
   const sessionCookie = req.cookies.get("__session")?.value;

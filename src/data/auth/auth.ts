@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { cache } from 'react';
-import { adminAuth } from "@/firebase/server/config";
+import { adminAuth } from "@/lib/firebase/server/config";
 
 export const validateUserServerSide = cache(async () => {
   const authToken = (await cookies()).get('__session');

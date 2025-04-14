@@ -1,4 +1,4 @@
-import { adminDb } from "@/firebase/server/config"
+import { adminDb } from "@/lib/firebase/server/config"
 import { stripe } from "@/lib/stripe"
 import Stripe from 'stripe';
 

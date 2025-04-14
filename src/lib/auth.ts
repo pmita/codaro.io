@@ -3,7 +3,7 @@ import { createSessionCookie, revokeAllSessions } from "@/data/auth/sessions";
 // FIREBASE
 import { getAuth, getIdToken } from "firebase/auth"
 // CONFIG
-import { app } from "@/firebase/client/config"
+import { app } from "@/lib/firebase/client/config"
 // LIB
 import { 
   getSessionCookieClientSide, 

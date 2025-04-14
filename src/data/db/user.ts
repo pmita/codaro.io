@@ -1,10 +1,14 @@
 "use server"
 
+// DRIZZLE
 import { NewUser, users, customers } from "@/db/schema";
 import { db } from "@/db";
 import { eq } from 'drizzle-orm';
+// DATA
 import { getCurrentUser } from "@/data/auth/currentUser";
+// PACKAGES
 import { differenceInCalendarDays } from "date-fns";
+// TYPES
 import { PRO_STATUS } from "@/types/db";
 
 
@@ -58,8 +62,10 @@ export const isSubscriptionValid = async () => {
   }
 
     const todaysDay = new Date();
-    const isPeriodValid = userSubscription?.currentPeriodEnd > todaysDay;
-    const daysPastExpired = differenceInCalendarDays(todaysDay, userSubscription?.currentPeriodEnd);
+    const isPeriodValid = userSubscription?.currentPeriodEnd && userSubscription.currentPeriodEnd > todaysDay;
+    const daysPastExpired = userSubscription?.currentPeriodEnd 
+      ? differenceInCalendarDays(todaysDay, userSubscription.currentPeriodEnd) 
+      : 0;
   
     switch(userSubscription.tier) {
       case PRO_STATUS.LIFE_TIME:

@@ -3,7 +3,7 @@
 // DATA
 import { getCurrentUser } from "../auth/currentUser";
 // CONFIG
-import { adminDb, deleteField } from "@/firebase/server/config";
+import { adminDb, deleteField } from "@/lib/firebase/server/config";
 
 export const getCompletedChapters = async () => {
   const user = await getCurrentUser();

@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 // FIREBASE
 import { SessionCookieOptions } from 'firebase-admin/auth';
 // CONFIG
-import { adminAuth } from "@/firebase/server/config";
+import { adminAuth } from "@/lib/firebase/server/config";
 
 export const getSessionCookie = async () => {
   try {
