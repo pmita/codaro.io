@@ -1,30 +1,25 @@
 "use server"
 
-import { adminAuth } from "@/firebase/server/config";
+import { adminAuth } from "@/lib/firebase/server/config";
 import { validateUserSession } from "./sessions";
 
 export const getCurrentUser = async () => {
   const decodedIdToken = await validateUserSession();
 
   if (!decodedIdToken) {
-    console.warn('No decoded token was found');
-    return null;
+    throw new Error('No auth cookie found, please log in');
   }
 
   try {
     const currentUser = await adminAuth.getUser(decodedIdToken.uid);
     
     if (!currentUser.uid) {
-      console.warn('No user id was found');
-      return null;
+      throw new Error('No user id was found');
     }
   
     if (!currentUser.email) {
-      console.warn('No user email was found');
-      return null;
+      throw new Error('No user email was found');
     }
-
-    // return currentUser;
 
     return {
       uid: currentUser.uid,
@@ -34,8 +29,7 @@ export const getCurrentUser = async () => {
       emailVerified: currentUser.emailVerified,
     }
   } catch(error) {
-    console.error('An error occurred while validating the user:', error);
-    return null;
+    throw new Error(`An error occurred while fetching the user: ${(error as Error).message}`);
   }
 };
 

@@ -2,33 +2,38 @@
 
 import { get } from "http";
 import { validateUserServerSide } from "../auth"
-import { getOrCreateCustomer } from "./user";
+import { getOrCreateStripeCustomer } from '@/data/db/customer';
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/lib/stripe/server/config";
+import { getCurrentUser } from "../auth/currentUser";
 
 const PORTAL_RETURN_URL = "http://localhost:3000/dashboard"
 const CHECKOUT_SUCCESS_URL = "http://localhost:3000/dashboard"
 const CHECKOUT_CANCEL_URL = "http://localhost:3000/pro"
 
-export const checkout = async (lineItems: Stripe.Checkout.SessionCreateParams.LineItem[]) => {
-  const user = await validateUserServerSide();
-  let customer: Stripe.Response<Stripe.Customer>;
+export const initStripeCheckout = async (
+  purchaseType: 'one-time' | 'subscription' | 'recurring',
+  lineItems: Stripe.Checkout.SessionCreateParams.LineItem[]
+) => {
+  const user = await getCurrentUser();
+  const customer = await getOrCreateStripeCustomer(user.uid);
 
-  if (user) {
-    const potentialCustomer = await getOrCreateCustomer(user.uid);
-    if (!('deleted' in potentialCustomer)) {
-      customer = potentialCustomer;
-    } else {
-      throw new Error("Customer has been deleted");
-    }
+  if (!user) {
+    throw new Error("User is not authenticated. Please sing in first");
+  }
+
+
+  if(!('deleted' in customer)) {
+    throw new Error("Customer has been deleted");
   }
 
   try {
-    const checkoutSession = await createCheckoutSession(customer?.id, user?.uid, 'one-time',lineItems);
+    const checkoutSession = await createCheckoutSession(customer.id, user.uid, purchaseType ?? 'one-time', lineItems);
 
     if (checkoutSession) {
       return checkoutSession;
     }
+
   } catch(error) {
     throw new Error('Could not create checkout session successfully');
   }
