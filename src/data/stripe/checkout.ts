@@ -16,12 +16,12 @@ export const initStripeCheckout = async (
   lineItems: Stripe.Checkout.SessionCreateParams.LineItem[]
 ) => {
   const user = await getCurrentUser();
-  const customer = await getOrCreateStripeCustomer(user.uid);
-
+  
   if (!user) {
     throw new Error("User is not authenticated. Please sing in first");
   }
-
+  
+  const customer = await getOrCreateStripeCustomer(user.uid);
 
   if(!('deleted' in customer)) {
     throw new Error("Customer has been deleted");

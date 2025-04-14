@@ -1,9 +1,16 @@
-import { PricingProps } from "./types"
-import styles from "./styles.module.css"
+
+// NEXT
+import Link from "next/link"
+// COMPONENTS
 import { AuthCheck } from "@/components/pemrissions/auth-check"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { CheckoutButton } from "@/components/buttons/checkout-button"
+// UTILS
 import { cn } from "@/lib/utils"
-import { Link } from "lucide-react"
+// STYLES
+import styles from "./styles.module.css"
+// TYPES
+import { PricingProps } from "./types"
 
 export const Pricing = ({
   sellingPoint,
@@ -26,19 +33,13 @@ export const Pricing = ({
         Buy Now
       </Link>
     )}>
-      <Button
-        // href="/signin"
-        className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}
-      >
-        Buy Now
-      </Button>
-      {/* <CheckoutButton 
+      <CheckoutButton 
         variant="secondary"
         className="mt-10 w-full hover:bg-indigo-500 hover:border-indigo-500 hover:text-primary-white"
-        stripeProduct={{ quantity: 1, subscription: productId }}
+        stripeProduct={{ quantity: 1, price: productId }}
         purchaseType={productType}
         callToAction="Buy Now"
-      /> */}
+      />
     </AuthCheck>
   </div>
 )

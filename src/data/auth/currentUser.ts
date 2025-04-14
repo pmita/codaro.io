@@ -7,7 +7,8 @@ export const getCurrentUser = async () => {
   const decodedIdToken = await validateUserSession();
 
   if (!decodedIdToken) {
-    throw new Error('No auth cookie found, please log in');
+    console.warn('No auth cookie found, please log in');
+    return;
   }
 
   try {

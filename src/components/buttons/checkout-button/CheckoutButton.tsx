@@ -49,7 +49,7 @@ export function CheckoutButton({
 
   return (
     <button 
-      className={cn(buttonVariants({ className }))}
+      className={cn(buttonVariants({ variant: 'default', className }))}
       onClick={handleClick}
       {...props}
     >
