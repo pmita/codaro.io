@@ -10,7 +10,7 @@ import { UserSubscriptionStatusQuery } from './types';
 
 export const useUserSubscriptionStatusQuery = () => {
   const { user } = useAuth();
-  return useQuery<UserSubscriptionStatusQuery | null>({
+  return useQuery({
     queryKey: ['subscription-status'],
     queryFn: async () => (
       await getUserSubscriptionStatus()
