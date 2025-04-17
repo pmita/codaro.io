@@ -15,29 +15,24 @@ export const initStripeCheckout = async (
   purchaseType: 'one-time' | 'subscription' | 'recurring',
   lineItems: Stripe.Checkout.SessionCreateParams.LineItem[]
 ) => {
-  const user = await getCurrentUser();
-  
-  if (!user) {
-    throw new Error("User is not authenticated. Please sing in first");
-  }
-  
-  const customer = await getOrCreateStripeCustomer(user.uid);
-
-  if(!('deleted' in customer)) {
-    throw new Error("Customer has been deleted");
-  }
-
   try {
+    const user = await getCurrentUser();
+    
+    if (!user) {
+      throw new Error("Unauthorized");
+    }
+    
+    const customer = await getOrCreateStripeCustomer(user.uid);
+
     const checkoutSession = await createCheckoutSession(customer.id, user.uid, purchaseType ?? 'one-time', lineItems);
 
     if (checkoutSession) {
       return checkoutSession;
     }
-
   } catch(error) {
-    throw new Error('Could not create checkout session successfully');
+    console.error("Error creating checkout session:", error);
+    return { error: 'Could not create checkout session successfully' };
   }
-
 }
 
 export const createCheckoutSession = async (
@@ -59,9 +54,6 @@ export const createCheckoutSession = async (
     metadata: {
       firebaseUID: userId
     },
-    invoice_creation: {
-      enabled: true
-    },
   }
 
   switch (type) {
@@ -76,9 +68,16 @@ export const createCheckoutSession = async (
       session = await stripe.checkout.sessions.create({
         ...baseOptions,
         mode: 'payment',
+        // INVOICE MODE ONLY ALLOWED FOR PAYMENTS MODE
+        invoice_creation: {
+          enabled: true
+        },
       });
       break;
   }
 
-  return session;
+  return { 
+    url: session.url, 
+    id: session.id,
+  };
 }
