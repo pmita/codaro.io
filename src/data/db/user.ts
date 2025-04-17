@@ -26,24 +26,50 @@ export const addUserToDb = async (data: NewUser) => {
 }
 
 export const getUserSubscriptionStatus = async () => {
-  const currentUser = await getCurrentUser();
+  try {
+    const currentUser = await getCurrentUser();
+  
+    if (!currentUser) {
+      throw new Error('No user found');
+    }
+  
+    const data = await db
+      .select({
+        id: users.id,
+        tier: users.tier,
+        subscriptionStatus: customers.subscriptionStatus,
+        currentPeriodEnd: customers.currentPeriodEnd,
+      })
+      .from(users)
+      .innerJoin(customers, eq(users.id, customers.userId))
+      .where(eq(users.id, currentUser.uid));
 
-  if (!currentUser) {
-    throw new Error('No user found');
+      if(!data.length) {
+        throw new Error('No subscription found');
+      }
+    
+      if (!data[0]?.id) {
+        throw new Error('No user found');
+      }
+
+      if (!data[0]?.tier) {
+        throw new Error('No subscription found');
+      }
+
+      if (!data[0]?.subscriptionStatus) {
+        throw new Error('No subscription status found');
+      }
+
+      if (!data[0]?.currentPeriodEnd) {
+        throw new Error('No current period end found');
+      }
+  
+    return data.length ? data[0] : null;
+    // return data[0];
+  } catch(error) {
+    console.error('Error getting user subscription status:', error);
+    return null;
   }
-
-  const data = await db
-    .select({
-      id: users.id,
-      tier: users.tier,
-      subscriptionStatus: customers.subscriptionStatus,
-      currentPeriodEnd: customers.currentPeriodEnd,
-    })
-    .from(users)
-    .innerJoin(customers, eq(users.id, customers.userId))
-    .where(eq(users.id, currentUser.uid));
-
-  return data.length ? data[0] : null;
 }
 
 export const isSubscriptionValid = async () => {
