@@ -5,6 +5,8 @@
 import { useCallback, useState, useEffect } from "react";
 // DATA
 import { initStripeCheckout } from "@/data/stripe/checkout";
+// PACKAGES
+import { toast } from "sonner";
 // COMPONENTS
 import { buttonVariants } from "../../../components/ui/button";
 // UTILS
@@ -34,17 +36,48 @@ export function CheckoutButton({
 
   // EVENTS
   const handleClick = useCallback(async () => {
-    const session = await initStripeCheckout(ProductPurchaseType.ONE_TIME, [product]);
+    const session = await initStripeCheckout(ProductPurchaseType.RECURRING, [product]);
+
+    // console.log('session --->', session);
+
+    if (!session) {
+      toast("Oops something went wrong", {
+        description: "Could not create checkout session",
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        }
+      });
+      return;
+    }
+
+    if ('error' in session || !session) {
+      toast("Oops something went wrong", {
+        description: session.error,
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        }
+      });
+      return;
+    }
 
     const stripe = await loadStripeInJS();
-    if (session) {
-      if (session.url) {
-        window.location.href = session.url;
-      } else {
-        console.error("Session URL is null");
-      }
-      stripe?.redirectToCheckout({ sessionId: session.id });
+
+    const { url, id } = session;
+    if (url) {
+      window.location.href = url;
+    } else {
+      toast("Oops something went wrong", {
+        description: "Invalid URL",
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        }
+      });
     }
+
+    stripe?.redirectToCheckout({ sessionId: id });
   }, [product, purchaseType]);
 
   return (
