@@ -3,17 +3,15 @@
 
 // REACT
 import { useCallback, useState, useEffect } from "react";
-// DATA
-import { initStripeCheckout } from "@/data/stripe/checkout";
-// PACKAGES
-import { toast } from "sonner";
 // COMPONENTS
 import { buttonVariants } from "../../../components/ui/button";
+// HOOKS
+import { useStripeCheckoutMutation } from "@/hooks/mutations/useStripeCheckoutMutation";
 // UTILS
 import { cn } from "@/lib/utils";
-import { loadStripeInJS } from "@/lib/stripe/client/config";
 // TYPES
-import { ProductPurchaseType, CheckoutButtonProps } from './types'
+import { ProductPurchaseType } from "@/types/stripe";
+import { CheckoutButtonProps } from './types'
 
 
 export function CheckoutButton({ 
@@ -23,8 +21,9 @@ export function CheckoutButton({
   callToAction = 'Buy Now',
   ...props
 }: CheckoutButtonProps) {
-  // STATE
+  // STATE & HOOKS
   const [product, setProduct] = useState({});
+  const mutation = useStripeCheckoutMutation();
 
   // EFFECTS
   useEffect(() => {
@@ -36,49 +35,11 @@ export function CheckoutButton({
 
   // EVENTS
   const handleClick = useCallback(async () => {
-    const session = await initStripeCheckout(ProductPurchaseType.RECURRING, [product]);
-
-    // console.log('session --->', session);
-
-    if (!session) {
-      toast("Oops something went wrong", {
-        description: "Could not create checkout session",
-        action: {
-          label: "Close",
-          onClick: () => toast.dismiss(),
-        }
-      });
-      return;
-    }
-
-    if ('error' in session || !session) {
-      toast("Oops something went wrong", {
-        description: session.error,
-        action: {
-          label: "Close",
-          onClick: () => toast.dismiss(),
-        }
-      });
-      return;
-    }
-
-    const stripe = await loadStripeInJS();
-
-    const { url, id } = session;
-    if (url) {
-      window.location.href = url;
-    } else {
-      toast("Oops something went wrong", {
-        description: "Invalid URL",
-        action: {
-          label: "Close",
-          onClick: () => toast.dismiss(),
-        }
-      });
-    }
-
-    stripe?.redirectToCheckout({ sessionId: id });
-  }, [product, purchaseType]);
+    mutation.mutate({
+      purchaseType,
+      lineItems: [product]
+    })
+  }, [mutation, product]);
 
   return (
     <button 

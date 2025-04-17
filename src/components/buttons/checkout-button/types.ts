@@ -1,13 +1,8 @@
 // TYPES
-import { ButtonProps } from "@/components/ui/button";
 import Stripe from "stripe";
-
-
-export enum ProductPurchaseType {
-  RECURRING = 'recurring',
-  ONE_TIME = 'one-time'
-}
-
+// TYPES
+import { ButtonProps } from "@/components/ui/button";
+import { ProductPurchaseType } from "@/types/stripe";
 
 export interface CheckoutButtonProps extends ButtonProps {
   stripeProduct: Stripe.Checkout.SessionCreateParams.LineItem;
