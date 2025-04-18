@@ -2,12 +2,13 @@
 
 // DRIZZLE
 import { db } from "@/db";
-import { customers, users } from "@/db/schema";
+import { Customer, customers, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 // STRIPE
 import Stripe from "stripe";
 // DATA
 import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe/customer";
+import { stripe } from "@/lib/stripe/server/config";
 
 export const getOrCreateStripeCustomer = async (userId: string, params?: Stripe.CustomerCreateParams) => {
   try {
@@ -44,9 +45,44 @@ export const getOrCreateStripeCustomer = async (userId: string, params?: Stripe.
   }
 }
 
+export const getExistingCustomer = async (customerId: string) => {
+  try {
+    const existingCustomer = await db
+      .select({
+        userId: users.id,
+        id: customers.id,
+      })
+      .from(customers)
+      .innerJoin(users, eq(customers.userId, users.id))
+      .where(eq(customers.stripeCustomerId, customerId));
+
+    if (existingCustomer.length === 0) {
+      throw new Error("Customer not found");
+    }
+
+    const { userId, id } = existingCustomer[0] ?? {};
+
+    return { 
+      userId,
+      id,
+    }
+
+  } catch(error) {
+    throw new Error("Could not get existing customer");
+  }
+}
+
 export const addCustomerForFirstTime = async (userId: string, stripeCustomerId: string) => {
   await db.insert(customers).values({
     userId: userId,
     stripeCustomerId: stripeCustomerId,
   });
+}
+
+export const updateCustomerTable = async (id: number, data: Customer) => {
+  try {
+    await db.update(customers).set(data).where(eq(customers.id, id));
+  } catch (error) {
+    throw new Error("Could not update customer table");
+  }
 }

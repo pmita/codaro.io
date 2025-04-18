@@ -22,11 +22,9 @@ import { PRO_STATUS } from "@/types/stripe";
 import { cn } from "@/lib/utils";
 
 export const UserBilling = () => {
-  // STATE
-  // const { proStatus } = useAuthState();
+  // STATE & HOOKS
   const { data } = useUserSubscriptionStatusQuery();
-  const { tier, subscriptionStatus, currentPeriodEnd } = data || {};
-  // const router = useRouter();
+  const { subscriptionStatus } = data || {};
 
   // FUNCTIONS
   const renderTitle = () => {
