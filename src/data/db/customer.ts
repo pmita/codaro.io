@@ -1,7 +1,7 @@
 "use server"
 
 // DATA
-import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe/customer";
+import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe";
 // DRIZZLE
 import { db } from "@/db";
 import { customers, NewCustomer, users } from "@/db/schema";

@@ -8,7 +8,6 @@ import { ButtonProps, buttonVariants } from "@/components/ui/button";
 import { useStripePortalMutation } from "@/hooks/mutations/useStripePortalMutation";
 // UTITLS
 import { cn } from "@/lib/utils";
-import { initStripePortal } from "@/data/stripe/portal";
 
 export interface ManageSubscriptionButtonProps extends ButtonProps {}
 

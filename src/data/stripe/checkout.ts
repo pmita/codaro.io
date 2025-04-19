@@ -1,11 +1,11 @@
 "use server"
 
-import { get } from "http";
-import { validateUserServerSide } from "../auth"
+// DATA
 import { getOrCreateStripeCustomer } from '@/data/db/customer';
+import { getCurrentUser } from "@/data/auth/currentUser";
+// PACKAGES
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe/server/config";
-import { getCurrentUser } from "../auth/currentUser";
 
 const PORTAL_RETURN_URL = "http://localhost:3000/dashboard"
 const CHECKOUT_SUCCESS_URL = "http://localhost:3000/dashboard"
