@@ -4,7 +4,8 @@ import { headers } from "next/headers";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe/server/config";
 import { StripeWebhookEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
-import { manageSubscriptionPurchase } from "@/data/stripe/subscriptions";
+import { manageSubscriptionPurchase } from "@/data/db/customer";
+import { manageInvoice } from "@/data/db/invoice";
 
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET || '';
 
@@ -34,18 +35,22 @@ export async function POST(request: Request) {
         case StripeWebhookEvents.CUSTOMER_SUBSCRIPTION_CREATED:
         case StripeWebhookEvents.CUSTOMER_SUBSCRIPTION_UPDATED:
         case StripeWebhookEvents.CUSTOMER_SUBSCRIPTION_DELETED:
-          const subscriptionEvent = event.data.object as Stripe.Subscription;
+          const subscription = event.data.object as Stripe.Subscription;
           await manageSubscriptionPurchase(
-            subscriptionEvent.id,
-            subscriptionEvent.customer as string,
+            subscription.id,
+            subscription.customer as string,
             event.type as StripeWebhookSubscirptionEvents
           );
           break;
         case StripeWebhookEvents.INVOICE_PAID:
         case StripeWebhookEvents.INVOICE_PAYMENT_SUCCEEDED:
         case StripeWebhookEvents.INVOICE_PAYMENT_FAILED:
+          const invoice = event.data.object as Stripe.Invoice;
+          await manageInvoice(invoice);
+          break;
         case StripeWebhookEvents.CHECKOUT_SESSION_COMPLETED:
-          return;
+          // TODO: Handle checkout session completed event
+          break;;
         default: 
           throw new Error(`Unhandled event type ${event.type}`);
       }

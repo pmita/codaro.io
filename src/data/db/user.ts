@@ -107,29 +107,3 @@ export const isSubscriptionValid = async () => {
         return false;
     }  
 }
-
-export const updateUserTierStatus = async (userId: string, tier: string) => {
-  try {
-    await db.update(users).set({ tier }).where(eq(users.id, userId));
-  } catch(error) {
-    console.error('Error updating user tier status:', error);
-    throw new Error('Could not update user tier status');
-  }
-}
-
-export const updateCustomerSubscriptionStatus = async (
-  userId: string, 
-  customerId: number,
-  tier: string, 
-  data: NewCustomer 
-) => {
-  try {
-    await db.batch([
-      db.update(users).set({ tier }).where(eq(users.id, userId)),
-      db.update(customers).set(data).where(eq(customers.id, customerId))
-    ]);
-  } catch(error) {
-    console.error('Error updating customer subscription status:', error);
-    throw new Error('Could not update customer subscription status');
-  }
-}
