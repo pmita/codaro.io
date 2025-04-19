@@ -6,7 +6,7 @@ import {
   getProgressChapter
 } from '@/data/db';
 import { getCurrentUser } from '@/data/auth/currentUser';
-import { getChapterMarkdown } from '@/data/content/markdown';
+import { getChapterMarkdown } from '@/data/content';
 // DB
 import { db } from '@/db';
 import { chapters, courses } from '@/db/schema';

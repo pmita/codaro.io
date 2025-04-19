@@ -1,12 +1,12 @@
 // NEXT
 import { notFound } from "next/navigation";
 // DATA
-import { getCourseMarkdown } from "@/data/content/markdown";
+import { getCourseMarkdown } from "@/data/content";
 import { getCourse, getCourseChapters } from "@/data/db";
 // COMPONENTS
 import { Header } from "@/components/ui/header";
 import { Title, titleVariants } from "@/components/ui/title";
-import { Description, descriptionVariants } from "@/components/ui/description";
+import { Description } from "@/components/ui/description";
 import { Mdx } from "@/components/mdx";
 // UTITLS
 import { cn } from "@/lib/utils";

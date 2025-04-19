@@ -1,1 +1,0 @@
-export { getCompletedChapters, toggleChapterProgress} from './progress';
