@@ -1,5 +1,5 @@
 // DATA
-import { getCourseChapters } from '@/data/db/courses';
+import { getCourseChapters } from '@/data/db';
 // DRIZZLE
 import { Chapter } from '@/db/schema';
 // PACKAGES

@@ -1,7 +1,8 @@
 "use server"
 
 // DATA
-import { getExistingCustomer } from "@/data/db//customer";
+import { getExistingCustomer } from "@/data/db";
+// DRIZZLE
 import { db } from "@/db";
 import { invoices, NewInvoice } from "@/db/schema";
 // PACKAGES

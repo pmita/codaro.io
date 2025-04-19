@@ -1,7 +1,7 @@
 // NEXT.JS
 import { useRouter } from "next/navigation";
 // DATA 
-import { addUserToDb } from "@/data/db/user";
+import { addUserToDb } from "@/data/db";
 // PACKAGES
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";

@@ -1,6 +1,6 @@
 
 // DATA
-import { isSubscriptionValid } from '@/data/db/user';
+import { isSubscriptionValid } from '@/data/db';
 // PACKAGES
 import { useQuery } from '@tanstack/react-query';
 // HOOKS

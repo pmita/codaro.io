@@ -1,8 +1,10 @@
 // NEXT
 import { notFound } from 'next/navigation';
 // DATA
-import { getCourseChapter } from '@/data/db/courses';
-import { getProgressChapter  } from '@/data/db/progress';
+import { 
+  getCourseChapter,
+  getProgressChapter
+} from '@/data/db';
 import { getCurrentUser } from '@/data/auth/currentUser';
 import { getChapterMarkdown } from '@/data/content/markdown';
 // DB

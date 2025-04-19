@@ -1,11 +1,11 @@
 // NEXT
 import { headers } from "next/headers";
+// DATA
+import { manageSubscriptionPurchase, manageInvoice } from "@/data/db";
 // PACKAGES
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe/server/config";
 import { StripeWebhookEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
-import { manageSubscriptionPurchase } from "@/data/db/customer";
-import { manageInvoice } from "@/data/db/invoice";
 
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET || '';
 

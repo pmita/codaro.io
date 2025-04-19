@@ -2,7 +2,7 @@
 
 // DATA
 import { getCurrentUser } from "@/data/auth/currentUser";
-import { getOrCreateStripeCustomer } from '@/data/db/customer';
+import { getOrCreateStripeCustomer } from '@/data/db';
 // LIB
 import { stripe } from "@/lib/stripe/server/config";
 

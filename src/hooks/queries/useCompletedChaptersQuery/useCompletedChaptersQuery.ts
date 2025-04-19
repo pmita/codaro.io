@@ -1,5 +1,5 @@
 // DATA
-import { getProgressChapters } from '@/data/db/progress';
+import { getProgressChapters } from '@/data/db';
 // PACKAGES
 import { useQuery } from '@tanstack/react-query';
 // HOOKS

@@ -1,10 +1,12 @@
 // REACT
 import { Suspense } from "react";
 // DATA
-import { getCourseChapters } from "@/data/db/courses";
-import { getProgressChapters } from "@/data/db/progress";
+import { 
+  getCourseChapters,
+  getProgressChapters,
+  isSubscriptionValid
+ } from "@/data/db";
 import { getCurrentUser } from "@/data/auth/currentUser";
-import { isSubscriptionValid } from "@/data/db/user";
 // PACKAGES
 import {
   dehydrate,

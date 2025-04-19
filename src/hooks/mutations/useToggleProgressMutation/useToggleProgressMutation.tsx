@@ -1,9 +1,10 @@
+// DATA
+import { toggleUserProgress } from "@/data/db"
 // PACKAGES
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 // HOOKS
 import { useAuth } from "@/hooks/useAuth"
-import { toggleUserProgress } from "@/data/db/progress"
 // TYPES
 import { ToggleProgressMutationProps } from "./types"
 
