@@ -16,6 +16,9 @@ const relavantEvents = new Set([
   StripeWebhookEvents.INVOICE_PAID,
   StripeWebhookEvents.INVOICE_PAYMENT_SUCCEEDED,
   StripeWebhookEvents.INVOICE_PAYMENT_FAILED,
+  StripeWebhookEvents.INVOICE_UPCOMING,
+  StripeWebhookEvents.INVOICE_MARKED_UNCOLLECTIBLE,
+  StripeWebhookEvents.INVOICE_ACTION_REQUIRED,
   StripeWebhookEvents.CHECKOUT_SESSION_COMPLETED,
 ]);
 
@@ -45,6 +48,9 @@ export async function POST(request: Request) {
         case StripeWebhookEvents.INVOICE_PAID:
         case StripeWebhookEvents.INVOICE_PAYMENT_SUCCEEDED:
         case StripeWebhookEvents.INVOICE_PAYMENT_FAILED:
+        case StripeWebhookEvents.INVOICE_UPCOMING:
+        case StripeWebhookEvents.INVOICE_MARKED_UNCOLLECTIBLE:
+        case StripeWebhookEvents.INVOICE_ACTION_REQUIRED:
           const invoice = event.data.object as Stripe.Invoice;
           await manageInvoice(invoice);
           break;
