@@ -2,6 +2,7 @@
 
 // DATA
 import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe";
+import { calculateCurrentPeriodEnd } from "./utils";
 // DRIZZLE
 import { db } from "@/db";
 import { customers, NewCustomer, users } from "@/db/schema";
@@ -10,7 +11,7 @@ import { eq } from "drizzle-orm";
 import { stripe } from "@/lib/stripe/server/config";
 import Stripe from "stripe";
 // TYPES
-import { StripeWebhookSubscirptionEvents } from "@/types/stripe";
+import { StripeWebhookCheckoutEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
 
 export const getOrCreateStripeCustomer = async (userId: string, params?: Stripe.CustomerCreateParams) => {
   try {
@@ -86,7 +87,7 @@ export const addCustomerForFirstTime = async (userId: string, stripeCustomerId: 
 export const manageSubscriptionPurchase = async (
   subscriptionId: string,
   customerId: string,
-  eventType: StripeWebhookSubscirptionEvents
+  eventType: StripeWebhookSubscirptionEvents | StripeWebhookCheckoutEvents
 ) => {
   try {
     const { userId } = await getExistingCustomer(customerId);
@@ -106,15 +107,21 @@ export const manageSubscriptionPurchase = async (
         ? subscriptionDetails.items.data[0].price.product
         : subscriptionDetails.items.data[0].price.product.id,
       subscriptionStatus: subscriptionDetails.status,
-      currentPeriodStart: new Date(subscriptionDetails.current_period_start * 1000),
+      currentPeriodStart: subscriptionDetails.current_period_start 
+        ? new Date(subscriptionDetails.current_period_start * 1000)
+        : null,
+      currentPeriodEnd: calculateCurrentPeriodEnd(subscriptionDetails, eventType)
     }
   
     switch(eventType) {
       case StripeWebhookSubscirptionEvents.CUSTOMER_SUBSCRIPTION_CREATED:
       case StripeWebhookSubscirptionEvents.CUSTOMER_SUBSCRIPTION_UPDATED:
+      case StripeWebhookCheckoutEvents.CHECKOUT_SESSION_COMPLETED:
+      case StripeWebhookCheckoutEvents.CHECKOUT_SESSION_ASYNC_PAYMENT_FAILED:
+      case StripeWebhookCheckoutEvents.CHECKOUT_SESSION_ASYNC_PAYMENT_SUCCEEDED:
+      case StripeWebhookSubscirptionEvents.CUSTOMER_SUBSCRIPTION_DELETED:
         const updatedSubData = {
           ...baseOptions,
-          currentPeriodEnd: new Date(subscriptionDetails.current_period_end * 1000),
         }
   
         await updateCustomerSubscription(
@@ -122,20 +129,6 @@ export const manageSubscriptionPurchase = async (
           subscriptionDetails.status,
           updatedSubData,
         )
-        break;
-      case StripeWebhookSubscirptionEvents.CUSTOMER_SUBSCRIPTION_DELETED:
-        const deletedSubData = {
-          ...baseOptions,
-          currentPeriodEnd: subscriptionDetails.cancel_at 
-            ? new Date(subscriptionDetails.cancel_at * 1000) 
-            : null,
-        }
-  
-        await updateCustomerSubscription(
-          userId,
-          subscriptionDetails.status,
-          deletedSubData,
-        );
         break;
       default:
         break;
@@ -145,7 +138,6 @@ export const manageSubscriptionPurchase = async (
     throw new Error("Could not manage subscription purchase");
   }
 }
-
 
 export const updateCustomerSubscription = async (
   userId: string, 

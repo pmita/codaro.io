@@ -55,8 +55,18 @@ export async function POST(request: Request) {
           await manageInvoice(invoice);
           break;
         case StripeWebhookEvents.CHECKOUT_SESSION_COMPLETED:
+        case StripeWebhookEvents.CHECKOUT_SESSION_ASYNC_PAYMENT_SUCCEEDED:
+        case StripeWebhookEvents.CHECKOUT_SESSION_ASYNC_PAYMENT_FAILED:
+          const checkoutSession = event.data.object as Stripe.Checkout.Session;
+          if (checkoutSession.mode === 'subscription') {
+            await manageSubscriptionPurchase(
+              checkoutSession.subscription as string,
+              checkoutSession.customer as string,
+              event.type as StripeWebhookSubscirptionEvents
+            );
+          }
           // TODO: Handle checkout session completed event
-          break;;
+          break;
         default: 
           throw new Error(`Unhandled event type ${event.type}`);
       }
