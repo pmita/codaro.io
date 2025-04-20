@@ -9,7 +9,15 @@
     "lint": "next lint",
     "db-generate": "npx drizzle-kit generate",
     "db-push": "npx drizzle-kit push",
-    "db-migrate": "npx drizzle-kit migrate"
+    "db-migrate": "npx drizzle-kit migrate",
+    "stripe-listen": "stripe listen --forward-to localhost:3000/api/stripe/webhooks",
+    "trigger-checkout-completed": "stripe trigger checkout.session.completed",
+    "trigger-subscription-created": "stripe trigger customer.subscription.created",
+    "trigger-subscription-deleted": "stripe trigger customer.subscription.deleted",
+    "trigger-subscription-updated": "stripe trigger customer.subscription.updated",
+    "trigger-invoice-paid": "stripe trigger invoice.paid",
+    "trigger-payment-failed": "stripe trigger invoice.payment_failed",
+    "trigger-payment-succeeded": "stripe trigger invoice.payment_succeeded"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -45,6 +53,7 @@
     "remark-gfm": "^4.0.0",
     "sonner": "^1.7.1",
     "stripe": "^17.5.0",
+    "stripe-cli": "^0.1.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },
