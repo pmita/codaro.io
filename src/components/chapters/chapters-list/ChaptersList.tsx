@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useCallback } from 'react';
 // HOOKS
 import { useCompletedChaptersQuery } from '@/hooks/queries/useCompletedChaptersQuery';
-import { useIsSubscriptionValidQuery } from '@/hooks/queries/useIsSubscriptionValidQuery';
+import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
 // COMPONENTS
 import { Chapter } from './components/chapter';
 // TYPES
@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 
 export const ChaptersList =  ({ course, allChapters }: ChaptersListProps) => {
   const { data: completedChapters } = useCompletedChaptersQuery(course);
-  const { data: canAccess } = useIsSubscriptionValidQuery();
+  const { data: subscriptionStatus } = useUserSubscriptionStatusQuery();
 
   if (!allChapters || !allChapters.length) return null;
 
@@ -38,7 +38,7 @@ export const ChaptersList =  ({ course, allChapters }: ChaptersListProps) => {
             videoLength={chapter.videoLength}
             isFree={chapter.isFree}
             completionStatus={isCompleted(chapter.slug)}
-            canAccess={canAccess}
+            canAccess={subscriptionStatus?.canAccess}
           />
         </Link>
       ))}

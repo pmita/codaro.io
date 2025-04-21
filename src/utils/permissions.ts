@@ -6,6 +6,8 @@ export enum PRO_STATUS {
   PAST_DUE = 'past_due',
   CANCELED = 'canceled',
   UNPAID = 'unpaid',
+  PRO = 'pro',
+  BASIC = 'basic',
 }
 
 export const isSubscriptionValid = (tier: string | undefined | null, currentPeriodEnd: Date | undefined) => {

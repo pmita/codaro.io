@@ -8,7 +8,7 @@ import { LockKeyhole, Check } from "lucide-react";
 // HOOKS
 import { useToggleProgressMutation } from "@/hooks/mutations/useToggleProgressMutation";
 import { useCompletedChapterQuery } from "@/hooks/queries/useCompletedChapterQuery";
-import { useIsSubscriptionValidQuery } from "@/hooks/queries/useIsSubscriptionValidQuery";
+import { useUserSubscriptionStatusQuery } from "@/hooks/queries/useUserSubscriptionStatusQuery";
 // COMPONENTS
 import { Button } from "@/components/ui/button";
 import { AuthCheck } from "@/components/pemrissions/auth-check";
@@ -23,8 +23,10 @@ import { ToggleChapterProgressProps } from "./types";
 export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapterProgressProps) => {
   // HOOKS
   const { data: chapterDetails } = useCompletedChapterQuery(courseSlug, chapterSlug)
-  const { data: canAccess } = useIsSubscriptionValidQuery();
-  const mutation = useToggleProgressMutation(courseSlug, chapterSlug)
+  const { data: subscriptionStatus } = useUserSubscriptionStatusQuery();
+  const mutation = useToggleProgressMutation(courseSlug, chapterSlug);
+
+  console.log('subscriptionStatus', subscriptionStatus);
 
   // EVENTS
   const handleClick = useCallback(() => {
@@ -38,7 +40,7 @@ export const ToggleChapterProgress = ({ chapterSlug, courseSlug }: ToggleChapter
   return (
     <div className={styles.container}>
       <AuthCheck fallback={(<LockKeyhole width={38} height={36} color="#b72b1a" />)}>
-        {(chapterDetails?.isFree || canAccess) 
+        {(chapterDetails?.isFree || subscriptionStatus?.canAccess) 
           ? (
             <>
               <Button 

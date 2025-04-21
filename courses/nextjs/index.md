@@ -26,7 +26,7 @@ This course is intermediate level 🟦 and expects some familiarity with React.j
 
 ## When was the course last updated?
 
-<span className="tag tag-sm tag-pro">Updated November 20th, 2024</span> <span class="tag tag-sm tag-next">next v15.0</span> <span className="tag tag-sm tag-next">react v19</span>
+<span className="tag tag-sm tag-pro">Updated November 20th, 2024</span> <span className="tag tag-sm tag-next">next v15.0</span> <span className="tag tag-sm tag-next">react v19</span>
 
 ## How do I enroll?
 

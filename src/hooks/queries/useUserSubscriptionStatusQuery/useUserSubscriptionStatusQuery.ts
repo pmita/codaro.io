@@ -5,8 +5,6 @@ import { getUserSubscriptionStatus } from '@/data/db/user';
 import { useQuery } from '@tanstack/react-query';
 // HOOKS
 import { useAuth } from '@/hooks/useAuth';
-// TYPES
-import { UserSubscriptionStatusQuery } from './types';
 
 export const useUserSubscriptionStatusQuery = () => {
   const { user } = useAuth();
