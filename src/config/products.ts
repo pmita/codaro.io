@@ -52,7 +52,26 @@ export const subscriptions = [
       "Special merch",
       "Access to discord"
     ],
-    purchaseType: ProductPurchaseType.ONE_TIME,
+    purchaseType: ProductPurchaseType.RECURRING,
     stripePriceId: process.env.NEXT_PUBLIC_STRIPE_YEARLY_SUBSCRIPTION_PRICE_ID || ""
+  },
+  {
+    id: 4,
+    title: 'Lieftime',
+    description: "Pay now and get access to all content for life",
+    price: '150',
+    frequency: '/ once',
+    sellingPoint: 'Work at your own pace',
+    bonuses: [
+      "All Pro tier benefits",
+      "Single payment, lifetime access",
+      "High quality videos",
+      "30-day moneyback guarentee",
+      "Special merch",
+      "Access to discord",
+      "Access to Projects freature",
+    ],
+    purchaseType: ProductPurchaseType.ONE_TIME,
+    stripePriceId: process.env.NEXT_PUBLIC_STRIPE_LIFETIME_PRODUCT_PRICE_ID || ""
   }
 ]

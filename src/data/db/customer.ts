@@ -2,7 +2,7 @@
 
 // DATA
 import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe";
-import { calculateCurrentPeriodEnd } from "./utils";
+import { calculateCurrentPeriodEnd, calculateTierStatus } from "./utils";
 // DRIZZLE
 import { db } from "@/db";
 import { customers, NewCustomer, users } from "@/db/schema";
@@ -11,7 +11,7 @@ import { eq } from "drizzle-orm";
 import { stripe } from "@/lib/stripe/server/config";
 import Stripe from "stripe";
 // TYPES
-import { StripeWebhookCheckoutEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
+import { PRO_STATUS, StripeWebhookCheckoutEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
 
 export const getOrCreateStripeCustomer = async (userId: string, params?: Stripe.CustomerCreateParams) => {
   try {
@@ -55,6 +55,7 @@ export const getExistingCustomer = async (stripeCustomerId: string) => {
         userId: users.id,
         id: customers.id,
         customerId: customers.id,
+        tier: users.tier,
       })
       .from(customers)
       .innerJoin(users, eq(customers.userId, users.id))
@@ -64,12 +65,13 @@ export const getExistingCustomer = async (stripeCustomerId: string) => {
       throw new Error("Customer not found");
     }
 
-    const { userId, id, customerId } = existingCustomer[0] ?? {};
+    const { userId, id, customerId, tier } = existingCustomer[0] ?? {};
 
     return { 
       userId,
       id,
-      customerId
+      customerId,
+      tier
     }
 
   } catch(error) {
@@ -84,13 +86,34 @@ export const addCustomerForFirstTime = async (userId: string, stripeCustomerId: 
   });
 }
 
+export const manageLifeTimePurchase = async (checkoutSession: Stripe.Checkout.Session) => {
+  try {
+    const { userId } = await getExistingCustomer(checkoutSession.customer as string);
+
+    if (!userId) {
+      throw new Error("User not found");
+    }
+
+    await db
+      .update(users)
+      .set({
+        tier: PRO_STATUS.LIFE_TIME,
+      })
+      .where(eq(users.id, userId));
+    
+  } catch(error) {
+    console.error("Error managing lifetime purchase:", error);
+    throw new Error("Could not manage lifetime purchase");
+  }
+}
+
 export const manageSubscriptionPurchase = async (
   subscriptionId: string,
   customerId: string,
   eventType: StripeWebhookSubscirptionEvents | StripeWebhookCheckoutEvents
 ) => {
   try {
-    const { userId } = await getExistingCustomer(customerId);
+    const { userId, tier } = await getExistingCustomer(customerId);
 
     if (!userId) {
       throw new Error("User not found");
@@ -102,7 +125,7 @@ export const manageSubscriptionPurchase = async (
 
     const baseOptions = {
       stripeSubscriptionId: subscriptionDetails.items.data[0].id,
-      planName: subscriptionDetails.items.data[0].plan.nickname,
+      planName: subscriptionDetails.items.data[0].plan.interval,
       stripeProductId: typeof subscriptionDetails.items.data[0].price.product === 'string'
         ? subscriptionDetails.items.data[0].price.product
         : subscriptionDetails.items.data[0].price.product.id,
@@ -123,10 +146,10 @@ export const manageSubscriptionPurchase = async (
         const updatedSubData = {
           ...baseOptions,
         }
-  
+
         await updateCustomerSubscription(
           userId,
-          subscriptionDetails.status,
+          calculateTierStatus(tier as PRO_STATUS ?? PRO_STATUS.FREE, subscriptionDetails.status),
           updatedSubData,
         )
         break;

@@ -2,11 +2,12 @@
 import { headers } from "next/headers";
 // DATA
 import { manageSubscriptionPurchase, manageInvoice } from "@/data/db";
+
 // PACKAGES
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe/server/config";
 import { StripeWebhookEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
-
+import { manageLifeTimePurchase } from "@/data/db/customer";
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const relavantEvents = new Set([
@@ -65,7 +66,9 @@ export async function POST(request: Request) {
               event.type as StripeWebhookSubscirptionEvents
             );
           }
-          // TODO: Handle checkout session completed event
+          if (checkoutSession.mode === 'payment' && checkoutSession.payment_status == 'paid') {
+            await manageLifeTimePurchase(checkoutSession);
+          }
           break;
         default: 
           throw new Error(`Unhandled event type ${event.type}`);
