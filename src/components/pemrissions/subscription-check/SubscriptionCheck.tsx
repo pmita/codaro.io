@@ -1,10 +1,12 @@
 "use client"
 
-import { useIsSubscriptionValid } from "@/hooks/useIsSubscriptionValid"
+// HOOKS
+import { useUserSubscriptionStatusQuery } from "@/hooks/queries/useUserSubscriptionStatusQuery";
+// TYPES
 import { SubscriptionCheckProps } from "./types"
 
 export const SubscriptionCheck = ({ children, fallback }: SubscriptionCheckProps) => {
-  const canAccess = useIsSubscriptionValid();
+  const { data } = useUserSubscriptionStatusQuery();
 
-  return (canAccess ? <>{children}</> : <>{fallback}</>);
+  return (data?.canAccess ? <>{children}</> : <>{fallback}</>);
 }
