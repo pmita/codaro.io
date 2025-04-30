@@ -68,7 +68,59 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+			animation: {
+				wiggleUp: 'wiggleUp 5s ease-in-out infinite',
+				wiggleDown: 'wiggleDown 5s ease-in-out infinite',
+				wiggleLeft: 'wiggleLeft 5s ease-in-out infinite',
+				wiggleRight: 'wiggleRight 5s ease-in-out infinite',
+			},
+			keyframes: {
+				wiggleUp: {
+					'0%': {
+						transform: 'translateY(0px)',
+					},
+					'50%': {
+						transform: 'translateY(-10px)',
+					},
+					'100%': {
+						transform: 'translateY(0px)',
+					}
+				},
+				wiggleDown: {
+					'0%': {
+						transform: 'translateY(0px)',
+					},
+					'50%': {
+						transform: 'translateY(10px)',
+					},
+					'100%': {
+						transform: 'translateY(0px)',
+					}
+				},
+				wiggleLeft: {
+					'0%': {
+						transform: 'translateX(0px)',
+					},
+					'50%': {
+						transform: 'translateX(-10px)',
+					},
+					'100%': {
+						transform: 'translateX(0px)',
+					}
+				},
+				wiggleRight: {
+					'0%': {
+						transform: 'translateX(0px)',
+					},
+					'50%': {
+						transform: 'translateX(10px)',
+					},						
+					'100%': {
+						transform: 'translateX(0px)',
+					}
+				}
+			}
   	}
   },
   plugins: [
