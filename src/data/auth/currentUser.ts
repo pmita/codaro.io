@@ -8,18 +8,20 @@ export const getCurrentUser = async () => {
 
   if (!decodedIdToken) {
     console.warn('No auth cookie found, please log in');
-    return;
+    return null;
   }
 
   try {
     const currentUser = await adminAuth.getUser(decodedIdToken.uid);
     
-    if (!currentUser.uid) {
-      throw new Error('No user id was found');
+    if (!currentUser.uid || !currentUser.email) {
+      console.warn('No user id was found');
+      return null;
     }
   
     if (!currentUser.email) {
-      throw new Error('No user email was found');
+      console.warn('No user email was found');
+      return null;
     }
 
     return {
@@ -30,7 +32,8 @@ export const getCurrentUser = async () => {
       emailVerified: currentUser.emailVerified,
     }
   } catch(error) {
-    throw new Error(`An error occurred while fetching the user: ${(error as Error).message}`);
+    console.warn(`An error occurred while fetching the user: ${(error as Error).message}`);
+    return null;
   }
 };
 
