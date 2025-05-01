@@ -1,7 +1,11 @@
+// REACT
+import { Suspense } from "react";
 // COMPONENTS
 import { Header } from "@/components/ui/header";
 import { Title, titleVariants } from "@/components/ui/title";
 import { Description } from "@/components/ui/description";
+import { UserInvoices } from "@/components/cards/user-invoices";
+import { Skeleton } from "@/components/ui/skeleton";
 // UTILS
 import { cn } from "@/lib/utils";
 
@@ -19,6 +23,9 @@ export default async function InvoicesPage(){
           description="Manage your invoices"
         />
       </Header>
+      <Suspense fallback={( <Skeleton className="h-96 w-full" /> )}>
+        <UserInvoices />
+      </Suspense>
     </main>
   )
 }
