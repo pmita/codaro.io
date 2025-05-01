@@ -4,9 +4,45 @@
 import { getExistingCustomer } from "@/data/db";
 // DRIZZLE
 import { db } from "@/db";
-import { invoices, NewInvoice } from "@/db/schema";
+import { customers, invoices, NewInvoice } from "@/db/schema";
+import { and, eq, desc } from "drizzle-orm";
 // PACKAGES
 import Stripe from "stripe";
+import { getCurrentUser } from "../auth/currentUser";
+
+export const getUserInvoices = async (limit: number) => {
+  try {
+    const currentUser = await getCurrentUser();
+  
+    if (!currentUser) {
+      throw new Error("No user found");
+    }
+  
+    const data = await db.select({
+
+      customerId: customers.id,
+      invoiceStatus: invoices.invoiceStatus,
+      amountPaid: invoices.amountPaid,
+      stripeInvoiceId: invoices.stripeInvoiceId,
+      createdAt: invoices.createdAt,
+    })
+    .from(invoices)
+    .innerJoin(customers, eq(invoices.customerId, customers.id))
+    .where(
+      and(
+        eq(customers.userId, currentUser.uid),
+        eq(invoices.invoiceStatus, "paid"),
+      )
+    )
+    .orderBy(desc(invoices.createdAt))
+    .limit(limit);
+  
+    return data;
+  } catch (error) {
+    console.log(`❌ Error message: ${(error as Error).message}`);
+    throw new Error("Error getting user invoices");
+  }
+}
 
 export const manageInvoice = async (
   invoice: Stripe.Invoice,
