@@ -1,0 +1,1 @@
+export const BASE_LIMIT = 10;

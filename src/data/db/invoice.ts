@@ -2,46 +2,52 @@
 
 // DATA
 import { getExistingCustomer } from "@/data/db";
+import { getCurrentUser } from "../auth/currentUser";
 // DRIZZLE
 import { db } from "@/db";
 import { customers, invoices, NewInvoice } from "@/db/schema";
-import { and, eq, desc } from "drizzle-orm";
+import { and, eq, desc, lt } from "drizzle-orm";
 // PACKAGES
 import Stripe from "stripe";
-import { getCurrentUser } from "../auth/currentUser";
+// TYPES
+import { IInvoiceFilters } from "./types";
 
-export const getUserInvoices = async (limit: number) => {
-  try {
-    const currentUser = await getCurrentUser();
-  
-    if (!currentUser) {
-      throw new Error("No user found");
-    }
-  
-    const data = await db.select({
+export const getUserInvoices = async ({
+  limit,
+  status,
+  sort,
+  startAfter,
+}: IInvoiceFilters ) => {
+  const currentUser = await getCurrentUser();
 
-      customerId: customers.id,
-      invoiceStatus: invoices.invoiceStatus,
-      amountPaid: invoices.amountPaid,
-      stripeInvoiceId: invoices.stripeInvoiceId,
-      createdAt: invoices.createdAt,
-    })
-    .from(invoices)
-    .innerJoin(customers, eq(invoices.customerId, customers.id))
-    .where(
-      and(
-        eq(customers.userId, currentUser.uid),
-        eq(invoices.invoiceStatus, "paid"),
-      )
-    )
-    .orderBy(desc(invoices.createdAt))
-    .limit(limit);
-  
-    return data;
-  } catch (error) {
-    console.log(`❌ Error message: ${(error as Error).message}`);
-    throw new Error("Error getting user invoices");
+  if (!currentUser) {
+    throw new Error("No user found");
   }
+
+  const conditions = [
+    eq(customers.userId, currentUser.uid),
+    eq(invoices.invoiceStatus, status ?? "paid"),
+  ]
+
+  if (startAfter) {
+    conditions.push(lt(invoices.createdAt, startAfter));
+  }
+
+  const data = await db.select({
+    id: invoices.id,
+    customerId: customers.id,
+    invoiceStatus: invoices.invoiceStatus,
+    amountPaid: invoices.amountPaid,
+    stripeInvoiceId: invoices.stripeInvoiceId,
+    createdAt: invoices.createdAt,
+  })
+  .from(invoices)
+  .innerJoin(customers, eq(invoices.customerId, customers.id))
+  .where(and(...conditions))
+  .orderBy(desc(invoices.createdAt))
+  .limit(limit ?? 10);
+
+  return data.length ? data : null;
 }
 
 export const manageInvoice = async (

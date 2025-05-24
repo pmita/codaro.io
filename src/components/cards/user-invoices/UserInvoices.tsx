@@ -21,13 +21,6 @@ export const UserInvoices = () => {
   // STATE & HOOKS
   const { data } = useUserInvoicesQuery();
 
-  if (!data) {
-    return (
-      <p>No invoices currently</p>
-    );
-  }
-
-
   return (
     <>
       <Card>

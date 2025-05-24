@@ -6,15 +6,24 @@ import { useQuery } from '@tanstack/react-query';
 // HOOKS
 import { useAuth } from '@/hooks/useAuth';
 import { getUserInvoices } from '@/data/db/invoice';
+// TYPES 
+import { UserInvoicesQueryType } from './types';
+import { IInvoiceFilters } from '@/data/db/types';
 
-export const INITIAL_INVOICES_LIMIT = 10;
-
-export const useUserInvoicesQuery = (limit?: number) => {
+export const useUserInvoicesQuery = ({ 
+  status,
+  limit,
+  sort,
+}: IInvoiceFilters) => {
   const { user } = useAuth();
-  return useQuery({
+  return useQuery<UserInvoicesQueryType[] | null>({
     queryKey: ['user-invoices'],
     queryFn: async () => (
-      await getUserInvoices(limit ?? INITIAL_INVOICES_LIMIT)
+      await getUserInvoices({
+        status,
+        limit,
+        sort,
+      })
     ),
     enabled: !!user,
   });
