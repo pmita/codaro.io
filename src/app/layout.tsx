@@ -1,10 +1,14 @@
+// NEXT
 import type { Metadata } from "next";
+// COMPONENTS
 import { AuthContextProvider } from "@/context/auth-context/AuthContext";
+import { ReactQueryProvider } from "@/context/react-query";
 import { Navbar } from "@/layouts/navigation/navbar";
 import { Toaster } from "@/components/ui/sonner";
-import { roboto, poppins } from "@/ui/fonts";
+// FONTS
+import { roboto, poppins } from "@/lib/fonts";
+// STYLES
 import "./globals.css";
-import { ReactQueryProvider } from "@/providers/react-query";
 
 export const metadata: Metadata = {
   title: 'Codaro.io - The easiest way to learn to code in Greek!',
