@@ -2,10 +2,13 @@
 
 // NEXT.JS
 import { cookies } from 'next/headers';
+// DATA
+import { createSessionCookie } from './services/session-service';
 // FIREBASE
 import { SessionCookieOptions } from 'firebase-admin/auth';
 // CONFIG
 import { adminAuth } from "@/lib/firebase/server/config";
+import { SESSION_OPTIONS } from './constants';
 
 export const getSessionCookie = async () => {
   try {
@@ -16,8 +19,13 @@ export const getSessionCookie = async () => {
   }
 }
 
-export const createSessionCookie = async (idToken: string, sessionCookiOptions: SessionCookieOptions) => {
-  return await adminAuth.createSessionCookie(idToken, sessionCookiOptions);
+// export const createSessionCookie = async (idToken: string, sessionCookiOptions: SessionCookieOptions) => {
+//   return await adminAuth.createSessionCookie(idToken, sessionCookiOptions);
+// }
+
+export const createSession = async (idToken: string) => {
+  const sessionCookie = await adminAuth.createSessionCookie(idToken, SESSION_OPTIONS);
+  await createSessionCookie(sessionCookie);
 }
 
 export const validateUserSession = async () => {
