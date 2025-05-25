@@ -2,7 +2,7 @@
 
 // DATA
 import { getExistingCustomer } from "@/data/db";
-import { getCurrentUser } from "../auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 // DRIZZLE
 import { db } from "@/db";
 import { customers, invoices, NewInvoice } from "@/db/schema";

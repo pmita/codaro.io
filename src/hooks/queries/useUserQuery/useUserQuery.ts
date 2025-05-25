@@ -1,5 +1,5 @@
 // DATA
-import { getCurrentUser } from "@/data/auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 // PACKAGES
 import { useQuery } from "@tanstack/react-query"
 // HOOKS

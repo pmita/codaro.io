@@ -1,7 +1,7 @@
 "use server"
 
 // DATA
-import { getCurrentUser } from "@/data/auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 import { getOrCreateStripeCustomer } from '@/data/db';
 // LIB
 import { stripe } from "@/lib/stripe/server/config";

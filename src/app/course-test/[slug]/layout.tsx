@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/data/auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 import {
   dehydrate,
   HydrationBoundary,

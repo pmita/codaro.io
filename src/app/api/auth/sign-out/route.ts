@@ -1,7 +1,7 @@
 // NEXT
 import { NextRequest, NextResponse } from "next/server";
 // DATA
-import { deleteSessionCookie } from "@/data/auth/services/session-service";
+import { deleteSessionCookie } from "@/data/auth/services/cookies-service";
 
 export async function POST(req: NextRequest) {
   try {

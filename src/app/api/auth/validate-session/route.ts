@@ -1,9 +1,9 @@
 // NEXT.JS
 import { NextRequest, NextResponse } from "next/server";
 // DATA
-import { revokeAllSessions } from "@/data/auth/sessions";
-// CONFIG
-import { adminAuth } from "@/lib/firebase/server/config";
+import { validateSession } from "@/data/auth/services/session-service";
+// LIB
+import { removeSessionCookie } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
   const sessionCookie = req.cookies.get("__session")?.value;
@@ -13,20 +13,22 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const decodedToken = await adminAuth.verifySessionCookie(sessionCookie);
+    const decodedToken = await validateSession(sessionCookie);
+
+    if (!decodedToken) {
+      throw new Error("Invalid session token");
+    }
 
     const currentTime = Math.floor(Date.now() / 1000);
     if (decodedToken.exp < currentTime) {
-      // await revokeAllSessions(sessionCookie);
-
-      await adminAuth.revokeRefreshTokens(decodedToken.sub);
+      await removeSessionCookie();
       return NextResponse.json({ valid: false, error: "Session expired" }, { status: 401 });
     }
 
     return NextResponse.json({ valid: true, decodedToken });
   } catch (error) {
     console.warn("Session validation failed:", error);
-    await revokeAllSessions(sessionCookie);
+    await removeSessionCookie();
     return NextResponse.json({ valid: false, error: "Invalid session" }, { status: 401 });
   }
 }

@@ -1,15 +1,13 @@
 // NEXT
 import { NextRequest, NextResponse } from "next/server";
 // DATA
-import { createSession } from "@/data/auth/sessions";
+import { createSession } from "@/data/auth/services/session-service";
+
 
 
 export async function POST(req: NextRequest) {
   try {
-    const requestBody = await req.json();
-    const { idToken } = requestBody;
-
-    console.log("Received ID Token:", idToken);
+    const { idToken } = await req.json();
 
     if (!idToken) {
       return NextResponse.json({

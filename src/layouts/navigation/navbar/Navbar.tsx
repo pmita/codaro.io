@@ -1,7 +1,7 @@
 // NEXT.JS
 import Link from "next/link"
 // DATA
-import { getCurrentUser } from "@/data/auth/currentUser"
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 // COMPONENTS
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"

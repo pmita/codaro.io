@@ -1,10 +1,13 @@
 "use server"
 
+// DATA
+import { validateSession } from "../services/session-service";
+// LIB
 import { adminAuth } from "@/lib/firebase/server/config";
-import { validateUserSession } from "./sessions";
+
 
 export const getCurrentUser = async () => {
-  const decodedIdToken = await validateUserSession();
+  const decodedIdToken = await validateSession();
 
   if (!decodedIdToken) {
     console.warn('No auth cookie found, please log in');

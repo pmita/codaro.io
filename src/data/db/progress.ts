@@ -5,7 +5,7 @@ import { db } from "@/db"
 import { chapters, users, courses, progress } from "@/db/schema"
 import { and, eq, not } from "drizzle-orm";
 // DATA
-import { getCurrentUser } from "@/data/auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 
 export const getProgressChapters = async (courseSlug: string) => {
   const currentUser = await getCurrentUser();

@@ -5,7 +5,7 @@ import { NewUser, users, customers, NewCustomer } from "@/db/schema";
 import { db } from "@/db";
 import { eq } from 'drizzle-orm';
 // DATA
-import { getCurrentUser } from "@/data/auth/currentUser";
+import { getCurrentUser } from "@/data/auth/actions/current-user";
 // UTILS
 import { calculateAccessPermission } from "./utils";
 
