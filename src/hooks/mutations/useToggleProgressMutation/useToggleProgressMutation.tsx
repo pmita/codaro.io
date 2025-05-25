@@ -1,5 +1,5 @@
 // DATA
-import { toggleUserProgress } from "@/data/db"
+import { toggleUserProgress } from "@/data/db/actions"
 // PACKAGES
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"

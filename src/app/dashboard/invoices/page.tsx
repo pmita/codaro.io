@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 // UTILS
 import { cn } from "@/lib/utils";
 import { QueryClient } from "@tanstack/react-query";
-import { getUserInvoices } from "@/data/db/invoice";
+import { getUserInvoices } from "@/data/db/actions/invoice";
 
 export type SearchFiltersParams = {
   limit?: number | null;

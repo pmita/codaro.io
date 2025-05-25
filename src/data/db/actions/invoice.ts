@@ -1,11 +1,11 @@
 "use server"
 
 // DATA
-import { getExistingCustomer } from "@/data/db";
+import { getExistingCustomer } from "@/data/db/actions";
 import { getCurrentUser } from "@/data/auth/actions/current-user";
 // DRIZZLE
-import { db } from "@/db";
-import { customers, invoices, NewInvoice } from "@/db/schema";
+import { db } from "@/data/db";
+import { customers, invoices, NewInvoice } from "@/data/db/schema";
 import { and, eq, desc, lt } from "drizzle-orm";
 // PACKAGES
 import Stripe from "stripe";

@@ -1,11 +1,11 @@
 
 // DATA
-import { getUserSubscriptionStatus } from '@/data/db/user';
+import { getUserSubscriptionStatus } from '@/data/db/actions/user';
 // PACKAGES
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 // HOOKS
 import { useAuth } from '@/hooks/useAuth';
-import { getUserInvoices } from '@/data/db/invoice';
+import { getUserInvoices } from '@/data/db/actions/invoice';
 // TYPES 
 import { UserInvoicesQueryType } from './types';
 import { useFilterSearchParams } from '@/hooks/useFilterSearchParams';

@@ -1,7 +1,7 @@
 "use server"
 
 // DATA
-import { getOrCreateStripeCustomer } from '@/data/db';
+import { getOrCreateStripeCustomer } from '@/data/db/actions';
 import { getCurrentUser } from "@/data/auth/actions/current-user";
 // PACKAGES
 import Stripe from "stripe";

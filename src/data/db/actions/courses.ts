@@ -1,8 +1,8 @@
 "use server"
 
 // DRIZZLE
-import { db } from "@/db"
-import { courses, chapters } from "@/db/schema"
+import { db } from "@/data/db"
+import { courses, chapters } from "@/data/db/schema"
 import { asc, eq, and } from "drizzle-orm";
 
 export const getCourses = async () => {

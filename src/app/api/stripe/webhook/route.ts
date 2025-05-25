@@ -1,13 +1,13 @@
 // NEXT
 import { headers } from "next/headers";
 // DATA
-import { manageSubscriptionPurchase, manageInvoice } from "@/data/db";
+import { manageSubscriptionPurchase, manageInvoice } from "@/data/db/actions";
 
 // PACKAGES
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe/server/config";
 import { StripeWebhookEvents, StripeWebhookSubscirptionEvents } from "@/types/stripe";
-import { manageLifeTimePurchase } from "@/data/db/customer";
+import { manageLifeTimePurchase } from "@/data/db/actions/customer";
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const relavantEvents = new Set([

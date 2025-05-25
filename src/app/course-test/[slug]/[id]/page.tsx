@@ -4,12 +4,12 @@ import { notFound } from 'next/navigation';
 import { 
   getCourseChapter,
   getProgressChapter
-} from '@/data/db';
+} from '@/data/db/actions';
 import { getCurrentUser } from "@/data/auth/actions/current-user";
 import { getChapterMarkdown } from '@/data/content';
 // DB
-import { db } from '@/db';
-import { chapters, courses } from '@/db/schema';
+import { db } from '@/data/db';
+import { chapters, courses } from '@/data/db/schema';
 // PACKAGES
 import { QueryClient } from '@tanstack/react-query';
 // LAYOUTS

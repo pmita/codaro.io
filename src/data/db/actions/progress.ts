@@ -1,8 +1,8 @@
 "use server"
 
 // DRIZZLE
-import { db } from "@/db"
-import { chapters, users, courses, progress } from "@/db/schema"
+import { db } from "@/data/db"
+import { chapters, users, courses, progress } from "@/data/db/schema"
 import { and, eq, not } from "drizzle-orm";
 // DATA
 import { getCurrentUser } from "@/data/auth/actions/current-user";

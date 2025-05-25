@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { Chapter } from '@/db/schema';
-import { getCourseChapter } from '@/data/db';
+import { Chapter } from '@/data/db/schema';
+import { getCourseChapter } from '@/data/db/actions';
 
 type ChapterDataType = Pick<Chapter, 'id' | 'title' | 'slug' | 'isFree' | 'courseId'>;
 

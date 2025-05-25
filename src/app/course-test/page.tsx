@@ -1,6 +1,6 @@
 
 // DATA
-import { getCourses } from "@/data/db"
+import { getCourses } from "@/data/db/actions"
 // COMPONENTS
 import { Header } from "@/components/ui/header";
 import { Description } from "@/components/ui/description";

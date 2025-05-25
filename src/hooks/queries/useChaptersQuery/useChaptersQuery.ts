@@ -1,7 +1,7 @@
 // DATA
-import { getCourseChapters } from '@/data/db';
+import { getCourseChapters } from '@/data/db/actions';
 // DRIZZLE
-import { Chapter } from '@/db/schema';
+import { Chapter } from '@/data/db/schema';
 // PACKAGES
 import { useQuery } from '@tanstack/react-query';
 

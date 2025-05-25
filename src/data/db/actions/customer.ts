@@ -4,8 +4,8 @@
 import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe/actions";
 import { calculateCurrentPeriodEnd, calculateTierStatus } from "./utils";
 // DRIZZLE
-import { db } from "@/db";
-import { customers, NewCustomer, users } from "@/db/schema";
+import { db } from "@/data/db";
+import { customers, NewCustomer, users } from "@/data/db/schema";
 import { eq } from "drizzle-orm";
 // STRIPE
 import { stripe } from "@/lib/stripe/server/config";

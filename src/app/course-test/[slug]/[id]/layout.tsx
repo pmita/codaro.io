@@ -4,8 +4,8 @@ import { Suspense } from "react";
 import { 
   getCourseChapters,
   getProgressChapters,
- } from "@/data/db";
- import { getUserSubscriptionStatus } from "@/data/db/user";
+ } from "@/data/db/actions";
+ import { getUserSubscriptionStatus } from "@/data/db/actions/user";
 import { getCurrentUser } from "@/data/auth/actions/current-user";
 // PACKAGES
 import {

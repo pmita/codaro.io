@@ -1,6 +1,6 @@
 
 // DATA
-import { getUserSubscriptionStatus } from '@/data/db/user';
+import { getUserSubscriptionStatus } from '@/data/db/actions/user';
 // PACKAGES
 import { useQuery } from '@tanstack/react-query';
 // HOOKS

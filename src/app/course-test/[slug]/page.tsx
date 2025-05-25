@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation";
 // DATA
 import { getCourseMarkdown } from "@/data/content";
-import { getCourse, getCourseChapters } from "@/data/db";
+import { getCourse, getCourseChapters } from "@/data/db/actions";
 // COMPONENTS
 import { Header } from "@/components/ui/header";
 import { Title, titleVariants } from "@/components/ui/title";

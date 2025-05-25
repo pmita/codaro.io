@@ -1,3 +1,3 @@
-import { Course } from "@/db/schema";
+import { Course } from "@/data/db/schema";
 
 export type CourseFields = Pick<Course, 'title' | 'description' | 'slug'>;

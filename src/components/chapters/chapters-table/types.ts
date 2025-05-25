@@ -1,5 +1,5 @@
 // TYPES
-import { Chapter } from "@/db/schema";
+import { Chapter } from "@/data/db/schema";
 
 export type ChapterFields = Pick<Chapter, 'id' | 'title' | 'slug' | 'isFree' | 'videoLength' | 'weight' | 'description'>;
 
