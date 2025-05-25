@@ -9,6 +9,7 @@ import { useAuth } from "../../useAuth";
 import { signout } from "./utils";
 // TYPES
 import { AuthActionTypes } from "@/context/auth-context/types";
+import { removeSessionCookie } from "@/lib/auth";
 
 
 
@@ -18,19 +19,11 @@ export const useSignoutMutation = () => {
     return useMutation({
       mutationKey: ['signin'],
       mutationFn: async () => {
-        await signout();
+       await Promise.all([
+          signout(),
+          removeSessionCookie()
+        ]);
 
-        const apiResponse = await fetch('/api/auth/sign-out', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-
-        if (!apiResponse.ok) {
-          const errorData = await apiResponse.json();
-          throw new Error(errorData.message || "Failed to sign in");
-        }
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
       },
       onSuccess: () => {

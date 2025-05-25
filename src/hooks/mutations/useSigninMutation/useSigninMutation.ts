@@ -11,6 +11,7 @@ import { signUserIn } from "./utils";
 import { showErrorToast } from "@/lib/toasts";
 // types
 import { AuthActionTypes } from "@/context/auth-context/types";
+import { updateSessionCookie } from "@/lib/auth";
 
 
 export const useSigninMutation = () => {
@@ -29,18 +30,7 @@ export const useSigninMutation = () => {
             throw new Error("Failed to retrieve ID token");
           }
 
-          const apiResponse = await fetch('/api/auth/signin', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ idToken }),
-          });
-
-          if (!apiResponse.ok) {
-            const errorData = await apiResponse.json();
-            throw new Error(errorData.message || "Failed to sign in");
-          }
+          await updateSessionCookie(idToken);
 
           dispatch({ type: AuthActionTypes.SIGN_IN_SUCCESS, payload: response.user });
         }

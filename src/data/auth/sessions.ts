@@ -19,10 +19,6 @@ export const getSessionCookie = async () => {
   }
 }
 
-// export const createSessionCookie = async (idToken: string, sessionCookiOptions: SessionCookieOptions) => {
-//   return await adminAuth.createSessionCookie(idToken, sessionCookiOptions);
-// }
-
 export const createSession = async (idToken: string) => {
   const sessionCookie = await adminAuth.createSessionCookie(idToken, SESSION_OPTIONS);
   await createSessionCookie(sessionCookie);

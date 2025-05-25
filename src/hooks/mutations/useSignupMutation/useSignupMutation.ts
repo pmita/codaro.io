@@ -15,7 +15,7 @@ import { createUser } from "./utils";
 import { auth } from "@/lib/firebase/client/config";
 // LIB
 import { showErrorToast } from "@/lib/toasts";
-import { syncSessionCookie } from "@/lib/auth";
+import { updateSessionCookie } from "@/lib/auth";
 // TYPES
 import { ISignUpForm } from "@/components/forms/signup-form/types";
 
@@ -29,14 +29,19 @@ export const useSignupMutation = () => {
         const response = await createUser(email, password);
         
         if(response.user) {
-          const userData = {
-            email,
-            username,
-            id: response.user.uid,
+          const idToken = await response.user.getIdToken();
+
+          if (!idToken) {
+            throw new Error("Failed to retrieve ID token");
           }
+          
           await Promise.all([
-            syncSessionCookie(),
-            addUserToDb(userData),
+            updateSessionCookie(idToken),
+            addUserToDb({
+              email,
+              username,
+              id: response.user.uid,
+            }),
           ])
           
           dispatch({ type: AuthActionTypes.SIGN_UP_SUCCESS, payload: auth.currentUser });
