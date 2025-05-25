@@ -18,8 +18,8 @@ import {
   RootLayout,
   AsideLayout,
   MainLayout
-} from "@/layouts/content/course";
-import { AsideLayoutSkeleton } from "@/layouts/content/course/aside-layout/components/AsideLayoutSkeleton";
+} from "@/components/layouts/content/course";
+import { AsideLayoutSkeleton } from "@/components/layouts/content/course/aside-layout/components/AsideLayoutSkeleton";
 // COMPONENTS
 import { ChaptersList } from "@/components/chapters/chapters-list";
 // STYLES

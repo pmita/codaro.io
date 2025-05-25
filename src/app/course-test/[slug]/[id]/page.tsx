@@ -15,7 +15,7 @@ import { QueryClient } from '@tanstack/react-query';
 // LAYOUTS
 import { 
   MdxLayout, 
-} from "@/layouts/content/course";
+} from "@/components/layouts/content/course";
 // COMPONENTS
 import { ToggleChapterProgress } from '@/components/chapters/chapter/toggle-chapter-progress';
 import { ChapterNavigation } from '@/components/chapters/chapter/chapter-navigation';

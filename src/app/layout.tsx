@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 // COMPONENTS
 import { AuthContextProvider } from "@/context/auth-context/AuthContext";
 import { ReactQueryProvider } from "@/context/react-query";
-import { Navbar } from "@/layouts/navigation/navbar";
+import { Navbar } from "@/components/layouts/navigation/navbar";
 import { Toaster } from "@/components/ui/sonner";
 // FONTS
 import { roboto, poppins } from "@/lib/fonts";

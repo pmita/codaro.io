@@ -1,4 +1,4 @@
-import { DashboardNavbar } from "@/layouts/navigation";
+import { DashboardNavbar } from "@/components/layouts/navigation";
 
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
