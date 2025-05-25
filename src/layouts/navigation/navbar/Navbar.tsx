@@ -14,7 +14,6 @@ import styles from './styles.module.css'
 export async function Navbar() {
   const currentUser = await getCurrentUser();
 
-
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoContainer}>
@@ -27,15 +26,21 @@ export async function Navbar() {
         </Link>
       </div>
       <ul className={styles.linksContainer}>
-        <li className={styles.link}>
-          <SubscriptionCheck fallback={(
-            <Link href={"/pro"}>
-              Pro
-            </Link>
-          )}>
-            {null}
-          </SubscriptionCheck>
+        {currentUser ? (
+          <li className={styles.link}>
+            <SubscriptionCheck fallback={(
+              <Link href={"/pro"}>
+                Pro
+              </Link>
+            )}>
+              {null}
+            </SubscriptionCheck>
           </li>
+        ) : (
+              <Link href={"/pro"}>
+                Pro
+              </Link>
+        ) }
         <li className={styles.link}>
           <Link href={"/blog"}>
             Blog

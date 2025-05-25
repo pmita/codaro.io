@@ -9,6 +9,8 @@ export async function POST(req: NextRequest) {
     const requestBody = await req.json();
     const { idToken } = requestBody;
 
+    console.log("Received ID Token:", idToken);
+
     if (!idToken) {
       return NextResponse.json({
         valid: false,

@@ -1,7 +1,10 @@
 "use client"
 
+// REACT
 import { useCallback } from "react";
+// COMPONENTS
 import { Button, buttonVariants } from "@/components/ui/button";
+// HOOKS
 import { useSignoutMutation } from "@/hooks/mutations/useSignoutMutation"
 
 export const SignoutButton = () => {

@@ -7,9 +7,8 @@ import {
   type AuthReducerActionsType, 
   type AuthReducerState 
 } from './types';
-import { removeSessionCookieClientSide } from '@/lib/cookies';
 import { auth } from "@/lib/firebase/client/config";
-import { syncSessionCookie } from '@/lib/auth';
+import { updateSessionCookie, removeSessionCookie } from '@/lib/auth';
 
 export const AuthContext = createContext<AuthReducerState | undefined | null>(null);
 
@@ -36,11 +35,24 @@ export const AuthContextProvider: FC<{children: React.ReactNode}> = ({ children 
   
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if(user) {        
-        await syncSessionCookie();
+      if(user) {  
+        const idToken = await user.getIdToken();  
+        
+        try {
+          await updateSessionCookie(idToken);
+        } catch(error) {
+          console.error("Error syncing session cookie:", error);
+        }
+
         dispatch({ type: AuthActionTypes.AUTH_HAS_CHANGED_SUCCESS, payload: user })
       } else {
-        removeSessionCookieClientSide();
+
+        try {
+          await removeSessionCookie();
+        } catch(error) {
+          console.error("Error removing session cookie:", error);
+        }
+
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS })
       }
     })
@@ -54,3 +66,4 @@ export const AuthContextProvider: FC<{children: React.ReactNode}> = ({ children 
     </AuthContext.Provider>
   );
 };
+

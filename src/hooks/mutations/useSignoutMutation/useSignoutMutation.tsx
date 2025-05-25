@@ -1,10 +1,14 @@
+// NEXT
 import { useRouter } from "next/navigation";
+// PACKAGES
 import { useMutation } from "@tanstack/react-query";
-import { useAuth } from "../../useAuth";
-import { AuthActionTypes } from "@/context/auth-context/types";
 import { toast } from "sonner";
+// HOOKS
+import { useAuth } from "../../useAuth";
+// UTILS
 import { signout } from "./utils";
-import { destroySessionCookie } from "@/lib/auth";
+// TYPES
+import { AuthActionTypes } from "@/context/auth-context/types";
 
 
 
@@ -14,11 +18,19 @@ export const useSignoutMutation = () => {
     return useMutation({
       mutationKey: ['signin'],
       mutationFn: async () => {
-        await Promise.all([
-          signout(),
-          destroySessionCookie(),
-        ])
-        
+        await signout();
+
+        const apiResponse = await fetch('/api/auth/sign-out', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!apiResponse.ok) {
+          const errorData = await apiResponse.json();
+          throw new Error(errorData.message || "Failed to sign in");
+        }
         dispatch({ type: AuthActionTypes.SIGN_OUT_SUCCESS });
       },
       onSuccess: () => {
