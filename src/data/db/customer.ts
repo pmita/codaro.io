@@ -1,7 +1,7 @@
 "use server"
 
 // DATA
-import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe";
+import { createNewStripeCustomer, retrieveExistingStripeCustomer } from "@/data/stripe/actions";
 import { calculateCurrentPeriodEnd, calculateTierStatus } from "./utils";
 // DRIZZLE
 import { db } from "@/db";

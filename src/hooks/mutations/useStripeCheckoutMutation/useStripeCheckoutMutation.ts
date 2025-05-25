@@ -1,5 +1,5 @@
 // DATA
-import { initStripeCheckout } from "@/data/stripe";
+import { initStripeCheckout } from "@/data/stripe/actions";
 // PACKAGES
 import Stripe from "stripe";
 import { toast } from "sonner";

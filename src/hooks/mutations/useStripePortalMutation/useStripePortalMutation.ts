@@ -1,5 +1,5 @@
 // DATA
-import { initStripePortal } from "@/data/stripe";
+import { initStripePortal } from "@/data/stripe/actions";
 // PACKAGES
 import { toast } from "sonner";
 // HOOKS
