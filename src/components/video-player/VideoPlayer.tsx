@@ -5,20 +5,14 @@ import ReactPlayer from 'react-player/vimeo';
 // HOOKS
 import { useUserSubscriptionStatusQuery } from '@/hooks/queries/useUserSubscriptionStatusQuery';
 // COMPONENTS
-import { VideoFallback } from './components/video-fallback';
+import { VideoLoading } from './components/video-loading';
+import { UnauthorizedVideoFallback } from './components/unauthorized-video-fallback';
 // CONSTANTS
 import { VIDEO_BASE_URL } from './constants';
 // STYLES
 import styles from './styles.module.css';
-
-export type VideoPlayerProps = {
-  videoId: string | null;
-  onPlay?: () => void;
-  onPause?: () => void;
-  onEnded?: () => void;
-  onError?: (error: Error) => void;
-  isFree?: boolean;
-}
+// TYPES
+import { VideoPlayerProps } from './types';
 
 export const VideoPlayer = ({ videoId, isFree }: VideoPlayerProps) => {
   const videoUrl = VIDEO_BASE_URL + '/' + videoId;
@@ -45,6 +39,7 @@ export const VideoPlayer = ({ videoId, isFree }: VideoPlayerProps) => {
                 muted: false,
               },
             }}
+            fallback={<VideoLoading />}
             onPlay={() => console.log('Video is playing')}
             onPause={() => console.log('Video is paused')}
             onEnded={() => console.log('Video has ended')}
@@ -52,7 +47,7 @@ export const VideoPlayer = ({ videoId, isFree }: VideoPlayerProps) => {
           />
         </div>
       ) : (
-        <VideoFallback />
+        <UnauthorizedVideoFallback />
       )} 
     </div>
   )

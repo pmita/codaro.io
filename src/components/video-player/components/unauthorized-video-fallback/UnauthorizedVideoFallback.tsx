@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import styles from './styles.module.css';
 
 
-export const VideoFallback = () => (
+export const UnauthorizedVideoFallback = () => (
   <div className={styles.container}>
     <h2 className={styles.title}>You can not view this video, upgrade now</h2>
     <Link
