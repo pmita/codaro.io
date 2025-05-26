@@ -25,6 +25,7 @@ import { Description } from '@/components/ui/description';
 import { Title, titleVariants } from '@/components/ui/title';
 // UTILS
 import { cn } from '@/lib/utils';
+import { VideoPlayer } from '@/components/video-player/VideoPlayer';
 
 interface ChapterPageProps {
   params: Promise<{
@@ -78,9 +79,10 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
 
   return (
     <section className="container p-4 w-full">
-      <div className="grid place-items-center w-full h-[650px] bg-primary">
-        <h1>Video Player goes here</h1>
-      </div>
+      <VideoPlayer
+        videoId={chapterData.videoId}
+        isFree={chapterData.isFree}
+      />
       <ChapterNavigation
         playPrevious={`/course-test/${courseSlug}/${chapterData.previousChapterSlug}`}
         playNext={`/course-test/${courseSlug}/${chapterData.nextChapterSlug}`}

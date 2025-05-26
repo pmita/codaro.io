@@ -1,0 +1,17 @@
+.container {
+  @apply aspect-video 
+    w-full 
+    bg-secondary 
+    grid 
+    place-content-center 
+    gap-10;
+}
+
+.title {
+  @apply font-bold
+    text-neutral;
+}
+
+.margin {
+  @apply mt-4;
+}

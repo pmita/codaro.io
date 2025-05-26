@@ -1,0 +1,22 @@
+.container {
+  @apply grid 
+    place-items-center 
+    w-full 
+    h-full;
+}
+
+.videoContainer {
+  @apply w-full
+    flex
+    flex-col
+    justify-center
+    items-stretch
+    gap-10;
+}
+
+.videoPlayer {
+  @apply aspect-video
+    w-full
+    relative
+    bg-secondary;
+}

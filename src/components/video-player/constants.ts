@@ -1,0 +1,1 @@
+export const VIDEO_BASE_URL = 'https://vimeo.com';
