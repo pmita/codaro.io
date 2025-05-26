@@ -97,10 +97,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
             description={chapterData.description}
           />
         </Header>
-        <ToggleChapterProgress 
-          courseSlug={courseSlug}
-          chapterSlug={chapterSlug} 
-        /> 
+        <ToggleChapterProgress />
       </div>
       <div className="container max-w-3xl py-6 lg:py-12">
         <Mdx mdxSource={chapterMarkdown.mdx} />

@@ -1,0 +1,39 @@
+.container {
+  @apply flex
+    flex-col
+    items-center
+    justify-center
+    gap-2
+    px-2;
+}
+
+.toggleButton {
+  @apply w-[20px]
+    rounded-[50%]
+    border-[3px]
+    border-primary
+    cursor-pointer;
+}
+
+.completed {
+  @apply bg-primary
+    border-primary;
+}
+
+.uncompleted {
+  @apply bg-transparent;
+}
+
+.highlightedText {
+  @apply font-roboto
+    font-bold
+    text-lg
+    text-secondary;
+}
+
+.locked {
+  @apply w-[20px]
+    h-[20px]
+    rounded-[50%]
+    bg-danger;
+}

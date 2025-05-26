@@ -1,9 +1,8 @@
-import { AuthCheck } from '@/components/pemrissions/auth-check';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { Link } from 'lucide-react';
-import { ProductCardProps } from './types';
+// COMPONENTS
 import { Bonuses } from './components/bonuses';
+import { CheckoutButton } from '../buttons/checkout-button';
+// TYPES
+import { ProductCardProps } from './types';
 
 
 export const ProductCard = ({ 
@@ -37,23 +36,13 @@ export const ProductCard = ({
                 <span className="text-5xl font-bold tracking-tight text-gray-900">${price}</span>
                 <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">{frequency}</span>
               </p>
-              <AuthCheck fallback={(
-                <Link
-                  href="/signin"
-                  className={cn(buttonVariants({ variant: "secondary", className: "mt-10 w-full hover:bg-indigo-500 hover:border-indigo-500 hover:text-primary-white" }))}
-                >
-                  Buy Now
-                </Link>
-              )}>
-                <p>buy now text</p>
-                {/* <CheckoutButton 
-                  variant="secondary"
-                  className="mt-10 w-full hover:bg-indigo-500 hover:border-indigo-500 hover:text-primary-white"
-                  stripeProduct={{ quantity: 1, subscription: productId }}
-                  purchaseType={productType}
-                  callToAction="Buy Now"
-                /> */}
-              </AuthCheck>
+              <CheckoutButton 
+                variant="secondary"
+                className="mt-10 w-full hover:bg-indigo-500 hover:border-indigo-500 hover:text-primary-white"
+                stripeProduct={{ quantity: 1, price: productId }}
+                purchaseType={productType}
+                callToAction="Buy Now"
+              />
             </div>
           </div>
         </div>

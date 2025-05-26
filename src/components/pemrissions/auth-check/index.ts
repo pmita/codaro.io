@@ -1,1 +1,0 @@
-export { AuthCheck } from './AuthCheck';

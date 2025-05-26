@@ -1,6 +1,8 @@
 
 "use client"
 
+// NEXT
+import Link from "next/link";
 // REACT
 import { useCallback, useState, useEffect } from "react";
 // COMPONENTS
@@ -9,18 +11,19 @@ import { buttonVariants } from "../../../components/ui/button";
 import { useStripeCheckoutMutation } from "@/hooks/mutations/useStripeCheckoutMutation";
 // UTILS
 import { cn } from "@/lib/utils";
+import { withAuth } from "@/utils/with-auth";
 // TYPES
 import { ProductPurchaseType } from "@/types/stripe";
 import { CheckoutButtonProps } from './types'
 
 
-export function CheckoutButton({ 
+export const Component = ({ 
   className, 
   stripeProduct, 
   purchaseType = ProductPurchaseType.ONE_TIME,
   callToAction = 'Buy Now',
   ...props
-}: CheckoutButtonProps) {
+}: CheckoutButtonProps) => {
   // STATE & HOOKS
   const [product, setProduct] = useState({});
   const mutation = useStripeCheckoutMutation();
@@ -51,3 +54,12 @@ export function CheckoutButton({
     </button>
   )
 }
+
+export const CheckoutButton = withAuth(Component, (
+  <Link
+    href="/signin"
+    className={cn(buttonVariants({ variant: "default" }))}
+  >
+    Buy Now
+  </Link>
+))
