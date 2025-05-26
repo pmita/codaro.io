@@ -27,5 +27,4 @@ export {
 // User Table related functions
 export { 
   addUserToDb,
-  // isSubscriptionValid
 } from './user';

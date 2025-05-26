@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/data/auth/actions/current-user";
 // COMPONENTS
 import { buttonVariants } from "@/components/ui/button"
 import { AuthDialog } from "@/components/dialogs/auth-dialog"
-import { SubscriptionCheck } from "@/components/pemrissions/subscription-check"
+import { LinkToPro } from "./components/link-to-pro";
 // UTILS
 import { cn } from "@/lib/utils"
 // STYLES
@@ -28,13 +28,7 @@ export async function Navbar() {
       <ul className={styles.linksContainer}>
         {currentUser ? (
           <li className={styles.link}>
-            <SubscriptionCheck fallback={(
-              <Link href={"/pro"}>
-                Pro
-              </Link>
-            )}>
-              {null}
-            </SubscriptionCheck>
+            <LinkToPro />
           </li>
         ) : (
               <Link href={"/pro"}>
