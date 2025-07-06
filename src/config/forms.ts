@@ -1,9 +1,27 @@
+export const passwordlessAuthFields = [
+  {
+    id: 1,
+    name: 'email',
+    type: 'email',
+    label: 'Email',
+    placeholder: 'user@example.com',
+    validationSchema: {
+      required: "Email is required",
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "Invalid email address",
+      }
+    }
+  },
+];
+
 export const signinFields = [
   {
     id: 1,
     name: 'email',
     type: 'email',
-    placeholder: 'Email',
+    label: 'Email',
+    placeholder: 'user@example.com',
     validationSchema: {
       required: "Email is required",
       pattern: {
@@ -16,7 +34,7 @@ export const signinFields = [
     id: 2,
     name: 'password',
     type: 'password',
-    placeholder: 'Password',
+    label: 'Password',
     validationSchema: {
       required: "Password is required",
       pattern: {
