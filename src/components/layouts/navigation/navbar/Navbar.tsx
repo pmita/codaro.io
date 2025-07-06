@@ -51,7 +51,20 @@ export async function Navbar() {
               Dashboard
             </Link>
           </li>
-        ): <AuthDialog />}
+        ): (
+          <>
+            <li>
+              <Link href="/signin" className={cn(buttonVariants({ variant: "secondary", size: 'lg' }))}>
+                Sign In
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup" className={cn(buttonVariants({ variant: "secondaryOutline", size: 'lg' }))}>
+                Sign Up
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   )

@@ -5,7 +5,8 @@
     justify-center 
     items-stretch 
     gap-5 
-    text-center;
+    text-center
+    w-[375px];
 }
 
 .googleBtn {
