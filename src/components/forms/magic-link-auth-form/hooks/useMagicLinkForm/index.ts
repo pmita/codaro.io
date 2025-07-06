@@ -1,0 +1,1 @@
+export { useMagicLinkForm } from './useMagicLinkForm';
